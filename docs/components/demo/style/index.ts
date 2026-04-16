@@ -27,8 +27,33 @@ export default getSimpleStyleHook('CoDocsDemo', (token) => {
 
       [`${componentCls}-code`]: {
         'div[class*="language-"]': {
-          margin: 0,
           borderRadius: 0,
+
+          position: 'relative',
+          margin: '0',
+          backgroundColor: 'var(--vp-code-block-bg)',
+          overflowX: 'auto',
+          transition: 'background-color .5s',
+
+          pre: {
+            position: 'relative',
+            zIndex: 1,
+            margin: 0,
+            padding: '20px 0',
+            background: 'transparent',
+            overflowX: 'auto',
+          },
+
+          code: {
+            display: 'block',
+            padding: '0 24px',
+            width: 'fit-content',
+            minWidth: '100%',
+            lineHeight: 'var(--vp-code-line-height)',
+            fontSize: 'var(--vp-code-font-size)',
+            color: 'var(--vp-code-block-color)',
+            transition: 'color .5s',
+          },
         },
       },
 

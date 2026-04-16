@@ -183,26 +183,30 @@ export default defineComponent({
             header: props.formProps
               ? () => {
                   return (
-                    <div
-                      ref={headerRef}
-                      onKeydown={(event) => {
-                        if ((event as KeyboardEvent).key === 'Enter') {
-                          event.preventDefault();
-                        }
-                      }}
-                    >
-                      <TableQuery
-                        ref={tableQueryRef}
-                        inline
-                        grid={false}
-                        size="small"
-                        class={`${prefixCls.value}-form`}
-                        width={120}
-                        {...props.formProps}
-                        reset={onReset}
-                        submit={onSubmit}
-                      ></TableQuery>
-                    </div>
+                    <>
+                      {slots.headerBefore ? slots.headerBefore({}) : null}
+                      <div
+                        ref={headerRef}
+                        onKeydown={(event) => {
+                          if ((event as KeyboardEvent).key === 'Enter') {
+                            event.preventDefault();
+                          }
+                        }}
+                      >
+                        <TableQuery
+                          ref={tableQueryRef}
+                          inline
+                          grid={false}
+                          size="small"
+                          class={`${prefixCls.value}-form`}
+                          width={120}
+                          {...props.formProps}
+                          reset={onReset}
+                          submit={onSubmit}
+                        ></TableQuery>
+                      </div>
+                      {slots.headerAfter ? slots.headerAfter({}) : null}
+                    </>
                   );
                 }
               : null,

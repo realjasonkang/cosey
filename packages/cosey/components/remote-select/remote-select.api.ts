@@ -42,6 +42,8 @@ export type RemoteSelectProps = ExtractPropTypes<typeof remoteSelectProps>;
 export interface RemoteSelectSlots {
   default: {};
   header: {};
+  headerBefore: {};
+  headerAfter: {};
   footer: {};
   prefix: {};
   empty: {};

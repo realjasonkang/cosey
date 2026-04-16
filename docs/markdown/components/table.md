@@ -52,7 +52,7 @@ table/basic
 
 ### TableQueryProps
 
-继承 `[FormQueryProps](./form-query)` 并有以下额外属性：
+继承 [FormQueryProps](./form-query) 并有以下额外属性：
 
 | 属性    | 描述           | 类型                                    | 默认值 |
 | ------- | -------------- | --------------------------------------- | ------ |
@@ -298,11 +298,10 @@ type TableColumnPropsSlots =
 
 ### TableActionProps
 
-继承 `element-plus` 的 [Table 属性](https://element-plus.org/zh-CN/component/table#table-%E5%B1%9E%E6%80%A7) 并有以下属性：
-
-| 属性    | 描述         | 类型                                             | 默认值 |
-| ------- | ------------ | ------------------------------------------------ | ------ |
-| actions | 定义操作按钮 | TableActionItemAtom[] \| TableActionItemAtom[][] | []     |
+| 属性    | 描述           | 类型                                             | 默认值 |
+| ------- | -------------- | ------------------------------------------------ | ------ |
+| actions | 定义操作按钮   | TableActionItemAtom[] \| TableActionItemAtom[][] | []     |
+| divider | 是否显示分割线 | boolean                                          | true   |
 
 ### TableActionItemAtom
 
