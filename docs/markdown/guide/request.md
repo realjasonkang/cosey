@@ -109,7 +109,7 @@ launch(app, {
 
     isAccessTokenExpired: (response: AxiosResponse<any, any>) => {
       // 根据响应数据判断是否为 access token 过期（401 可能为 access token 过期或者 refresh token 过期）
-      return response.data.data.type === 'accessToken';
+      return response.data.type === 'accessToken';
     },
   },
 });

@@ -19,6 +19,7 @@ import {
   Fragment,
   defineComponent,
   type VNodeArrayChildren,
+  unref,
 } from 'vue';
 import { useTwoWayBinding } from '../../hooks';
 import useStyle from './form-query.style';
@@ -132,16 +133,32 @@ export default defineComponent({
               <>
                 {!props.hideSubmit && (
                   <ElButton
-                    onClick={() => submit()}
                     type="primary"
+                    {...props.submitProps}
                     loading={submitting.value}
                     icon={Search}
+                    onClick={() => submit()}
                   >
-                    {t('co.form.search')}
+                    {t(props.submitText)}
                   </ElButton>
                 )}
                 {!props.hideReset && (
-                  <ElButton onClick={() => reset()}>{t('co.form.reset')}</ElButton>
+                  <ElButton
+                    {...props.resetProps}
+                    onClick={() =>
+                      reset(() => {
+                        if (props.resetValues) {
+                          const values = props.resetValues();
+                          const model = unref(props.model);
+                          if (values && model) {
+                            Object.assign(model, values);
+                          }
+                        }
+                      })
+                    }
+                  >
+                    {t(props.resetText)}
+                  </ElButton>
                 )}
               </>
             )}

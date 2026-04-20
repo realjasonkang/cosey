@@ -30,6 +30,9 @@ export const formQueryProps = {
     type: Boolean,
     default: true,
   },
+  resetValues: {
+    type: Function as PropType<() => Record<string, any>>,
+  },
 };
 
 export type FormQueryProps = ExtractPublicPropTypes<typeof formQueryProps>;

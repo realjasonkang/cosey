@@ -46,6 +46,6 @@ export default {
   },
 
   isAccessTokenExpired: (response: AxiosResponse<any, any>) => {
-    return response.data.data.type === 'accessToken';
+    return response.data.type === 'accessToken';
   },
 };
