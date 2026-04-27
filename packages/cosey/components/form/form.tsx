@@ -1,4 +1,4 @@
-import { defineComponent, inject, reactive, toRef } from 'vue';
+import { defineComponent, inject, reactive, ref, toRef, watch } from 'vue';
 import {
   type FormProps,
   type FormBubbleContext,
@@ -15,6 +15,7 @@ import FormItem from './form-item.vue';
 import useStyle from './form.style';
 import { useComponentConfig } from '../config-provider';
 import { useLocale } from '../../hooks';
+import { useLayoutStore } from '../../store';
 
 export default defineComponent({
   name: 'CoForm',
@@ -44,6 +45,20 @@ export default defineComponent({
       }),
     );
 
+    const innerInline = ref(props.inline);
+
+    const layoutStore = useLayoutStore();
+
+    watch(
+      () => layoutStore.isMobile,
+      (isMobile) => {
+        innerInline.value = isMobile ? false : props.inline;
+      },
+      {
+        immediate: true,
+      },
+    );
+
     _expose(expose);
 
     return () => {
@@ -51,6 +66,7 @@ export default defineComponent({
         <ElForm
           ref="form"
           {...elFormProps}
+          inline={innerInline.value}
           class={[hashId.value, prefixCls.value]}
           {...{
             onSubmit: (event: SubmitEvent) => {
