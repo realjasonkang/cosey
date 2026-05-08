@@ -38,7 +38,7 @@
           <div :class="`${prefixCls}-toolbar-left`">
             <slot name="toolbar-left"></slot>
             <div v-if="isStatsVisible" :class="`${prefixCls}-stats-wrapper`">
-              <TableStats :columns="statsColumns" :data="statsData" />
+              <TableStats :columns="finalStatsColumns" :data="statsData" />
             </div>
           </div>
           <div :class="`${prefixCls}-toolbar-right`">
@@ -480,7 +480,10 @@ const getFullFetchParams = () => ({
 const { isFetching, execute } = useFetch(
   () => {
     const params = getFullFetchParams();
-    return Promise.all([props.api?.({ ...params }), props.parallelFetch?.({ ...params })]);
+    return Promise.all([
+      isFunction(props.api) ? props.api({ ...params }) : null,
+      isFunction(props.parallelFetch) ? props.parallelFetch({ ...params }) : null,
+    ]);
   },
   {
     immediate: false,
@@ -510,7 +513,7 @@ const validateExecute = async () => {
 };
 
 onMounted(() => {
-  if (props.immediate && props.api) {
+  if (props.immediate && isFunction(props.api)) {
     validateExecute();
   }
 });
@@ -722,7 +725,12 @@ const reset: TableExpose['reset'] = async (values) => {
 // stats
 const statsColumns = computed(() => unref(props.statsColumns));
 const statsData = computed(() => unref(props.statsData));
-const isStatsVisible = computed(() => statsColumns.value && statsColumns.value.length > 0);
+const isStatsVisible = computed(
+  () => Array.isArray(statsColumns.value) && statsColumns.value.length > 0,
+);
+const finalStatsColumns = computed(() => {
+  return Array.isArray(statsColumns.value) ? statsColumns.value : [];
+});
 
 // ref el
 const rootRef = ref<HTMLElement | null>(null);

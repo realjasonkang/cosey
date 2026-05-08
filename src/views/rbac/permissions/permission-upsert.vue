@@ -9,6 +9,7 @@
         :field-props="{
           data: permissionTree,
           checkStrictly: true,
+          defaultExpandAll: true,
           nodeKey: 'id',
           props: {
             label: 'name',

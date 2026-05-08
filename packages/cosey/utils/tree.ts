@@ -211,18 +211,32 @@ export function mapTreeExtra<
   });
 }
 
+/**
+ * 查找表格遍历中的下一个兄弟节点。
+ * 当开启 mergeLast 时，最后一级连续叶子节点会被合并到同一个单元格中，
+ * 因此这里要跳过这些已经被合并展示的叶子节点，但仍需保留后续的分支节点。
+ */
 function getNextSibling<
   Extra extends Record<PropertyKey, any> = any,
   INode extends Record<PropertyKey, any> = any,
 >(node?: ExtraTreeNode<Extra, INode>, mergeLast?: boolean) {
   if (node) {
-    const nextSibling = node.nextSibling;
-    if (
+    let nextSibling = node.nextSibling;
+
+    // 跳过已经和前一个叶子节点合并进同一单元格的连续叶子节点。
+    while (
+      mergeLast &&
       nextSibling &&
-      (!mergeLast || nextSibling.reverseLevel > 1 || nextSibling.prevSibling?.reverseLevel !== 1)
+      nextSibling.reverseLevel === 1 &&
+      nextSibling.prevSibling?.reverseLevel === 1
     ) {
+      nextSibling = nextSibling.nextSibling;
+    }
+
+    if (nextSibling) {
       return nextSibling;
     } else {
+      // 当前层已经没有可继续遍历的兄弟节点时，回到父级继续向后查找。
       return getNextSibling(node.parent, mergeLast);
     }
   }

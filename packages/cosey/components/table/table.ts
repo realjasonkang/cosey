@@ -59,7 +59,9 @@ export const tableEmitOnProps = tableEmitOnEvents.reduce(
 
 const tableExtraProps = {
   api: {
-    type: Function as PropType<(...args: any[]) => Promise<any> | any>,
+    type: null as unknown as PropType<
+      ((...args: any[]) => Promise<any> | any) | boolean | null | undefined
+    >,
   },
   immediate: {
     type: Boolean,
@@ -89,7 +91,9 @@ const tableExtraProps = {
     type: Function as PropType<(res: any) => any>,
   },
   parallelFetch: {
-    type: Function as PropType<(...args: any[]) => Promise<any> | any>,
+    type: null as unknown as PropType<
+      ((...args: any[]) => Promise<any> | any) | boolean | null | undefined
+    >,
   },
   toolbarConfig: {
     type: [Object, Boolean] as PropType<ToolbarConfig | boolean>,
@@ -99,7 +103,9 @@ const tableExtraProps = {
     type: Object as PropType<TableConfig['keys']>,
   },
   statsColumns: {
-    type: Object as PropType<MaybeRef<TableStatisticsColumn[]>>,
+    type: null as unknown as PropType<
+      MaybeRef<TableStatisticsColumn[] | null | undefined | boolean>
+    >,
   },
   statsData: {
     type: Object as MaybeRef<any>,
