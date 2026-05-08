@@ -217,6 +217,18 @@ export default defineComponent({
       return props.renderNode ? props.renderNode(node, () => renderNode(node)) : renderNode(node);
     }
 
+    function getMergedLeafNodes(node: ExtraTreeNode<any>) {
+      const nodes: ExtraTreeNode<any>[] = [];
+      let current: ExtraTreeNode<any> | undefined = node;
+
+      while (current && current.reverseLevel === 1) {
+        nodes.push(current);
+        current = current.nextSibling;
+      }
+
+      return nodes;
+    }
+
     return () => {
       return (
         <div
@@ -258,7 +270,7 @@ export default defineComponent({
                             {node.reverseLevel !== 1 || !props.mergeLast ? (
                               renderMayCustomNode(node)
                             ) : (
-                              <div>{node.parent!.children?.map(renderMayCustomNode)}</div>
+                              <div>{getMergedLeafNodes(node).map(renderMayCustomNode)}</div>
                             )}
                           </td>
                         );

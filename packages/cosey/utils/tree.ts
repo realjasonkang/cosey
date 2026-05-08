@@ -198,7 +198,7 @@ export function mapTreeExtra<
       rNode.lastChild = mappedChildren[mappedChildren.length - 1];
       rNode.reverseLevel = Math.max(...mappedChildren.map((item) => item.reverseLevel)) + 1;
     } else {
-      if (mergeLast && index > 0) {
+      if (mergeLast && prevNode?.reverseLevel === 1) {
         rNode.leafCount = 0;
       }
     }
@@ -216,8 +216,12 @@ function getNextSibling<
   INode extends Record<PropertyKey, any> = any,
 >(node?: ExtraTreeNode<Extra, INode>, mergeLast?: boolean) {
   if (node) {
-    if (node.nextSibling && (!mergeLast || node.nextSibling.reverseLevel > 1)) {
-      return node.nextSibling;
+    const nextSibling = node.nextSibling;
+    if (
+      nextSibling &&
+      (!mergeLast || nextSibling.reverseLevel > 1 || nextSibling.prevSibling?.reverseLevel !== 1)
+    ) {
+      return nextSibling;
     } else {
       return getNextSibling(node.parent, mergeLast);
     }
