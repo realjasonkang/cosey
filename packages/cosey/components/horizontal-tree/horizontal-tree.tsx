@@ -120,6 +120,25 @@ export default defineComponent({
       });
     };
 
+    const setLeafOnlyCheckedKeys = (keys: (string | number)[]) => {
+      const nodes: CheckableNode[] = [];
+
+      walkTree(checkableTree.value, 'children', (node) => {
+        const id = node.data[props.nodeKey!];
+        if (keys.includes(id)) {
+          nodes.push(node);
+        }
+      });
+
+      setCheckedByNode(rootNode, false);
+
+      nodes.forEach((node) => {
+        if (node.reverseLevel === 1) {
+          setCheckedByNode(node, true);
+        }
+      });
+    };
+
     const getCheckedKeys = () => {
       const keys: (string | number)[] = [];
 
@@ -179,6 +198,7 @@ export default defineComponent({
       getCheckedNodes,
       setCheckedNodes,
       setCheckedKeys,
+      setLeafOnlyCheckedKeys,
       getCheckedKeys,
       setChecked,
       getHalfCheckedNodes,

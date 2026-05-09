@@ -64,6 +64,7 @@ export interface HorizontalTreeExpose {
   setCheckedNodes: (nodes: INode[]) => void;
   getCheckedKeys: () => (string | number)[];
   setCheckedKeys: (keys: (string | number)[]) => void;
+  setLeafOnlyCheckedKeys: (keys: (string | number)[]) => void;
   setChecked: (key: string | number, checked: boolean) => void;
   getHalfCheckedNodes: () => INode[];
   getHalfCheckedKeys: () => (string | number)[];

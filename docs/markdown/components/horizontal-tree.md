@@ -48,13 +48,14 @@ horizontal-tree/basic
 
 ### HorizontalTreeExpose
 
-| 属性                | 描述                                       | 类型                                                             |
-| ------------------- | ------------------------------------------ | ---------------------------------------------------------------- |
-| getCheckedNodes     | 返回当前选中节点的数组                     | () => Record<PropertyKey, any>[]                                 |
-| setCheckedNodes     | 设置目前选中的节点                         | (nodes: Record<PropertyKey, any>[]) => void                      |
-| getCheckedKeys      | 返回当前选中节点 key 的数组                | () => (string \| number)[]                                       |
-| setCheckedKeys      | 设置目前选中的节点                         | (keys: (string \| number)[]) => void                             |
-| setChecked          | 设置节点是否被选中                         | (key: string \| number, checked: boolean) => void                |
-| getHalfCheckedNodes | 返回当前半选中的节点组成的数组             | () => Record<PropertyKey, any>[]                                 |
-| getHalfCheckedKeys  | 返回目前半选中的节点的 key 所组成的数组    | () => (string \| number)[]                                       |
-| getNode             | 根据 data 或者 key 拿到 Tree 组件中的 node | (key: string \| number) => Record<PropertyKey, any> \| undefined |
+| 属性                   | 描述                                       | 类型                                                             |
+| ---------------------- | ------------------------------------------ | ---------------------------------------------------------------- |
+| getCheckedNodes        | 返回当前选中节点的数组                     | () => Record<PropertyKey, any>[]                                 |
+| setCheckedNodes        | 设置目前选中的节点                         | (nodes: Record<PropertyKey, any>[]) => void                      |
+| getCheckedKeys         | 返回当前选中节点 key 的数组                | () => (string \| number)[]                                       |
+| setCheckedKeys         | 设置目前选中的节点                         | (keys: (string \| number)[]) => void                             |
+| setLeafOnlyCheckedKeys | 设置目前选中的叶子节点，非叶子节点会被忽略 | (keys: (string \| number)[]) => void                             |
+| setChecked             | 设置节点是否被选中                         | (key: string \| number, checked: boolean) => void                |
+| getHalfCheckedNodes    | 返回当前半选中的节点组成的数组             | () => Record<PropertyKey, any>[]                                 |
+| getHalfCheckedKeys     | 返回目前半选中的节点的 key 所组成的数组    | () => (string \| number)[]                                       |
+| getNode                | 根据 data 或者 key 拿到 Tree 组件中的 node | (key: string \| number) => Record<PropertyKey, any> \| undefined |
