@@ -1,4 +1,15 @@
-## 0.0.0 (2026-04-14)
+## 0.0.0 (2026-05-28)
+
+## <small>0.11.9 (2026-05-28)</small>
+
+- fix(form): 移动端始终展示为块级 ([da4407c](https://github.com/sutras/cosey/commit/da4407c))
+- fix(horizontal-tree): 修复合并最后一级时的问题 ([717e088](https://github.com/sutras/cosey/commit/717e088))
+- fix(search): 修复搜索快捷键与浏览器冲突问题 ([ba56392](https://github.com/sutras/cosey/commit/ba56392))
+- feat: remote-select新增插槽 ([7378ff1](https://github.com/sutras/cosey/commit/7378ff1))
+- feat(form-query): 允许以指定值重置 ([53b838e](https://github.com/sutras/cosey/commit/53b838e))
+- feat(horizontal-tree): 允许只设置叶子节点选中 ([f71eb27](https://github.com/sutras/cosey/commit/f71eb27))
+- feat(table): 允许传递布尔类型 ([ce0d8bb](https://github.com/sutras/cosey/commit/ce0d8bb))
+- build: changelog ([7359222](https://github.com/sutras/cosey/commit/7359222))
 
 ## <small>0.11.1 (2026-04-14)</small>
 
