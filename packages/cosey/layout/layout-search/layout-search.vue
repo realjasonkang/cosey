@@ -147,6 +147,7 @@ const searchResult = ref<Option[]>([]);
 
 useDocumentEvent('keydown', (event) => {
   if (event.metaKey && event.code === 'KeyK') {
+    event.preventDefault();
     open.value = true;
   }
 });
