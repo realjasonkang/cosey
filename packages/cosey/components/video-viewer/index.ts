@@ -1,9 +1,9 @@
-import { withInstall } from '../utils';
+import { enhanceComponent, type EnhancedComponent } from '../utils';
 import VideoViewer from './video-viewer';
 
 export * from './video-viewer';
 
-const _VideoViewer = withInstall(VideoViewer);
+const _VideoViewer: EnhancedComponent<typeof VideoViewer> = enhanceComponent(VideoViewer);
 
 export { _VideoViewer as VideoViewer };
 export default _VideoViewer;

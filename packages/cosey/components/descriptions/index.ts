@@ -1,9 +1,9 @@
-import { withInstall } from '../utils';
+import { enhanceComponent, type EnhancedComponent } from '../utils';
 import Descriptions from './descriptions';
 
 export * from './descriptions';
 
-const _Descriptions = withInstall(Descriptions);
+const _Descriptions: EnhancedComponent<typeof Descriptions> = enhanceComponent(Descriptions);
 
 export { _Descriptions as Descriptions };
 export default _Descriptions;

@@ -1,7 +1,8 @@
-import { withInstall } from '../utils';
+import { enhanceComponent, type EnhancedComponent } from '../utils';
 import OptionalWrapper from './optional-wrapper';
 
-const _OptionalWrapper = withInstall(OptionalWrapper);
+const _OptionalWrapper: EnhancedComponent<typeof OptionalWrapper> =
+  enhanceComponent(OptionalWrapper);
 
 export { _OptionalWrapper as OptionalWrapper };
 export default _OptionalWrapper;

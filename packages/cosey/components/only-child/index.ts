@@ -1,7 +1,7 @@
-import { withInstall } from '../utils';
+import { enhanceComponent, type EnhancedComponent } from '../utils';
 import OnlyChild from './only-child';
 
-const _OnlyChild = withInstall(OnlyChild);
+const _OnlyChild: EnhancedComponent<typeof OnlyChild> = enhanceComponent(OnlyChild);
 
 export { _OnlyChild as OnlyChild };
 export default _OnlyChild;

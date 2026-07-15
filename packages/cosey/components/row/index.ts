@@ -1,9 +1,9 @@
-import { withInstall } from '../utils';
+import { enhanceComponent, type EnhancedComponent } from '../utils';
 import Row from './row.vue';
 
 export * from './row';
 
-const _Row = withInstall(Row);
+const _Row: EnhancedComponent<typeof Row> = enhanceComponent(Row);
 
 export { _Row as Row };
 export default _Row;

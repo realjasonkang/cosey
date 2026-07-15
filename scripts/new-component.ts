@@ -49,12 +49,12 @@ export default defineComponent({
   // index.ts
   await fse.outputFile(
     path.resolve(compDir, `index.ts`),
-    `import { withInstall } from '../utils';
+    `import { enhanceComponent, type EnhancedComponent } from '../utils';
 import ${pascalName} from './${kebabName}';
 
 export * from './${kebabName}';
 
-const _${pascalName} = withInstall(${pascalName});
+const _${pascalName}: EnhancedComponent<typeof ${pascalName}> = enhanceComponent(${pascalName});
 
 export { _${pascalName} as ${pascalName} };
 export default _${pascalName};

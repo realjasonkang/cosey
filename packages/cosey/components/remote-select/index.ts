@@ -1,9 +1,9 @@
-import { withInstall } from '../utils';
+import { enhanceComponent, type EnhancedComponent } from '../utils';
 import RemoteSelect from './remote-select';
 
 export * from './remote-select.api';
 
-const _RemoteSelect = withInstall(RemoteSelect);
+const _RemoteSelect: EnhancedComponent<typeof RemoteSelect> = enhanceComponent(RemoteSelect);
 
 export { _RemoteSelect as RemoteSelect };
 export default _RemoteSelect;

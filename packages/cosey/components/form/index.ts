@@ -1,4 +1,4 @@
-import { withInstall } from '../utils';
+import { enhanceComponent, type EnhancedComponent } from '../utils';
 import Form from './form';
 import FormItem from './form-item.vue';
 import { useBubbleTemplate } from './useBubbleTemplate';
@@ -8,8 +8,8 @@ import { getFormItemWidth, useFormItemWidth } from './useFormItemWidth';
 export * from './form.api';
 export * from './form-item.api';
 
-const _Form = withInstall(Form);
-const _FormItem = withInstall(FormItem);
+const _Form: EnhancedComponent<typeof Form> = enhanceComponent(Form);
+const _FormItem: EnhancedComponent<typeof FormItem> = enhanceComponent(FormItem);
 
 export {
   _Form as Form,

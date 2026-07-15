@@ -2,31 +2,35 @@ import { type App } from 'vue';
 
 import { launchRouter } from './router';
 import { type CoseyOptions, launchGlobalConfig } from './config';
-import { launchGlobalComponents } from './layout';
 import { launchStore } from './store';
 import { isClient } from './utils';
+import ElementPlus from 'element-plus';
+import { registerGlobalComponents } from './components/index';
 
-export { Http, createHttp, http } from './request';
+import { Http, createHttp, http } from './request';
 
-export * from './layout/layout';
-export * from './layout/merged';
-export { defineRoute, defineRoutes, mergeRouteModules, router } from './router';
-export {
+import { defineRoute, defineRoutes, mergeRouteModules, router } from './router';
+import {
   type UserInfo,
   pinia,
+  piniaPluginPersist,
   useUserStore,
   useOuterUserStore,
   useLayoutStore,
   useOuterLayoutStore,
 } from './store';
 export { type CoseyOptions, type LayoutComponents, type LayoutSlots } from './config';
-export { persist } from './persist';
-export { i18n } from './locale';
+import { persist } from './persist';
+import { i18n } from './locale';
 
-export * from './config/root-config-provider.api';
-export { default as RootConfigProvider } from './config/root-config-provider';
+import RootConfigProvider from './config/root-config-provider';
 
-export function launch(app: App, options: CoseyOptions = {}) {
+function launchGlobalComponents(app: App) {
+  app.use(ElementPlus);
+  app.use(registerGlobalComponents);
+}
+
+function launch(app: App, options: CoseyOptions = {}) {
   // 路由
   launchRouter(app, options.router);
 
@@ -41,3 +45,45 @@ export function launch(app: App, options: CoseyOptions = {}) {
     launchGlobalConfig(app, options);
   }
 }
+
+export * from './layout/layout';
+export * from './layout/merged';
+
+export * from './config/root-config-provider.api';
+
+export {
+  // components
+  registerGlobalComponents,
+
+  // config
+  RootConfigProvider,
+
+  // http
+  Http,
+  createHttp,
+  http,
+
+  // router
+  defineRoute,
+  defineRoutes,
+  mergeRouteModules,
+  router,
+
+  // persist
+  persist,
+
+  // i18n
+  i18n,
+
+  // store
+  type UserInfo,
+  pinia,
+  piniaPluginPersist,
+  useUserStore,
+  useOuterUserStore,
+  useLayoutStore,
+  useOuterLayoutStore,
+
+  // launch
+  launch,
+};

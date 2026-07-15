@@ -58,7 +58,7 @@ export * from './week-range-picker';
 import { type App } from 'vue';
 import * as components from './components';
 
-const installer = {
+const registerGlobalComponents = {
   install(app: App) {
     Object.keys(components).forEach((key) => {
       app.use((components as any)[key]);
@@ -66,6 +66,4 @@ const installer = {
   },
 };
 
-export { components };
-
-export default installer;
+export { components, registerGlobalComponents };

@@ -1,9 +1,9 @@
-import { withInstall } from '../utils';
+import { enhanceComponent, type EnhancedComponent } from '../utils';
 import TableAction from './table-action';
 
 export * from './table-action.api';
 
-const _TableAction = withInstall(TableAction);
+const _TableAction: EnhancedComponent<typeof TableAction> = enhanceComponent(TableAction);
 
 export { _TableAction as TableAction };
 export default _TableAction;
