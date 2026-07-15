@@ -2,12 +2,17 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "files.associations": {
     "*.css": "tailwindcss"
   },
   "npm.packageManager": "pnpm",
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
-  }
+  "i18n-ally.localesPaths": [
+    "src/locale",
+    "packages/cosey/locale",
+    "lib-dist/cosey/locale",
+    "src/locale/lang",
+    "packages/cosey/locale/lang",
+    "lib-dist/cosey/locale/lang"
+  ]
 }

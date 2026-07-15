@@ -1,6 +1,7 @@
 import { computed, defineComponent, ref, watch } from 'vue';
 import { SvgIcon } from '../svg-icon';
 import { IconifyIcon } from '../iconify-icon';
+import { FontIcon } from '../font-icon';
 import { iconProps } from './icon.api';
 import useStyle from './icon.style';
 import { useComponentConfig } from '../config-provider';
@@ -53,18 +54,22 @@ export default defineComponent({
       } as any;
     });
 
+    function getDefualtSlot() {
+      if (slots.default) {
+        return <span {...mergedProps.value}>{slots.default()}</span>;
+      }
+      if (prefix.value) {
+        if (prefix.value === 'svg') {
+          return <SvgIcon {...mergedProps.value} />;
+        }
+        return <IconifyIcon {...mergedProps.value} prefix={prefix.value} />;
+      } else {
+        return <FontIcon {...mergedProps.value} />;
+      }
+    }
+
     return () => {
-      return (
-        <span class={[hashId.value, `${prefixCls.value}-wrapper`]}>
-          {slots.default ? (
-            <span {...mergedProps.value}>{slots.default()}</span>
-          ) : prefix.value === 'svg' ? (
-            <SvgIcon {...mergedProps.value} />
-          ) : (
-            <IconifyIcon {...mergedProps.value} prefix={prefix.value} />
-          )}
-        </span>
-      );
+      return <span class={[hashId.value, `${prefixCls.value}-wrapper`]}>{getDefualtSlot()}</span>;
     };
   },
 });

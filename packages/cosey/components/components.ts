@@ -40,6 +40,7 @@ import { ScrollView } from './scroll-view';
 import { SnugMenu, SnugMenuItem } from './snug-menu';
 import { StackDialog } from './stack-dialog';
 import { SvgIcon } from './svg-icon';
+import { FontIcon } from './font-icon';
 import { SvgaCard } from './svga-card';
 import { SvgaViewer } from './svga-viewer';
 import { Table } from './table';
@@ -102,6 +103,7 @@ declare module 'vue' {
     CoSnugMenuItem: typeof SnugMenuItem;
     CoStackDialog: typeof StackDialog;
     CoSvgIcon: typeof SvgIcon;
+    CoFontIcon: typeof FontIcon;
     CoSvgaCard: typeof SvgaCard;
     CoSvgaViewer: typeof SvgaViewer;
     CoTable: typeof Table;

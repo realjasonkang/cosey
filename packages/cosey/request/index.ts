@@ -9,7 +9,7 @@ import { get, merge, pick } from 'lodash-es';
 import { useOuterUserStore } from '../store';
 import { ROUTER_TO, TOKEN_NAME } from '../constant';
 import { Http } from './Http';
-import { isObject } from '../utils';
+import { isObject, toArray } from '../utils';
 import { type RequiredHttpConfig, type HttpConfig } from '../config/http';
 import { persist } from '../persist';
 import { globalConfig } from '../config';
@@ -42,10 +42,10 @@ export function createHttp(axiosConfig: CreateAxiosDefaults = {}, createCfg: Htt
       const message = get(resData, httpPath.message) || 'Error';
       const data = httpPath.data ? get(resData, httpPath.data) : resData;
 
-      if (code !== mergedCfg.code.success) {
-        if (code === mergedCfg.code.forbidden) {
+      if (!toArray(mergedCfg.code.success).includes(code)) {
+        if (toArray(mergedCfg.code.forbidden).includes(code)) {
           router.push(routerConfig.homePath);
-        } else if (code === mergedCfg.code.unauthorized) {
+        } else if (toArray(mergedCfg.code.unauthorized).includes(code)) {
           // 如果是 access token 过期导致的未认证，并且提供了刷新 token 的接口，则尝试刷新 token
           if (apiConfig.refreshToken && apiConfig?.isAccessTokenExpired?.(response)) {
             if (!refreshTokenRequest) {

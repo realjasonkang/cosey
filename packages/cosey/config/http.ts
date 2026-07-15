@@ -53,17 +53,17 @@ export const defaultHttpConfig = {
     /**
      * 响应成功状态码
      */
-    success: 200,
+    success: 200 as number | number[],
 
     /**
      * 未认证状态码
      */
-    unauthorized: 401,
+    unauthorized: 401 as number | number[],
 
     /**
      * 无权限状态码
      */
-    forbidden: 403,
+    forbidden: 403 as number | number[],
   },
 
   /**

@@ -181,21 +181,21 @@ Token 添加到的请求头字段的键名
 
 #### code.success
 
-- 类型：`number`
+- 类型：`number | number[]`
 - 默认值：`200`
 
 响应成功状态码。
 
 #### code.unauthorized
 
-- 类型：`number`
+- 类型：`number | number[]`
 - 默认值：`401`
 
 未认证状态码。
 
 #### code.forbidden
 
-- 类型：`number`
+- 类型：`number | number[]`
 - 默认值：`403`
 
 没权限状态码。
