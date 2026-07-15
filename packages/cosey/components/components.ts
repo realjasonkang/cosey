@@ -43,6 +43,8 @@ import { SvgIcon } from './svg-icon';
 import { FontIcon } from './font-icon';
 import { SvgaCard } from './svga-card';
 import { SvgaViewer } from './svga-viewer';
+import { PagViewer } from './pag-viewer';
+import { PagCard } from './pag-card';
 import { Table } from './table';
 import { TableAction } from './table-action';
 import { TableQuery } from './table/table-query';
@@ -106,6 +108,8 @@ declare module 'vue' {
     CoFontIcon: typeof FontIcon;
     CoSvgaCard: typeof SvgaCard;
     CoSvgaViewer: typeof SvgaViewer;
+    CoPagViewer: typeof PagViewer;
+    CoPagCard: typeof PagCard;
     CoTable: typeof Table;
     CoTableAction: typeof TableAction;
     CoTableQuery: typeof TableQuery;
@@ -169,6 +173,8 @@ export {
   SvgIcon,
   SvgaCard,
   SvgaViewer,
+  PagViewer,
+  PagCard,
   Table,
   TableAction,
   TableQuery,

@@ -8,6 +8,7 @@
       src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
     />
     <co-media-card src="../../assets/1658309970649.svga" />
+    <co-media-card src="../../assets/1387867861684.pag" />
     <co-media-card src="https://interactive-examples.mdn.mozilla.net/media/cc0/t-rex-roar.zip" />
   </el-space>
 </template>

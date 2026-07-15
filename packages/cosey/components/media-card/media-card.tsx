@@ -6,6 +6,7 @@ import VideoCard from '../video-card/video-card';
 import AudioCard from '../audio-card/audio-card';
 import FileCard from '../file-card/file-card';
 import SvgaCard from '../svga-card/svga-card';
+import PagCard from '../pag-card/pag-card';
 
 export default defineComponent({
   name: 'CoMediaCard',
@@ -45,6 +46,8 @@ export default defineComponent({
           return <AudioCard {...mergedProps.value} ref={mediaRef} />;
         case 'svga':
           return <SvgaCard {...mergedProps.value} ref={mediaRef} />;
+        case 'pag':
+          return <PagCard {...mergedProps.value} ref={mediaRef} />;
         default:
           return <FileCard {...mergedProps.value} />;
       }

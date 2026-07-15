@@ -1,17 +1,17 @@
 import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
 import { omit } from 'lodash-es';
-import { Parser, Player } from 'svga';
-import { svgaViewerEmits, svgaViewerProps, svgaViewerSlots } from './svga-viewer.api';
+import { PAGView, PAGFile, types, View } from '@gunny/libpag-lite';
+import { pagViewerEmits, pagViewerProps, pagViewerSlots } from './pag-viewer.api';
 import { MediaViewerDialog } from '../media-viewer/media-viewer-dialog';
 import { ElIcon } from 'element-plus';
 import { Loading } from '@element-plus/icons-vue';
 import { useToken } from '..';
 
 export default defineComponent({
-  name: 'CoSvgaViewer',
-  props: svgaViewerProps,
-  slots: svgaViewerSlots,
-  emits: svgaViewerEmits,
+  name: 'CoPagViewer',
+  props: pagViewerProps,
+  slots: pagViewerSlots,
+  emits: pagViewerEmits,
   setup(props, { emit }) {
     const canvasRef = ref<HTMLCanvasElement>();
 
@@ -19,27 +19,28 @@ export default defineComponent({
 
     const { token } = useToken();
 
-    let player: Player | null = null;
+    let pagView: View | null = null;
 
     onMounted(async () => {
       try {
         loading.value = true;
-        const parser = new Parser();
-        const svga = await parser.load(props.src!);
-        canvasRef.value!.width = svga.size.width;
-        canvasRef.value!.height = svga.size.height;
 
-        player = new Player(canvasRef.value!);
-        await player.mount(svga);
-
-        player.start();
+        const arrayBuffer = await fetch(props.src!).then((res) => res.arrayBuffer());
+        const pagFile = PAGFile.fromArrayBuffer(arrayBuffer);
+        const canvas = canvasRef.value!;
+        canvas.width = pagFile.mainComposition.width;
+        canvas.height = pagFile.mainComposition.height;
+        pagView = PAGView.init(arrayBuffer, canvas, {
+          renderingMode: types.RenderingMode.WebGL,
+        });
+        pagView.play();
       } finally {
         loading.value = false;
       }
     });
 
     onBeforeUnmount(() => {
-      player?.destroy();
+      pagView?.destroy();
     });
 
     return () => {
