@@ -12,6 +12,8 @@ export default getSimpleStyleHook('CoIcon', (token) => {
       width: '1em',
       height: '1em',
       fill: 'currentcolor',
+      justifyContent: 'center',
+      alignItems: 'center',
 
       '&-sm': {
         fontSize: token.fontSizeSM,

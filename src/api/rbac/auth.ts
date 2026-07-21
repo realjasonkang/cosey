@@ -3,6 +3,7 @@ import { http, persist } from 'cosey';
 
 const Api = {
   Login: '/rbac/auth/login',
+  Captcha: '/rbac/auth/captcha',
   UserInfo: '/rbac/auth/info',
   ChangePassword: '/rbac/auth/change-password',
   RefreshToken: '/rbac/auth/refresh-token',
@@ -19,6 +20,10 @@ export default {
 
     persist.set(REFRESH_TOKEN, refreshToken);
     return accessToken;
+  },
+
+  captcha: () => {
+    return http.get(Api.Captcha, {});
   },
 
   getUserInfo: () => {

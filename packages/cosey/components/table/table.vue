@@ -368,8 +368,8 @@ const setRenderedColumns = () => {
   );
 };
 
-const exportColumns = computed(() => {
-  return renderedColumns.value?.filter((column) => {
+const exportColumns = computed<TableColumnProps[]>(() => {
+  return (renderedColumns.value as any)?.filter((column: any) => {
     return (
       (!isNullish(column.prop || column.property) && (column.prop || column.property) !== '') ||
       (column.columns && column.columns.length > 0) ||

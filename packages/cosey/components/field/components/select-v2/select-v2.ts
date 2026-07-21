@@ -1,5 +1,5 @@
+import { SelectV2Props } from 'element-plus';
 import { type FieldComponentCommonProps } from '../common';
-import { type SelectV2Props } from 'element-plus/es/components/select-v2/src/defaults.mjs';
 
 export interface FieldSelectV2Props extends FieldComponentCommonProps {
   componentProps?: Partial<SelectV2Props> & {

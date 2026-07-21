@@ -1,6 +1,4 @@
-import { defineComponent, ref } from 'vue';
-import ElTeleport from 'element-plus/es/components/teleport/index.mjs';
-import ElFocusTrap from 'element-plus/es/components/focus-trap/index.mjs';
+import { defineComponent, ref, Teleport } from 'vue';
 import Mask from '../mask/mask';
 import Close from '../close/close';
 import { useComponentConfig } from '../config-provider';
@@ -8,6 +6,7 @@ import useStyle from './media-viewer-dialog.style';
 import { useZIndex } from 'element-plus';
 import { mediaViewerDialogEmits, mediaViewerDialogProps } from './media-viewer-dialog.api';
 import Transition from '../transition/transition';
+import { ElFocusTrap } from 'element-plus/es/components/focus-trap/index.mjs';
 
 export const MediaViewerDialog = defineComponent({
   name: 'CoMediaViewerDialog',
@@ -42,7 +41,7 @@ export const MediaViewerDialog = defineComponent({
 
     return () => {
       return (
-        <ElTeleport to="body" disabled={!props.teleported}>
+        <Teleport to="body" disabled={!props.teleported}>
           <Transition name="fade" appear>
             <div
               ref="wrapper"
@@ -66,7 +65,7 @@ export const MediaViewerDialog = defineComponent({
               </ElFocusTrap>
             </div>
           </Transition>
-        </ElTeleport>
+        </Teleport>
       );
     };
   },

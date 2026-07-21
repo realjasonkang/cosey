@@ -84,6 +84,7 @@ export default {
       cancelUpload: 'Cancelar carregamento',
       reUpload: 'Carregar novamente',
       maxUpload: 'Carregue no máximo {num} ficheiros',
+      maxSize: 'O ficheiro {name} é demasiado grande, o tamanho máximo suportado é {size} MB',
     },
     colorScheme: {
       auto: 'Automático',
@@ -112,6 +113,8 @@ export default {
       username: 'Nome de utilizador',
       enterPassword: 'Introduza a palavra-passe',
       password: 'Palavra-passe',
+      enterCaptcha: 'Introduza o captcha',
+      captcha: 'Captcha',
       logout: 'Terminar sessão',
       loggingOut: 'A terminar sessão...',
     },

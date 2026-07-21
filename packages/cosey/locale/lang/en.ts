@@ -84,6 +84,7 @@ export default {
       cancelUpload: 'Cancel upload',
       reUpload: 're-upload',
       maxUpload: 'Upload a maximum of {num} files',
+      maxSize: 'The file {name} is too large, the maximum supported size is {size} MB',
     },
     colorScheme: {
       auto: 'Auto',
@@ -112,6 +113,8 @@ export default {
       username: 'Username',
       enterPassword: 'Please enter your password',
       password: 'Password',
+      enterCaptcha: 'Enter captcha',
+      captcha: 'Captcha',
       logout: 'Logout',
       loggingOut: 'Logging out...',
     },

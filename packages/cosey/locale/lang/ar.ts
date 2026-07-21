@@ -84,6 +84,7 @@ export default {
       cancelUpload: 'إلغاء التحميل',
       reUpload: 'إعادة التحميل',
       maxUpload: 'الحد الأقصى للتحميل {num} ملف',
+      maxSize: 'الملف {name} كبير جداً، الحد الأقصى للحجم المدعوم هو {size} MB',
     },
     colorScheme: {
       auto: 'تلقائي (حسب النظام)',
@@ -112,6 +113,8 @@ export default {
       username: 'اسم المستخدم',
       enterPassword: 'الرجاء إدخال كلمة المرور',
       password: 'كلمة المرور',
+      enterCaptcha: 'الرجاء إدخال رمز التحقق',
+      captcha: 'رمز التحقق',
       logout: 'تسجيل الخروج',
       loggingOut: 'جاري تسجيل الخروج...',
     },

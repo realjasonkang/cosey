@@ -47,9 +47,13 @@ async function bootstrap() {
       description: import.meta.env.VITE_APP_DESCRIPTION,
     },
     i18n: i18nConfig,
+    auth: {
+      captcha: true,
+    },
     api: {
       upload: commonApi.singleUpload,
       login: authApi.login,
+      captcha: authApi.captcha,
       changePassword: authApi.changePassword,
       refreshToken: authApi.refreshToken,
       isAccessTokenExpired: authApi.isAccessTokenExpired,

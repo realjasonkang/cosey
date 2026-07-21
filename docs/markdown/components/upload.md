@@ -57,6 +57,7 @@ upload/select-only
 | accept         | 允许选择的文件类型                                           | string                                                        | ''        |
 | limit          | 允许上传文件的最大数量，0表示无限制                          | number                                                        | 0         |
 | multiple       | 是否支持多选文件                                             | boolean                                                       | false     |
+| max-size       | 选择文件的最大尺寸，单位字节                                 | number                                                        | -         |
 | model-value    | 绑定的值                                                     | string \| File \| (string \ File)[]                           | -         |
 | validate-event | 是否触发表单验证                                             | boolean                                                       | true      |
 | single         | 是否只绑定一个值（`string` 或 `File`，而非数组）             | boolean                                                       | false     |
@@ -76,8 +77,9 @@ upload/select-only
 
 ### UploadEmits
 
-| 事件               | 描述               | 类型                                                  |
-| ------------------ | ------------------ | ----------------------------------------------------- |
-| exceed             | 当超出限制时触发   | () => void                                            |
-| update:model-value | 绑定的值改变时触发 | (value: string \| File \| (string \| File)[]) => void |
-| change             | 绑定的值改变时触发 | (value: string \| File \| (string \| File)[]) => void |
+| 事件               | 描述                       | 类型                                                  |
+| ------------------ | -------------------------- | ----------------------------------------------------- |
+| exceed             | 当超出限制时触发           | () => void                                            |
+| update:model-value | 绑定的值改变时触发         | (value: string \| File \| (string \| File)[]) => void |
+| change             | 绑定的值改变时触发         | (value: string \| File \| (string \| File)[]) => void |
+| oversize           | 选择文件超出最大尺寸时触发 | (file: File) => void                                  |

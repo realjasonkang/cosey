@@ -1,6 +1,6 @@
-import { type SelectProps } from 'element-plus/es/components/select/src/select.mjs';
-import { type FieldComponentCommonProps } from '../common';
 import { type ExtractPropTypes } from 'vue';
+import { SelectProps } from 'element-plus';
+import { type FieldComponentCommonProps } from '../common';
 import { Props } from '../../../../hooks';
 
 export interface FieldSelectObjectOption {

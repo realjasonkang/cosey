@@ -1,6 +1,13 @@
 import type { DeepPartial } from '../types/helper';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
+export interface LoginFormModel {
+  username: string;
+  password: string;
+  captcha?: string;
+  captchaId?: string;
+}
+
 /**
  * 请求接口
  */
@@ -19,7 +26,20 @@ export const defaultApiConfig = {
   /**
    * 登录
    */
-  login: null as ((data: any, config?: AxiosRequestConfig) => Promise<string>) | null,
+  login: null as ((data: LoginFormModel, config?: AxiosRequestConfig) => Promise<string>) | null,
+
+  /**
+   * 验证码
+   */
+  captcha: null as
+    | ((
+        data: any,
+        config?: AxiosRequestConfig,
+      ) => Promise<{
+        image: string;
+        id: string;
+      }>)
+    | null,
 
   /**
    * 修改密码

@@ -30,7 +30,8 @@ export function registerAuthGuard(router: Router) {
 
           // 首次添加路由，需重新触发路由匹配，避免404
           return to.fullPath;
-        } catch {
+        } catch (e) {
+          console.error(e);
           return false;
         } finally {
           persist.remove(ROUTER_TO);

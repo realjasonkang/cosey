@@ -30,6 +30,9 @@ export const uploadProps = {
   multiple: {
     type: Boolean,
   },
+  maxSize: {
+    type: Number,
+  },
   modelValue: {
     type: [String, Object, Array] as PropType<string | File | (string | File)[]>,
   },
@@ -74,6 +77,7 @@ export const uploadSlots = Object as SlotsType<UploadSlots>;
 
 export const uploadEmits = {
   exceed: () => true,
+  oversize: (file: File) => file || true,
   'update:modelValue': (value: string | File | (string | File)[]) => value || true,
   change: (value: string | File | (string | File)[]) => value || true,
 };

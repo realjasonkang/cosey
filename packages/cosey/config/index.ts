@@ -5,7 +5,8 @@ import { type RouterConfig, type RequiredRouterConfig, defaultRouterConfig } fro
 import { type LayoutConfig, type RequiredLayoutConfig, defaultLayoutConfig } from './layout';
 import { type SiteConfig, type RequiredSiteConfig, defaultSiteConfig } from './site';
 import { type HttpConfig, type RequiredHttpConfig, defaultHttpConfig } from './http';
-import { type ApiConfig, type RequiredApiConfig, defaultApiConfig } from './api';
+import { type ApiConfig, type RequiredApiConfig, defaultApiConfig, LoginFormModel } from './api';
+import { type AuthConfig, type RequiredAuthConfig, defaultAuthConfig } from './auth';
 import { type PersistConfig } from './persist';
 import { type I18nConfig } from './i18n';
 
@@ -14,6 +15,8 @@ import { type CoseyRouterOptions } from '../router';
 import { launchLocale } from '../locale';
 import { launchPersist } from '../persist';
 import { type UserInfo } from '../store';
+
+export { type LoginFormModel };
 
 export interface LayoutComponents {
   base?: string | Component;
@@ -71,6 +74,7 @@ export type CoseyOptions = {
   layout?: LayoutConfig;
   site?: SiteConfig;
   api?: ApiConfig;
+  auth?: AuthConfig;
   initializeData?: InitializeDataHandler;
   filterRoute?: FilterRouteHandler;
   components?: LayoutComponents;
@@ -85,6 +89,7 @@ export interface GlobalConfig {
   layout: RequiredLayoutConfig;
   site: RequiredSiteConfig;
   api: RequiredApiConfig;
+  auth: RequiredAuthConfig;
   initializeData: NonNullable<CoseyOptions['initializeData']>;
   filterRoute: NonNullable<CoseyOptions['filterRoute']>;
   components: NonNullable<CoseyOptions['components']>;
@@ -102,6 +107,7 @@ export function launchGlobalConfig(app: App, options: CoseyOptions) {
     layout = {},
     site = {},
     api = {},
+    auth = {},
     initializeData = () => void 0,
     filterRoute = () => true,
     components = {},
@@ -116,6 +122,7 @@ export function launchGlobalConfig(app: App, options: CoseyOptions) {
     layout: defaultsDeep(layout, defaultLayoutConfig),
     site: defaultsDeep(site, defaultSiteConfig),
     api: defaultsDeep(api, defaultApiConfig),
+    auth: defaultsDeep(auth, defaultAuthConfig),
     initializeData,
     filterRoute,
     components,

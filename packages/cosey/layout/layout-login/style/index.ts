@@ -17,6 +17,22 @@ export default getSimpleStyleHook('CoLayoutLogin', (token) => {
         color: token.colorTextSecondary,
       },
 
+      [`${componentCls}-captcha-wrapper`]: {
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center',
+        gap: token.margin,
+      },
+
+      [`${componentCls}-captcha`]: {
+        width: 'auto',
+        minWidth: 100,
+        height: 40,
+        objectFit: 'contain',
+        flex: 'none',
+        cursor: 'pointer',
+      },
+
       [`${componentCls}-button`]: {
         width: '100%',
       },

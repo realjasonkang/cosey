@@ -84,6 +84,7 @@ export default {
       cancelUpload: '取消上传',
       reUpload: '重新上传',
       maxUpload: '最多上传{num}个文件',
+      maxSize: '{name}文件过大，最大支持{size}MB',
     },
     colorScheme: {
       auto: '跟随系统',
@@ -112,6 +113,8 @@ export default {
       username: '用户名',
       enterPassword: '请输入密码',
       password: '密码',
+      enterCaptcha: '请输入验证码',
+      captcha: '验证码',
       logout: '退出',
       loggingOut: '正在退出',
     },

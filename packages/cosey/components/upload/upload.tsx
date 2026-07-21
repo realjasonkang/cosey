@@ -129,6 +129,17 @@ export default defineComponent({
       }
 
       files.forEach((rawFile) => {
+        if (props.maxSize && rawFile.size > props.maxSize) {
+          emit('oversize', rawFile);
+          ElMessage.warning(
+            t('co.upload.maxSize', {
+              name: rawFile.name,
+              size: (props.maxSize / 1024 / 1024).toFixed(2),
+            }),
+          );
+          return;
+        }
+
         const file: UploadFile = reactive({
           raw: rawFile,
           name: rawFile.name,

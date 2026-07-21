@@ -14,6 +14,8 @@ import {
   unref,
   readonly,
   nextTick,
+  MaybeRefOrGetter,
+  toValue,
 } from 'vue';
 
 import { useLocale } from '../hooks';
@@ -38,8 +40,8 @@ export interface UseUpsertExpose<Row extends Record<string, any>, Data = any> {
 export type UpsertType = 'edit' | 'add';
 
 export interface UseUpsertOptions<Model, Row = Model> {
-  title?: string;
-  stuffTitle?: string;
+  title?: MaybeRefOrGetter<string>;
+  stuffTitle?: MaybeRefOrGetter<string>;
   model: Model;
   onAdd?: (...args: any[]) => void;
   onEdit?: (row: Row, ...args: any[]) => void;
@@ -115,8 +117,10 @@ export function useUpsert<
 
   const mergedTitle = computed(() => {
     return (
-      unref(title) ||
-      t(mapTypeTitle[type.value]) + (lang.value === 'zh-cn' ? '' : ' ') + (unref(stuffTitle) || '')
+      toValue(unref(title)) ||
+      t(mapTypeTitle[type.value]) +
+        (lang.value === 'zh-cn' ? '' : ' ') +
+        (toValue(unref(stuffTitle)) || '')
     );
   });
 

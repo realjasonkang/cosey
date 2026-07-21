@@ -4,6 +4,7 @@ import { Result } from '../utils/Result';
 import { generateTokens, jwt } from '../utils/jwt';
 import { PermissionRow } from '../db/models/permission';
 import { omit } from 'lodash-es';
+import { generateCaptcha } from '../utils/generateCaptcha';
 
 export default function register(interceptor: RequestInterceptor) {
   const prefix = '/rbac/auth';
@@ -21,6 +22,21 @@ export default function register(interceptor: RequestInterceptor) {
       }
 
       return res.json(Result.success(generateTokens(row.id, row.username)));
+    },
+    {
+      skipAuth: true,
+    },
+  );
+
+  interceptor.get(
+    `${prefix}/captcha`,
+    async ({ res }) => {
+      return res.json(
+        Result.success({
+          image: generateCaptcha().base64,
+          id: 'abc123',
+        }),
+      );
     },
     {
       skipAuth: true,
