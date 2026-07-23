@@ -1,0 +1,27 @@
+@use './base/index' as *;
+
+@include b(layout-menu) {
+  width: 100%;
+  border-inline-end: 0 !important;
+  border-block-end: 0 !important;
+
+  @include is(horizontal) {
+    height: 100%;
+  }
+
+  @include e(icon) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline-end: css-var(margin-xxs);
+    width: var(--el-menu-icon-width);
+    flex: none;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+  }
+
+  @include e(title) {
+    @include truncate;
+  }
+}

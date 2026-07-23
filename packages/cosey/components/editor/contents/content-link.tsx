@@ -2,9 +2,8 @@ import { defineComponent } from 'vue';
 import { ElButton, ElDivider, useLocale } from 'element-plus';
 import { useEditor, useElement } from 'slate-vue3';
 import { DOMEditor } from 'slate-vue3/dom';
+import { createBem } from '../../../utils';
 import Icon from '../../icon/icon';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './content-link.stye';
 import WidgetPopover from './widget-popover';
 
 export default defineComponent({
@@ -19,8 +18,7 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const { t } = useLocale();
-    const { prefixCls } = useComponentConfig('editor-content-link', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-content-link');
 
     const editor = useEditor();
 
@@ -44,14 +42,14 @@ export default defineComponent({
               </a>
             ),
             default: () => (
-              <div class={[hashId.value, prefixCls.value]}>
+              <div class={bem.b()}>
                 <ElButton type="primary" link onClick={onOpenLink}>
-                  <Icon name="co:launch" class={`${prefixCls.value}-icon`} />
+                  <Icon name="co:launch" class={bem.e('icon')} />
                   {t('co.editor.openLink')}
                 </ElButton>
                 <ElDivider direction="vertical" />
                 <ElButton type="primary" link onClick={onRemoveLink}>
-                  <Icon name="co:unlink" class={`${prefixCls.value}-icon`} />
+                  <Icon name="co:unlink" class={bem.e('icon')} />
                   {t('co.editor.removeLink')}
                 </ElButton>
               </div>

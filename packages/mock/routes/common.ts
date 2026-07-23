@@ -3,7 +3,14 @@ import { db } from '../db';
 import { validateCreateAsset } from '../validator/assets';
 import { Result } from '../utils/Result';
 import CryptoJS from 'crypto-js';
-import { readAsDataURL } from 'cosey/utils';
+
+function readAsDataURL(file: File) {
+  return new Promise<string>((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.readAsDataURL(file);
+  });
+}
 
 export default function register(interceptor: RequestInterceptor) {
   const prefix = '/upload';

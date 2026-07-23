@@ -1,0 +1,16 @@
+@use './base/index' as *;
+
+@include b(editor-picker) {
+  padding: 0;
+  box-shadow: css-var(box-shadow);
+
+  @include e(content) {
+    padding: css-var(padding-xs);
+    overflow-y: auto;
+    border-radius: inherit;
+
+    @include is(nopadding) {
+      padding: 0;
+    }
+  }
+}

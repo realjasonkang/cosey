@@ -1,102 +1,84 @@
-import { computed, defineComponent, onUnmounted, provide, unref, watch } from 'vue';
-import useMergeTheme from './useMergeTheme';
+import { defineComponent, provide, SlotsType, watch } from 'vue';
 import {
   configProviderProps,
   useConfig,
   useConfigProvide,
   type ConfigProviderInnerProps,
 } from './config-provider.api';
-import { useThemeProvide, useToken } from '../theme';
-import useOverrideElementPlus from './override-element-plus';
-import { ThemeManager } from '../theme/theme-context';
-import { localeContextKey, outsideLocale } from '../../hooks';
+import { localeContextKey, outsideLocale, useColorSchemeProvide } from '../../hooks';
 import en from '../../locale/lang/en';
+import { type Language, useCoseyLocale } from '../../locale';
+import { useLayoutStore } from '../../store';
+import { useContainerProvide } from '../container';
+import { useStackDialogProvide } from '../stack-dialog';
+import { useGlobalConfig } from '../../config';
+import { provideUploadConfig } from '../../config/upload';
+import { useTheme } from '../../theme';
 
 export default defineComponent({
   name: 'CoConfigProvider',
   props: configProviderProps,
+  slots: Object as SlotsType<{
+    default: { locale: Language };
+  }>,
   setup(props, { slots }) {
     const parentContext = useConfig();
 
-    const mergedPrefixCls = computed(() => props.prefixCls || parentContext.prefixCls.value);
+    if (parentContext) {
+      throw new Error('ConfigProvider can only be used once at the root.');
+    }
 
-    const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
-      if (customizePrefixCls) return customizePrefixCls;
-      return suffixCls ? `${mergedPrefixCls.value}-${suffixCls}` : mergedPrefixCls.value;
-    };
+    // ================================== theme ===================================
+    useTheme(() => props.theme);
 
-    const mergedTheme = useMergeTheme(
-      computed(() => props.theme),
-      computed(() => parentContext.theme?.value),
+    // =============================== color scheme ===============================
+    useColorSchemeProvide();
+
+    // ================================= locale ===================================
+    const coseyLocale = useCoseyLocale();
+
+    provide(localeContextKey, coseyLocale);
+
+    watch(
+      coseyLocale,
+      (locale) => {
+        outsideLocale.value = locale || en;
+      },
+      {
+        immediate: true,
+      },
     );
 
-    const mergedTable = computed(() => {
-      return props.table || unref(parentContext.table);
-    });
-
-    const mergedTableAction = computed(() => {
-      return props.tableAction || unref(parentContext.tableAction);
-    });
-
-    // config provider
+    // ============================= config provider ==============================
     const configProvider: ConfigProviderInnerProps = {
-      getPrefixCls,
-      theme: mergedTheme,
-      prefixCls: mergedPrefixCls,
-      table: mergedTable,
-      tableAction: mergedTableAction,
+      table: () => props.table,
+      tableAction: () => props.tableAction,
     };
 
     useConfigProvide(configProvider);
 
-    // locale
-    provide(
-      localeContextKey,
-      computed(() => props.locale),
-    );
+    // ================================= upload ===================================
+    const apiConfig = useGlobalConfig()?.api;
 
-    watch(
-      () => props.locale,
-      () => {
-        outsideLocale.value = props.locale || en;
-      },
-      {
-        immediate: true,
-      },
-    );
+    if (apiConfig) {
+      const uploadApi = apiConfig.upload;
+      provideUploadConfig({
+        request: uploadApi,
+      });
+    }
 
-    // theme
-    const themeManager = new ThemeManager(mergedTheme);
+    // ================================ container =================================
+    const layoutStore = useLayoutStore();
+    useContainerProvide(() => layoutStore.headerHeight);
 
-    onUnmounted(() => {
-      themeManager.destroy();
-    });
+    // =============================== stack dialog ===============================
+    useStackDialogProvide();
 
-    useThemeProvide(themeManager);
-
-    // override ElementPlus
-    useOverrideElementPlus(themeManager);
-
-    // root hash
-    const { hashId } = useToken(themeManager);
-
-    watch(
-      hashId,
-      (newHashId, oldHashId) => {
-        if (!parentContext.theme) {
-          if (oldHashId) {
-            document.documentElement.classList.remove(oldHashId);
-          }
-          document.documentElement.classList.add(newHashId);
-        }
-      },
-      {
-        immediate: true,
-      },
-    );
-
+    // =============================== template ===============================
     return () => {
-      return <div class={hashId.value}>{slots.default?.()}</div>;
+      return slots.default?.({
+        locale: coseyLocale.value,
+      });
     };
   },
 });

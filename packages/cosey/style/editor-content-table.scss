@@ -1,0 +1,13 @@
+@use './base/index' as *;
+
+@include b(editor-content-table) {
+  @include is(active) {
+    outline: 2px solid css-var(color-primary-light-5);
+  }
+
+  @include e(toolbar) {
+    display: flex;
+    align-items: center;
+    column-gap: css-var(size-lg);
+  }
+}

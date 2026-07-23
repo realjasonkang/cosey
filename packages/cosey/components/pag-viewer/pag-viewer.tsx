@@ -5,7 +5,7 @@ import { pagViewerEmits, pagViewerProps, pagViewerSlots } from './pag-viewer.api
 import { MediaViewerDialog } from '../media-viewer/media-viewer-dialog';
 import { ElIcon } from 'element-plus';
 import { Loading } from '@element-plus/icons-vue';
-import { useToken } from '..';
+import { getCssVar } from '../../utils';
 
 export default defineComponent({
   name: 'CoPagViewer',
@@ -16,8 +16,6 @@ export default defineComponent({
     const canvasRef = ref<HTMLCanvasElement>();
 
     const loading = ref(false);
-
-    const { token } = useToken();
 
     let pagView: View | null = null;
 
@@ -49,8 +47,8 @@ export default defineComponent({
           <ElIcon
             v-show={loading.value}
             class="is-loading"
-            color={token.value.colorWhite}
-            size={token.value.sizeXL}
+            color={getCssVar('color-white')}
+            size={getCssVar('size-xl')}
           >
             <Loading />
           </ElIcon>

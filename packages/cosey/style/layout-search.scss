@@ -1,0 +1,88 @@
+@use './base/index' as *;
+
+@include b(layout-search) {
+  max-width: 90%;
+
+  @include e(button) {
+    padding: 0;
+  }
+
+  @include e(button-wrapper) {
+    display: flex;
+    height: 32px;
+    align-items: center;
+    padding-inline: css-var(padding-xs);
+    border-radius: 9999px;
+    background-color: css-var(fill-color);
+  }
+
+  @include e(button-text) {
+    margin-inline-start: css-var(margin-xs);
+    font-size: css-var(font-size-small);
+  }
+
+  @include e(button-kbd) {
+    margin-inline-start: css-var(margin-xs);
+    padding-inline: css-var(padding-xxs);
+    font-size: css-var(font-size-small);
+    line-height: css-var(line-height);
+    border-radius: css-var(border-radius-small);
+    border: css-var(border-width) css-var(border-style) css-var(border-color-lighter);
+    background-color: css-var(bg-color);
+  }
+
+  @include e(input) {
+    width: 100%;
+    height: css-var(size-xxl);
+  }
+
+  @include e(input-icon) {
+    color: css-var(text-color-placeholder);
+  }
+
+  @include e(content) {
+    min-height: 100px;
+  }
+
+  @include e(empty) {
+    padding-block: css-var(padding-xl);
+    text-align: center;
+    font-size: css-var(font-size-small);
+    color: css-var(text-color-secondary);
+  }
+
+  @include e(item) {
+    display: flex;
+    height: 56px;
+    margin-block-end: css-var(margin-xxs);
+    padding-inline: css-var(padding-xs);
+    cursor: pointer;
+    align-items: center;
+    border-radius: css-var(border-radius-base);
+    border: css-var(border-width) css-var(border-style) css-var(border-color-lighter);
+    background-color: css-var(fill-color-light);
+
+    @include is(active) {
+      color: css-var(color-white);
+      background-color: css-var(color-primary);
+    }
+  }
+
+  @include e(enter) {
+    margin-inline-start: auto;
+  }
+
+  @include e(footer) {
+    display: flex;
+    align-items: center;
+    column-gap: css-var(size);
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    font-size: css-var(font-size-small);
+    color: css-var(text-color-regular);
+  }
+
+  @include e(footer-text) {
+    margin-inline-start: css-var(margin-xxs);
+  }
+}

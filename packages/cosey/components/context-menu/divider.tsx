@@ -1,12 +1,12 @@
 import { defineComponent } from 'vue';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   setup() {
-    const { prefixCls } = useComponentConfig('context-menu');
+    const bem = createBem('context-menu');
 
     return () => {
-      return <div class={`${prefixCls.value}-divider`}></div>;
+      return <div class={bem.e('divider')}></div>;
     };
   },
 });

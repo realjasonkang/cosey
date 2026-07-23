@@ -1,15 +1,7 @@
 <template>
-  <div
-    :class="[
-      hashId,
-      prefixCls,
-      {
-        'is-horizontal': isHorizontal,
-      },
-    ]"
-  >
-    <img v-if="!hideLogo" :src="siteConfig.logo" :class="`${prefixCls}-logo`" />
-    <span v-if="!hideName" :class="`${prefixCls}-name`">
+  <div :class="[bem.b(), bem.is('horizontal', isHorizontal)]">
+    <img v-if="!hideLogo" :src="siteConfig.logo" :class="bem.e('logo')" />
+    <span v-if="!hideName" :class="bem.e('name')">
       {{ siteConfig.name }}
     </span>
   </div>
@@ -17,8 +9,7 @@
 
 <script setup lang="ts">
 import { useGlobalConfig } from '../../config';
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutBrand',
@@ -30,9 +21,7 @@ defineProps<{
   isHorizontal?: boolean;
 }>();
 
-const { prefixCls } = useComponentConfig('layout-brand');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-brand');
 
 const siteConfig = useGlobalConfig().site;
 </script>

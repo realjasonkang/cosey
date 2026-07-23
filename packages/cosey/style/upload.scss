@@ -1,0 +1,92 @@
+@use './base/index' as *;
+@use './card-shared' as card;
+
+@include b(upload) {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: css-var(size-xs);
+
+  @include e(select) {
+    @include card.card-base;
+    cursor: pointer;
+    border: css-var(border-width) dashed css-var(border-color-lighter);
+    background-color: css-var(fill-color-lighter);
+
+    &:hover {
+      border-color: css-var(color-primary);
+    }
+  }
+
+  @include e(item) {
+    @include card.card-base;
+    border: none;
+
+    @include is(small, mini) {
+      @include e(actions) {
+        flex-direction: column;
+      }
+    }
+
+    @include is(mini) {
+      @include e(actions) {
+        button {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  @include e(status) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: css-var(size-xxs);
+    border-radius: inherit;
+    border: css-var(border-width) css-var(border-style) css-var(border-color);
+    background-color: var(--el-mask-color);
+    background-clip: content-box;
+  }
+
+  @include e(progress-plain) {
+    display: flex;
+    text-align: center;
+  }
+
+  @include e(progress-text) {
+    font-size: css-var(font-size-small);
+    line-height: 1;
+  }
+
+  @include e(actions) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include e(remove) {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    z-index: 10;
+    display: flex;
+    width: css-var(size-md);
+    height: css-var(size-md);
+    padding-block-end: css-var(padding-xxs);
+    padding-inline-start: css-var(padding-xxs);
+    align-items: center;
+    justify-content: center;
+    border-end-start-radius: 9999px;
+    color: css-var(color-white);
+    transition-duration: 100ms;
+    background-color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.95);
+    }
+  }
+}

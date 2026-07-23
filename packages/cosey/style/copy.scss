@@ -1,0 +1,20 @@
+@use './base/index' as *;
+
+@include b(copy) {
+  width: css-var(size-lg);
+  height: css-var(size-lg) !important;
+  font-size: css-var(font-size-base);
+  transition: none;
+
+  &:not(.is-copied):hover {
+    opacity: 0.75;
+  }
+
+  @include is(copied) {
+    font-size: css-var(font-size-extra-large);
+
+    @include e(icon) {
+      color: css-var(color-success);
+    }
+  }
+}

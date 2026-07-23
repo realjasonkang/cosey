@@ -24,13 +24,12 @@ import {
   isString,
   getBasename,
   debugWarn,
+  createBem,
 } from '../../utils';
 import UploadItem from './upload-item';
 import { TransitionGroup } from '../transition-group';
 import Icon from '../icon/icon';
 
-import useStyle from './upload.style';
-import { useComponentConfig } from '../config-provider';
 import { useLocale } from '../../hooks';
 import { injectUploadConfig } from '../../config/upload';
 
@@ -42,9 +41,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const { t } = useLocale();
 
-    const { prefixCls } = useComponentConfig('upload');
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('upload');
 
     const { request } = injectUploadConfig() || {};
 
@@ -262,7 +259,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <div class={[hashId.value, prefixCls.value]}>
+        <div class={bem.b()}>
           <TransitionGroup effect="fade">
             {fileList.value.map((file) => {
               return (
@@ -280,7 +277,7 @@ export default defineComponent({
           </TransitionGroup>
 
           {showSelect.value && (
-            <div class={[`${prefixCls.value}-select`, `is-${props.size}`]} onClick={onSelect}>
+            <div class={[bem.e('select'), bem.is(props.size)]} onClick={onSelect}>
               <Icon name="co:add-large" size="24" />
             </div>
           )}

@@ -9,9 +9,9 @@ import { ElMenu, ElMenuItem, ElMenuItemGroup, ElSubMenu } from 'element-plus';
 import { type MenuItem } from '../../router';
 import { useLayoutStore } from '../../store';
 import { defineTemplate } from '../../utils';
-import { Icon, useComponentConfig } from '../../components';
+import { Icon } from '../../components';
+import { createBem } from '../../utils';
 
-import useStyle from './style';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -29,9 +29,7 @@ const props = withDefaults(
   },
 );
 
-const { prefixCls } = useComponentConfig('layout-menu');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-menu');
 
 const route = useRoute();
 const router = useRouter();
@@ -69,7 +67,7 @@ function renderMenu(menuItems: MenuItem[]) {
       const iconVNode = () =>
         item.icon && (
           <div
-            class={`${prefixCls.value}-icon`}
+            class={bem.e('icon')}
             style={{
               margin: collapse.value ? 0 : undefined,
             }}
@@ -80,7 +78,7 @@ function renderMenu(menuItems: MenuItem[]) {
       const titleVNode = () => {
         const title = t(item.title ?? '');
         return (
-          <span class={`${prefixCls.value}-title`} title={title}>
+          <span class={bem.e('title')} title={title}>
             {title}
           </span>
         );
@@ -107,7 +105,7 @@ function renderMenu(menuItems: MenuItem[]) {
         <ElMenuItem
           key={item.name}
           index={item.name}
-          class={{ 'is-active': active }}
+          class={bem.is('active', active)}
           onClick={() => onMenuItemClick(item)}
           v-slots={{
             title: titleVNode,
@@ -125,7 +123,7 @@ function renderMenu(menuItems: MenuItem[]) {
       mode={mode.value}
       collapse={collapse.value}
       style={{ '--el-menu-horizontal-height': '100%' }}
-      class={[hashId.value, prefixCls.value, `is-${layoutStore.menuType}`]}
+      class={[bem.b(), bem.is(layoutStore.menuType)]}
     >
       {{ default: () => renderSubMenu(menuItems) }}
     </ElMenu>

@@ -1,0 +1,57 @@
+@use './base/index' as *;
+
+@include b(descriptions) {
+  border-collapse: collapse;
+
+  tr {
+    background: transparent;
+  }
+
+  td {
+    &:nth-child(2n-1) {
+      color: css-var(text-color-secondary);
+    }
+  }
+
+  @include is(label-left) {
+    td:nth-child(2n-1) {
+      text-align: left;
+    }
+  }
+
+  @include is(label-center) {
+    td:nth-child(2n-1) {
+      text-align: center;
+    }
+  }
+
+  @include is(label-right) {
+    td:nth-child(2n-1) {
+      text-align: right;
+    }
+  }
+
+  &:not(.is-bordered) {
+    td:nth-child(2n) {
+      padding-inline-start: css-var(padding-xs);
+    }
+
+    td:nth-child(2n-1):not(:first-child) {
+      padding-inline-start: css-var(padding-sm);
+    }
+  }
+
+  @include is(bordered) {
+    td {
+      border: 1px solid css-var(border-color-lighter);
+      padding-block: css-var(padding-xxs);
+      padding-inline: css-var(padding-xs);
+    }
+  }
+
+  @include has(colon) {
+    td:nth-child(2n-1) span::after {
+      content: ':\00a0';
+    }
+  }
+}

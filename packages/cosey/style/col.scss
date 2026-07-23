@@ -1,0 +1,63 @@
+@use 'sass:math';
+@use './base/index' as *;
+
+$columns: 24;
+$sizes: xs, sm, md, lg, xl, xxl;
+
+@include b(col) {
+  position: relative;
+  box-sizing: border-box;
+
+  // 基础 span / offset / pull / push
+  @for $i from 1 through $columns {
+    @include m($i) {
+      display: block;
+      max-width: math.percentage(math.div($i, $columns));
+      flex: 0 0 math.percentage(math.div($i, $columns));
+    }
+
+    @include m('offset-#{$i}') {
+      margin-inline-start: math.percentage(math.div($i, $columns));
+    }
+
+    @include m('pull-#{$i}') {
+      position: relative;
+      inset-inline-end: math.percentage(math.div($i, $columns));
+    }
+
+    @include m('push-#{$i}') {
+      position: relative;
+      inset-inline-start: math.percentage(math.div($i, $columns));
+    }
+  }
+
+  // 响应式 span / offset / pull / push
+  @each $size in $sizes {
+    @for $i from 1 through $columns {
+      @include m-intersect('#{$size}-#{$i}', $size) {
+        display: block;
+        max-width: math.percentage(math.div($i, $columns));
+        flex: 0 0 math.percentage(math.div($i, $columns));
+      }
+
+      @include m-intersect('#{$size}-offset-#{$i}', $size) {
+        margin-inline-start: math.percentage(math.div($i, $columns));
+      }
+
+      @include m-intersect('#{$size}-pull-#{$i}', $size) {
+        position: relative;
+        inset-inline-end: math.percentage(math.div($i, $columns));
+      }
+
+      @include m-intersect('#{$size}-push-#{$i}', $size) {
+        position: relative;
+        inset-inline-start: math.percentage(math.div($i, $columns));
+      }
+    }
+  }
+
+  // guttered 状态（有间距时辅助类，配合行内 style padding）
+  @include m(guttered) {
+    display: block;
+  }
+}

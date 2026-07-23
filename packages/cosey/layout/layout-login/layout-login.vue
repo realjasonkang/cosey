@@ -1,6 +1,6 @@
 <template>
-  <div :class="[hashId, prefixCls]">
-    <div :class="`${prefixCls}-title`">{{ t('co.auth.login') }}</div>
+  <div :class="bem.b()">
+    <div :class="bem.e('title')">{{ t('co.auth.login') }}</div>
     <el-form ref="formRef" :model="formState" @keyup.enter.prevent="onSubmit">
       <el-form-item
         prop="username"
@@ -8,7 +8,7 @@
       >
         <el-input v-model="formState.username" size="large" :placeholder="t('co.auth.username')">
           <template #prefix>
-            <co-icon name="co:user" :class="`${prefixCls}-icon`" />
+            <co-icon name="co:user" :class="bem.e('icon')" />
           </template>
         </el-input>
       </el-form-item>
@@ -25,7 +25,7 @@
           :placeholder="t('co.auth.password')"
         >
           <template #prefix>
-            <co-icon name="co:password" :class="`${prefixCls}-icon`" />
+            <co-icon name="co:password" :class="bem.e('icon')" />
           </template>
         </el-input>
       </el-form-item>
@@ -35,7 +35,7 @@
         prop="captcha"
         :rules="[{ required: true, message: t('co.auth.enterCaptcha') }]"
       >
-        <div :class="`${prefixCls}-captcha-wrapper`">
+        <div :class="bem.e('captcha-wrapper')">
           <el-input
             v-model="formState.captcha"
             style="width: 100%"
@@ -43,17 +43,17 @@
             :placeholder="t('co.auth.captcha')"
           >
             <template #prefix>
-              <co-icon name="co:certificate-check" :class="`${prefixCls}-icon`" />
+              <co-icon name="co:certificate-check" :class="bem.e('icon')" />
             </template>
           </el-input>
-          <img :class="`${prefixCls}-captcha`" :src="captchaUrl" @click="getCaptcha" />
+          <img :class="bem.e('captcha')" :src="captchaUrl" @click="getCaptcha" />
         </div>
       </el-form-item>
 
       <el-button
         size="large"
         type="primary"
-        :class="`${prefixCls}-button`"
+        :class="bem.e('button')"
         :loading="loading"
         @click="onSubmit"
       >
@@ -67,16 +67,14 @@
 import { type FormInstance, ElButton } from 'element-plus';
 import { useUserStore } from '../../store';
 import { computed, reactive, ref, useTemplateRef, onMounted } from 'vue';
-import { useComponentConfig } from '../../components';
-import useStyle from './style';
 import { useLocale } from '../../hooks';
 import { type LoginFormModel, useGlobalConfig } from '../../config';
 import { warningOnce } from '../../utils';
+import { createBem } from '../../utils';
 
 const { t } = useLocale();
 
-const { prefixCls } = useComponentConfig('layout-login');
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-login');
 
 const { auth: authConfig, api: apiConfig } = useGlobalConfig();
 

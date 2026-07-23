@@ -2,11 +2,9 @@ import { defineComponent, nextTick, ref, shallowReactive, useTemplateRef } from 
 import { tableColumnEditorEmits, tableColumnEditorProps } from './table-column-editor.api';
 import List from './list.vue';
 
-import useStyle from './table-column-editor.style';
-import { useComponentConfig } from '../../config-provider';
+import { createBem, mapTree, walkTree } from '../../../utils';
 import { useTreeCheck } from '../../../hooks';
 import { type TableColumnProps } from '../table-column/table-column.api';
-import { mapTree, walkTree } from '../../../utils';
 import { ElButton, ElCheckbox, ElPopover, ElScrollbar } from 'element-plus';
 import { useLocale } from '../../../hooks';
 
@@ -15,11 +13,9 @@ export default defineComponent({
   props: tableColumnEditorProps,
   emits: tableColumnEditorEmits,
   setup(props, { emit, slots }) {
-    const { prefixCls } = useComponentConfig('table-column-editor');
+    const bem = createBem('table-column-editor');
 
     const { t } = useLocale();
-
-    const { hashId } = useStyle(prefixCls);
 
     const wrapperRef = useTemplateRef<HTMLElement>('wrapper');
 
@@ -118,8 +114,8 @@ export default defineComponent({
           onBefore-enter={onBeforeEnter}
           v-slots={{
             default: () => (
-              <div ref="wrapper" class={[hashId.value, prefixCls.value]}>
-                <div class={`${prefixCls.value}-header`}>
+              <div ref="wrapper" class={bem.b()}>
+                <div class={bem.e('header')}>
                   <ElCheckbox
                     modelValue={checkAllValue.value}
                     indeterminate={checkAllIndeterminate.value}
@@ -129,11 +125,11 @@ export default defineComponent({
                   </ElCheckbox>
                 </div>
                 <ElScrollbar maxHeight={maxHeight.value}>
-                  <div class={`${prefixCls.value}-body`}>
+                  <div class={bem.e('body')}>
                     <List nodeList={tree.value} />
                   </div>
                 </ElScrollbar>
-                <div class={`${prefixCls.value}-footer`}>
+                <div class={bem.e('footer')}>
                   <ElButton size="small" link onClick={reset}>
                     {t('co.table.restoreDefault')}
                   </ElButton>

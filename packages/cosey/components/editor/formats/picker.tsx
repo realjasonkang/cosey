@@ -10,10 +10,8 @@ import {
   useTemplateRef,
 } from 'vue';
 import { ElTooltip } from 'element-plus';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './picker.style';
+import { createBem, isBoolean } from '../../../utils';
 import { pickerContextKey } from './picker.api';
-import { isBoolean } from '../../../utils';
 
 export default defineComponent({
   name: 'CoEditorPicker',
@@ -32,8 +30,7 @@ export default defineComponent({
     content: {};
   }>,
   setup(props, { slots, emit }) {
-    const { prefixCls } = useComponentConfig('editor-picker');
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-picker');
 
     const contentRef = useTemplateRef<HTMLElement>('content');
 
@@ -77,7 +74,7 @@ export default defineComponent({
           placement="bottom-start"
           offset={0}
           gpuAcceleration={false}
-          popperClass={[hashId.value, props.popperClass, `${prefixCls.value}-panel`]}
+          popperClass={[bem.b(), props.popperClass]}
           stopPopperMouseEvent={false}
           effect="light"
           trigger="click"
@@ -87,12 +84,7 @@ export default defineComponent({
             content: () => (
               <div
                 ref="content"
-                class={[
-                  `${prefixCls.value}-content`,
-                  {
-                    'is-nopadding': props.nopadding,
-                  },
-                ]}
+                class={[bem.e('content'), bem.is('nopadding', props.nopadding)]}
                 style={{ maxHeight: props.maxHeight }}
                 onMousedown={(event) => event.preventDefault()}
               >

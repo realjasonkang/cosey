@@ -1,0 +1,49 @@
+@use './base/index' as *;
+
+@include b(input-number-range) {
+  display: flex;
+  width: 100%;
+  padding-inline: 10px;
+  vertical-align: middle;
+
+  &:hover {
+    box-shadow: 0 0 0 1px var(--el-border-color-hover) inset;
+  }
+
+  @include is(focus) {
+    box-shadow: 0 0 0 1px css-var(color-primary) inset;
+  }
+
+  @include e(start) {
+    display: flex;
+    flex: 1;
+
+    .el-input__wrapper {
+      box-shadow: none !important;
+    }
+  }
+
+  @include e(end) {
+    display: flex;
+    flex: 1;
+
+    .el-input__wrapper {
+      box-shadow: none !important;
+    }
+  }
+
+  @include e(separator) {
+    flex: none;
+    height: 100%;
+    padding-inline: css-var(padding-xs);
+  }
+
+  .el-input-number {
+    width: 0;
+    flex: 1;
+
+    &.is-without-controls .el-input__wrapper {
+      padding: 0;
+    }
+  }
+}

@@ -1,19 +1,17 @@
 import { computed, defineComponent, Transition } from 'vue';
 import { ElButton, ElProgress } from 'element-plus';
 import { type UploadFileStatus, uploadItemProps, uploadItemEmits } from './upload.api';
-import { isString } from '../../utils';
+import { isString, createBem } from '../../utils';
 import { MediaCard } from '../media-card';
 import Icon from '../icon/icon';
 import { useLocale } from '../../hooks';
-
-import { useComponentConfig } from '../config-provider';
 
 export default defineComponent({
   name: 'CoUploadItem',
   props: uploadItemProps,
   emits: uploadItemEmits,
   setup(props, { emit }) {
-    const { prefixCls } = useComponentConfig('upload');
+    const bem = createBem('upload');
 
     const { t } = useLocale();
 
@@ -49,7 +47,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <div class={`${prefixCls.value}-item is-${props.size}`}>
+        <div class={[bem.e('item'), bem.is(props.size)]}>
           <MediaCard
             ref="media"
             src={props.file.previewUrl}
@@ -60,12 +58,10 @@ export default defineComponent({
           />
           <Transition name="co-fade">
             {(props.file.status === 'loading' || props.file.status === 'error') && (
-              <div class={`${prefixCls.value}-status`}>
+              <div class={bem.e('status')}>
                 {isSmall.value && (
-                  <div class={`${prefixCls.value}-progress-plain`}>
-                    <span class={`${prefixCls.value}-progress-text`}>
-                      {progressFormat(props.file.percent)}
-                    </span>
+                  <div class={bem.e('progress-plain')}>
+                    <span class={bem.e('progress-text')}>{progressFormat(props.file.percent)}</span>
                   </div>
                 )}
                 {!isSmall.value && (
@@ -79,15 +75,13 @@ export default defineComponent({
                       return props.file.status === 'error' ? (
                         <Icon name="co:close-filled" size="lg" />
                       ) : (
-                        <span class={`${prefixCls.value}-progress-text`}>
-                          {progressFormat(percentage)}
-                        </span>
+                        <span class={bem.e('progress-text')}>{progressFormat(percentage)}</span>
                       );
                     }}
                   </ElProgress>
                 )}
 
-                <div class={`${prefixCls.value}-actions`}>
+                <div class={bem.e('actions')}>
                   {props.file.status === 'loading' && (
                     <ElButton
                       link
@@ -124,7 +118,7 @@ export default defineComponent({
             )}
           </Transition>
           {showRemove.value && (
-            <div class={`${prefixCls.value}-remove`} onClick={() => emit('remove')}>
+            <div class={bem.e('remove')} onClick={() => emit('remove')}>
               <Icon name="co:close-large" size="md" />
             </div>
           )}

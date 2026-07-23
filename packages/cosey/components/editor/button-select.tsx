@@ -1,5 +1,5 @@
 import { defineComponent, inject, onMounted, useTemplateRef } from 'vue';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 import Icon from '../icon/icon';
 import { pickerContextKey } from './formats/picker.api';
 
@@ -12,7 +12,7 @@ export default defineComponent({
     click: (event: MouseEvent) => event instanceof MouseEvent,
   },
   setup(props, { slots, emit }) {
-    const { prefixCls } = useComponentConfig('editor-button');
+    const bem = createBem('editor-button');
 
     const buttonRef = useTemplateRef('button');
 
@@ -29,13 +29,13 @@ export default defineComponent({
         <button
           ref="button"
           type="button"
-          class={[prefixCls.value, `${prefixCls.value}-select`]}
+          class={[bem.b(), bem.e('select')]}
           style={{ width: props.width }}
           onMousedown={(event) => event.preventDefault()}
           onClick={(event) => emit('click', event)}
         >
-          <div class={[`${prefixCls.value}-text`]}>{slots.default?.()}</div>
-          <Icon class={`${prefixCls.value}-arrow`} name="co:chevron-down" size="lg" />
+          <div class={bem.e('text')}>{slots.default?.()}</div>
+          <Icon class={bem.e('arrow')} name="co:chevron-down" size="lg" />
         </button>
       );
     };

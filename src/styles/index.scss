@@ -1,0 +1,24 @@
+@use 'element-plus/dist/index.css' as *;
+@use 'element-plus/theme-chalk/dark/css-vars.css' as *;
+@use 'cosey/style/index.scss' as *;
+@use './override-element-plus.scss' as *;
+@use './layout-http-message.scss' as *;
+@use './layout-setting.scss' as *;
+@use './tailwindcss.css';
+
+/* initialized */
+::-ms-reveal {
+  display: none;
+}
+
+:-webkit-autofill {
+  transition-property: background-color !important;
+  transition-delay: 86400s !important;
+}
+
+body {
+  font-size: var(--el-font-size-base);
+  font-family: var(--el-font-family);
+  color: var(--el-text-color-primary);
+  overflow-x: hidden;
+}

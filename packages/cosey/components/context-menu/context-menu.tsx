@@ -11,8 +11,7 @@ import { useItemProvide } from './useItemProvide';
 import { useSubProvide } from './useSubProvide';
 import { useFloating, useLockScroll } from '../../hooks';
 import { OnlyChild } from '../only-child';
-import useStyle from './context-menu.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoContextMenu',
@@ -21,9 +20,7 @@ export default defineComponent({
   slots: contextMenuSlots,
   emits: contextMenuEmits,
   setup(props, { slots, attrs, emit, expose }) {
-    const { prefixCls } = useComponentConfig('context-menu', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('context-menu');
 
     const { nextZIndex } = useZIndex();
 
@@ -139,13 +136,9 @@ export default defineComponent({
             {visible.value ? (
               <Teleport to="body">
                 <div>
+                  <div ref="point" class={bem.e('point')} style={pointStyle.value}></div>
                   <div
-                    ref="point"
-                    class={[hashId.value, `${prefixCls.value}-point`]}
-                    style={pointStyle.value}
-                  ></div>
-                  <div
-                    class={[hashId.value, `${prefixCls.value}-mask`]}
+                    class={bem.e('mask')}
                     style={backdropStyle.value}
                     onClick={onBackDropClick}
                     onContextmenu={onBackdropContextMenu}
@@ -153,7 +146,7 @@ export default defineComponent({
                   <div
                     ref="menu"
                     {...attrs}
-                    class={[hashId.value, prefixCls.value]}
+                    class={bem.b()}
                     style={menuStyle.value}
                     onContextmenu={onMenuContextMenu}
                   >

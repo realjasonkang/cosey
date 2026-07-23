@@ -1,7 +1,7 @@
 import { computed, inject, onBeforeUnmount, onMounted, reactive, ref, toRef, unref } from 'vue';
 import { type DndSortContext, dndSortContextSymbol, DndSortItemContext } from './dnd-sort.api';
 import { useDocumentEvent } from '../../hooks';
-import { useToken } from '../theme';
+import { getCssVar } from '../../utils';
 
 export interface UseDndSortItemOptions {
   index: number;
@@ -9,8 +9,6 @@ export interface UseDndSortItemOptions {
 
 export function useDndSortItem(options: UseDndSortItemOptions) {
   const index = computed(() => unref(options.index));
-
-  const { token } = useToken();
 
   const dndSortContext = inject<DndSortContext>(dndSortContextSymbol)!;
 
@@ -163,7 +161,9 @@ export function useDndSortItem(options: UseDndSortItemOptions) {
     itemBinder: reactive({
       style: computed(() => {
         return {
-          transition: context.squeezed ? `transform ${token.value.motionDurationSlow}` : undefined,
+          transition: context.squeezed
+            ? `transform ${getCssVar('transition-duration')}`
+            : undefined,
           zIndex: isPressing.value ? '2147483647' : undefined,
           transform:
             !isPressing.value && !context.squeezed

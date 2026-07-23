@@ -1,0 +1,26 @@
+@use './base/index' as *;
+
+@include b(layout-switch-effect) {
+  position: relative;
+  flex: 1;
+
+  @include m(fade) {
+    &-enter-active,
+    &-leave-active {
+      transition: all css-var(transition-duration);
+    }
+
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+    }
+
+    &-enter-from {
+      transform: translateX(-30px);
+    }
+
+    &-leave-to {
+      transform: translateX(30px);
+    }
+  }
+}

@@ -1,0 +1,35 @@
+@use './base/index' as *;
+
+@include b(layout-login) {
+  @include e(title) {
+    margin-block-end: css-var(margin-xl);
+    text-align: center;
+    font-size: css-var(font-size-extra-large);
+    line-height: css-var(line-height-heading-2);
+    font-weight: css-var(font-weight-strong);
+  }
+
+  @include e(icon) {
+    color: css-var(text-color-regular);
+  }
+
+  @include e(captcha-wrapper) {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: css-var(margin);
+  }
+
+  @include e(captcha) {
+    width: auto;
+    min-width: 100px;
+    height: 40px;
+    object-fit: contain;
+    flex: none;
+    cursor: pointer;
+  }
+
+  @include e(button) {
+    width: 100%;
+  }
+}

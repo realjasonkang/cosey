@@ -1,0 +1,35 @@
+@use './base/index' as *;
+
+@include b(remote-select) {
+  @include e(popper) {
+    display: flex;
+    flex-direction: column;
+    height: 320px;
+
+    &.el-select-dropdown {
+      height: 100%;
+    }
+
+    @include e(form) {
+      .el-form-item {
+        margin-bottom: 0;
+        margin-right: 16px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .el-scrollbar {
+      flex: 1;
+    }
+
+    .el-select-dropdown__empty {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

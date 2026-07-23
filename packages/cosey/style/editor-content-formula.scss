@@ -1,0 +1,7 @@
+@use './base/index' as *;
+
+@include b(editor-content-formula) {
+  @include is(active) {
+    outline: 2px solid css-var(color-primary-light-5);
+  }
+}

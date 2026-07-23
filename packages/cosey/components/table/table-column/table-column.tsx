@@ -1,15 +1,13 @@
 import { computed, defineComponent } from 'vue';
 import { type TableColumnProps, type TableColumnSlots, tableColumnProps } from './table-column.api';
-import { isFunction, isPlainObject, isString } from '../../../utils';
+import { isFunction, isPlainObject, isString, createBem } from '../../../utils';
 import { mapRendererColumnProps, renderer } from './renderer';
 import { ElTableColumn, ElTooltip } from 'element-plus';
 import classNames from 'classnames';
 
-import useStyle from './table-column.style';
-import { useComponentConfig } from '../../config-provider';
 import { useLocale } from '../../../hooks';
 import Icon from '../../icon/icon';
-import { useToken } from '../../theme';
+import { getCssVar } from '../../../utils';
 
 const TableColumn = defineComponent({
   // 使用和ep一样的组件名
@@ -20,17 +18,13 @@ const TableColumn = defineComponent({
   props: tableColumnProps,
 
   setup(props: TableColumnProps) {
-    const { prefixCls } = useComponentConfig('table-column');
+    const bem = createBem('table-column');
 
     const { t } = useLocale();
 
-    const { hashId } = useStyle(prefixCls);
-
-    const { token } = useToken();
-
     const mergedProps = computed<TableColumnProps>(() => {
       const obj: TableColumnProps = {};
-      const cls = [props.className, hashId.value, prefixCls.value];
+      const cls = [props.className, bem.b()];
 
       for (const [key, value] of Object.entries(props)) {
         if (value !== undefined) {
@@ -83,14 +77,12 @@ const TableColumn = defineComponent({
       return result;
     });
 
-    const renderLabel = () => (
-      <span class={`${prefixCls.value}-label`}>{mergedProps.value.label}</span>
-    );
+    const renderLabel = () => <span class={bem.e('label')}>{mergedProps.value.label}</span>;
 
     const renderTooltip = () => (
       <>
         <ElTooltip content={mergedProps.value.tooltip} placement="top">
-          <Icon name="carbon:help" style={{ marginInlineStart: token.value.marginXXS + 'px' }} />
+          <Icon name="carbon:help" style={{ marginInlineStart: getCssVar('margin-xxs') }} />
         </ElTooltip>
       </>
     );

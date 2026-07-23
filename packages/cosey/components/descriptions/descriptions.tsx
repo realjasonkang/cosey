@@ -1,6 +1,5 @@
 import { descriptionsProps, descriptionsSlots, descriptionsEmits } from './descriptions.api';
-import useStyle from './descriptions.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -9,20 +8,16 @@ export default defineComponent({
   slots: descriptionsSlots,
   emits: descriptionsEmits,
   setup(props) {
-    const { prefixCls } = useComponentConfig('descriptions', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('descriptions');
 
     return () => {
       return (
         <table
           class={[
-            hashId.value,
-            prefixCls.value,
-            `is-label-${props.labelAlign}`,
-            {
-              'is-bordered': props.border,
-              'has-colon': props.colon,
-            },
+            bem.b(),
+            bem.is(`label-${props.labelAlign}`),
+            bem.is('bordered', props.border),
+            bem.has('colon', props.colon),
           ]}
         >
           <tbody>

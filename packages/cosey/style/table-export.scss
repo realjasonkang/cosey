@@ -1,0 +1,22 @@
+@use './base/index' as *;
+
+@include b(table-export) {
+  display: flex;
+  flex-direction: column;
+  background-color: css-var(bg-color);
+
+  @include e(list) {
+    display: flex;
+    flex-direction: column;
+    gap: css-var(size-xxs);
+
+    @include e(list) {
+      margin-inline-start: css-var(margin-lg);
+    }
+  }
+
+  @include e(list-item) {
+    display: flex;
+    align-items: center;
+  }
+}

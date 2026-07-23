@@ -1,0 +1,34 @@
+@use './base/index' as *;
+
+@include b(form) {
+  @include e(form-item-buttons) {
+    .el-form-item--label-top .el-form-item__label {
+      display: none;
+    }
+  }
+}
+
+@include b(form-item) {
+  min-width: 0;
+
+  @include e(label-icon) {
+    margin-inline-start: css-var(margin-xxs);
+    cursor: pointer;
+    align-self: center;
+  }
+
+  @include e(content) {
+    max-width: 100%;
+
+    @media (max-width: 768px) {
+      width: 100% !important;
+    }
+  }
+
+  @include e(extra) {
+    margin-block-start: css-var(margin-xxs);
+    font-size: css-var(font-size-small);
+    line-height: css-var(line-height);
+    color: css-var(text-color-regular);
+  }
+}

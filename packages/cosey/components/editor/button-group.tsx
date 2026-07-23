@@ -1,12 +1,12 @@
 import { defineComponent } from 'vue';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoEditorButtonGroup',
   setup(_, { slots }) {
-    const { prefixCls } = useComponentConfig('editor-button-group');
+    const bem = createBem('editor-button');
     return () => {
-      return <div class={`${prefixCls.value}`}>{slots.default?.()}</div>;
+      return <div class={bem.e('group')}>{slots.default?.()}</div>;
     };
   },
 });

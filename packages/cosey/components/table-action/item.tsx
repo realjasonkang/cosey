@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, unref } from 'vue';
+import { computed, defineComponent, ref, toValue, unref } from 'vue';
 import { omit } from 'lodash-es';
 import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElPopconfirm } from 'element-plus';
 import {
@@ -7,7 +7,7 @@ import {
   tableActionItemProps,
 } from './item.api';
 import Icon from '../icon/icon';
-import { useToken } from '../theme';
+import { getCssVar } from '../../utils';
 import { useLocale } from '../../hooks';
 import { useConfig } from '../config-provider';
 
@@ -18,14 +18,12 @@ export default defineComponent({
   setup(props) {
     const { t } = useLocale();
 
-    const { token } = useToken();
-
-    const { tableAction: tableActionConfig } = useConfig();
+    const tableActionConfig = useConfig()?.tableAction;
 
     const mergedProps = computed<TableActionItemProps>(() => {
       return {
         ...defaultTableActionItemProps,
-        ...unref(tableActionConfig)?.itemProps,
+        ...toValue(tableActionConfig)?.itemProps,
         ...props.props,
       };
     });
@@ -66,14 +64,14 @@ export default defineComponent({
           {unref(mergedProps).icon && (
             <Icon
               name={unref(mergedProps).icon}
-              style={{ marginInlineEnd: token.value.marginXXS + 'px' }}
+              style={{ marginInlineEnd: getCssVar('margin-xxs') }}
             />
           )}
           {unref(mergedProps).label}
           {unref(mergedProps).appendIcon && (
             <Icon
               name={unref(mergedProps).appendIcon}
-              style={{ marginInlineStart: token.value.marginXXS + 'px' }}
+              style={{ marginInlineStart: getCssVar('margin-xxs') }}
             />
           )}
         </ElButton>
@@ -123,14 +121,14 @@ export default defineComponent({
                           {icon && (
                             <Icon
                               name={icon}
-                              style={{ marginInlineEnd: token.value.marginXXS + 'px' }}
+                              style={{ marginInlineEnd: getCssVar('margin-xxs') }}
                             />
                           )}
                           {label}
                           {appendIcon && (
                             <Icon
                               name={appendIcon}
-                              style={{ marginInlineStart: token.value.marginXXS + 'px' }}
+                              style={{ marginInlineStart: getCssVar('margin-xxs') }}
                             />
                           )}
                         </ElDropdownItem>

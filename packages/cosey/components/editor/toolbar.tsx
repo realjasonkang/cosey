@@ -1,15 +1,15 @@
 import { defineComponent } from 'vue';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoEditorToolbar',
   setup(props, { slots }) {
     void props;
 
-    const { prefixCls } = useComponentConfig('editor-toolbar');
+    const bem = createBem('editor');
 
     return () => {
-      return <div class={prefixCls.value}>{slots.default?.()}</div>;
+      return <div class={bem.e('toolbar')}>{slots.default?.()}</div>;
     };
   },
 });

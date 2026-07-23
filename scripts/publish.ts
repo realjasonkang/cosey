@@ -3,7 +3,7 @@ import child_process from 'node:child_process';
 import consola from 'consola';
 
 import { distDir } from './utils/const';
-import { selectPackage } from './utils/flow';
+import { selectPackage } from './utils/select-package';
 
 let pkgName = '';
 let pkgDistDir = '';

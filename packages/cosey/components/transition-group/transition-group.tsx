@@ -1,8 +1,7 @@
 import { computed, defineComponent, TransitionGroup } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { transitionGroupProps, transitionGroupSlots } from './transition-group.api';
-import useStyle from './transition-group.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoTransitionGroup',
@@ -12,12 +11,10 @@ export default defineComponent({
   setup(props, { slots }) {
     const vueTransGroupProps = reactiveOmit(props, 'effect');
 
-    const { prefixCls } = useComponentConfig('transition-group');
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('transition-group');
 
     const mergedProps = computed(() => {
-      const transitionName = `${hashId.value} ${prefixCls.value}-${props.effect}`;
+      const transitionName = bem.m(props.effect);
       return {
         ...vueTransGroupProps,
         moveClass: `${transitionName}-move`,

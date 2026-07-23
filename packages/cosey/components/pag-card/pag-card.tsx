@@ -2,8 +2,7 @@ import { defineComponent, ref } from 'vue';
 import { useLockscreen } from 'element-plus';
 import { pagCardProps, pagCardEmits } from './pag-card.api';
 import PagViewer from '../pag-viewer/pag-viewer';
-import useStyle from './pag-card.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoPagCard',
@@ -11,9 +10,7 @@ export default defineComponent({
   props: pagCardProps,
   emits: pagCardEmits,
   setup(props, { attrs, emit, expose }) {
-    const { prefixCls } = useComponentConfig('pag-card', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('pag-card');
 
     const viewerVisible = ref(false);
 
@@ -40,12 +37,12 @@ export default defineComponent({
         <>
           <div
             {...attrs}
-            class={[hashId.value, prefixCls.value, `is-${props.size}`]}
+            class={[bem.b(), bem.is(props.size)]}
             title={props.title || props.src}
             onClick={() => openViewer()}
           >
-            <div class={`${prefixCls.value}-type`}>pag</div>
-            <div class={`${prefixCls.value}-filename`}>{props.name}</div>
+            <div class={bem.e('type')}>pag</div>
+            <div class={bem.e('filename')}>{props.name}</div>
           </div>
 
           {viewerVisible.value && <PagViewer src={props.src} onClose={() => closeViewer()} />}

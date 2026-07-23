@@ -1,0 +1,15 @@
+@use './base/index' as *;
+
+@include b(editor-content-video) {
+  display: inline-flex;
+  margin: 1px;
+
+  @include is(active) {
+    outline: 2px solid css-var(color-primary-light-5);
+  }
+
+  @include e(wrapper) {
+    position: relative;
+    display: inline-flex;
+  }
+}

@@ -1,18 +1,14 @@
 import { computed, CSSProperties, defineComponent, inject, h } from 'vue';
 import { type ColSize, colProps, colSlots } from './col.api';
 import { type RowContext, type RowSize, rowContextSymbol, rowSizes } from '../row';
-import { isNumber, isObject } from '../../utils';
-import useStyle from './col.style';
-import { useComponentConfig } from '../config-provider';
+import { isNumber, isObject, createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoCol',
   props: colProps,
   slots: colSlots,
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('col', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('col');
 
     const rowContext = inject<RowContext>(rowContextSymbol, {
       gutter: 0,
@@ -26,8 +22,8 @@ export default defineComponent({
       pos.forEach((prop) => {
         const size = props[prop];
         if (isNumber(size)) {
-          if (prop === 'span') classes.push(`${prefixCls.value}-${size}`);
-          else if (size > 0) classes.push(`${prefixCls.value}-${prop}-${size}`);
+          if (prop === 'span') classes.push(bem.m(size));
+          else if (size > 0) classes.push(bem.m(`${prop}-${size}`));
         }
       });
 
@@ -46,28 +42,21 @@ export default defineComponent({
 
       sizes.forEach(([size, sizeValue]) => {
         if (isNumber(sizeValue)) {
-          classes.push(`${prefixCls.value}-${size}-${sizeValue}`);
+          classes.push(bem.m(`${size}-${sizeValue}`));
         } else if (isObject(sizeValue)) {
           Object.entries(sizeValue).forEach(([prop, value]) => {
             classes.push(
-              prop === 'span'
-                ? `${prefixCls.value}-${size}-${value}`
-                : `${prefixCls.value}-${size}-${prop}-${value}`,
+              prop === 'span' ? bem.m(`${size}-${value}`) : bem.m(`${size}-${prop}-${value}`),
             );
           });
         }
       });
 
       if (rowContext.gutter) {
-        classes.push(`${prefixCls.value}-guttered`);
+        classes.push(bem.m('guttered'));
       }
 
-      return [
-        hashId.value,
-        prefixCls.value,
-        `${prefixCls.value}-${rowContext.currentSize}`,
-        classes,
-      ];
+      return [bem.b(), bem.m(rowContext.currentSize), classes];
     });
 
     const colStyle = computed(() => {

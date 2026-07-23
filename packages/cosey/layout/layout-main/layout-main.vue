@@ -1,5 +1,5 @@
 <template>
-  <div :class="[hashId, prefixCls]" :style="mainStyle">
+  <div :class="bem.b()" :style="mainStyle">
     <MergedLayoutIframe />
     <router-view v-slot="{ Component, route }">
       <MergedLayoutSwitchEffect>
@@ -16,17 +16,13 @@ import { computed } from 'vue';
 import MergedLayoutIframe from '../merged/layout-iframe';
 import MergedLayoutSwitchEffect from '../merged/layout-switch-effect';
 import { useLayoutStore } from '../../store';
-
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutMain',
 });
 
-const { prefixCls } = useComponentConfig('layout-main');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-main');
 
 const layoutStore = useLayoutStore();
 

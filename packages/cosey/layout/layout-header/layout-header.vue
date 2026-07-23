@@ -1,5 +1,5 @@
 <template>
-  <div :class="[hashId, prefixCls]" :style="headerStyle">
+  <div :class="bem.b()" :style="headerStyle">
     <slot></slot>
   </div>
 </template>
@@ -8,16 +8,13 @@
 import { computed } from 'vue';
 import { useLockscreenObserver } from '../../hooks';
 import { useLayoutStore } from '../../store';
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutHeader',
 });
 
-const { prefixCls } = useComponentConfig('layout-header');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-header');
 
 const layoutStore = useLayoutStore();
 

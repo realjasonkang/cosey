@@ -1,17 +1,11 @@
 <template>
   <div
-    :class="[
-      hashId,
-      prefixCls,
-      {
-        'is-hide': layoutStore.defaultMenus.length === 0,
-      },
-    ]"
+    :class="[bem.b(), bem.is('hide', layoutStore.defaultMenus.length === 0)]"
     :style="asideStyle"
   >
     <div
       v-show="layoutStore.isMobile || !layoutStore.includeHorizontal"
-      :class="`${prefixCls}-header`"
+      :class="bem.e('header')"
       :style="{ height: `${layoutStore.topbarHeight - 1}px` }"
     >
       <MergedLayoutBrand
@@ -22,10 +16,10 @@
         :hide-name="!layoutStore.isMobile && layoutStore.collapse"
       />
     </div>
-    <ScrollView :class="`${prefixCls}-body`">
+    <ScrollView :class="bem.e('body')">
       <MergedLayoutMenu />
     </ScrollView>
-    <div v-if="!layoutStore.isMobile" :class="`${prefixCls}-footer`">
+    <div v-if="!layoutStore.isMobile" :class="bem.e('footer')">
       <el-button text bg size="small" @click="layoutStore.collapse = !layoutStore.collapse">
         <Icon size="lg" :name="layoutStore.collapse ? 'co:chevron-right' : 'co:chevron-left'" />
       </el-button>
@@ -39,16 +33,14 @@ import { ElButton } from 'element-plus';
 import MergedLayoutBrand from '../merged/layout-brand';
 import MergedLayoutMenu from '../merged/layout-menu';
 import { useLayoutStore } from '../../store';
-import { ScrollView, Icon, useComponentConfig } from '../../components';
-import useStyle from './style';
+import { ScrollView, Icon } from '../../components';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutAside',
 });
 
-const { prefixCls } = useComponentConfig('layout-aside');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-aside');
 
 const layoutStore = useLayoutStore();
 

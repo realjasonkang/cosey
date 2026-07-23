@@ -1,27 +1,27 @@
 <template>
-  <div :style="{ height: `${layoutStore.topbarHeight}px` }" :class="[hashId, prefixCls]">
-    <div :class="`${prefixCls}-left`">
+  <div :style="{ height: `${layoutStore.topbarHeight}px` }" :class="bem.b()">
+    <div :class="bem.e('left')">
       <slot name="left"></slot>
     </div>
-    <div :class="`${prefixCls}-right`">
+    <el-scrollbar
+      :class="bem.e('right')"
+      :wrap-class="bem.e('right-wrap')"
+      :view-class="bem.e('right-view')"
+    >
       <slot name="right"></slot>
-    </div>
+    </el-scrollbar>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useLayoutStore } from '../../store';
-
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutTopbar',
 });
 
-const { prefixCls } = useComponentConfig('layout-topbar');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-topbar');
 
 const layoutStore = useLayoutStore();
 </script>

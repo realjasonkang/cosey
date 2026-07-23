@@ -1,7 +1,6 @@
 import { defineComponent, PropType } from 'vue';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './content-list-item.style';
-import { useToken } from '../../theme';
+import { createBem } from '../../../utils';
+import { getCssVar } from '../../../utils';
 
 export default defineComponent({
   name: 'CoEditorContentListItem',
@@ -16,16 +15,14 @@ export default defineComponent({
     },
   },
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('editor-content-list-item', props);
-    const { hashId } = useStyle(prefixCls);
-    const { token } = useToken();
+    const bem = createBem('editor-content-list-item');
 
     return () => {
       return (
         <li
-          class={[hashId.value, prefixCls.value, `is-${props.listType}`, `is-level-${props.level}`]}
+          class={[bem.b(), bem.is(props.listType), bem.is(`level-${props.level}`)]}
           style={{
-            marginLeft: (props.level + 1) * token.value.paddingXL + 'px',
+            marginLeft: `calc(${props.level + 1} * ${getCssVar('padding-xl')})`,
           }}
         >
           {slots.default?.()}

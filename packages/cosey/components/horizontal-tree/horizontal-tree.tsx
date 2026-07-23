@@ -4,13 +4,21 @@ import {
   horizontalTreeSlots,
   horizontalTreeEmits,
 } from './horizontal-tree.api';
-import useStyle, { HorizontalTreeNodeWidthVar } from './horizontal-tree.style';
-import { useComponentConfig } from '../config-provider';
-import { ExtraTreeNode, extraTreeToTable, isString, mapTree, walkTree } from '../../utils';
+import {
+  ExtraTreeNode,
+  extraTreeToTable,
+  isString,
+  mapTree,
+  walkTree,
+  createBem,
+} from '../../utils';
 import { computed, defineComponent, watch } from 'vue';
 import { type CheckableNode, useTreeCheck } from '../../hooks';
 import { useLocale } from '../../hooks';
 import { ElCheckbox } from 'element-plus';
+import { cssVarName } from '../../utils/bem';
+
+export const HorizontalTreeNodeWidthVar = cssVarName('horizontal-tree-node-width');
 
 export default defineComponent({
   name: 'CoHorizontalTree',
@@ -18,9 +26,7 @@ export default defineComponent({
   slots: horizontalTreeSlots,
   emits: horizontalTreeEmits,
   setup(props, { emit, expose }) {
-    const { prefixCls } = useComponentConfig('horizontal-tree', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('horizontal-tree');
 
     const { t } = useLocale();
 
@@ -216,7 +222,7 @@ export default defineComponent({
       }
 
       return (
-        <div class={`${prefixCls.value}-node`}>
+        <div class={bem.e('node')}>
           {props.showCheckbox ? (
             <ElCheckbox
               disabled={getDisabled(node.data)}
@@ -251,19 +257,16 @@ export default defineComponent({
 
     return () => {
       return (
-        <div
-          class={[hashId.value, prefixCls.value]}
-          style={{ [HorizontalTreeNodeWidthVar]: props.nodeWidth }}
-        >
+        <div class={bem.b()} style={{ [HorizontalTreeNodeWidthVar]: props.nodeWidth }}>
           {tableTree.value.length === 0 ? (
-            <div class={`${prefixCls.value}-empty`}>{t('co.common.noData')}</div>
+            <div class={bem.e('empty')}>{t('co.common.noData')}</div>
           ) : (
             <table>
               {props.showCheckbox && !props.checkStrictly && (
                 <thead>
                   <tr>
                     <td colspan={maxLevel.value}>
-                      <div class={`${prefixCls.value}-node`}>
+                      <div class={bem.e('node')}>
                         <ElCheckbox
                           modelValue={checkAllValue.value}
                           indeterminate={checkAllIndeterminate.value}

@@ -1,9 +1,5 @@
 @import 'tailwindcss';
 
-body {
-  font-size: 14px;
-}
-
 :root {
   --ep-c-bg-row: #f9fafc;
   --ep-c-bg-purple: #d3dce6;

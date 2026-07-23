@@ -1,7 +1,6 @@
 import Icon from '../icon/icon';
 import { fileCardProps, fileCardSlots } from './file-card.api';
-import useStyle from './file-card.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -9,18 +8,13 @@ export default defineComponent({
   props: fileCardProps,
   slots: fileCardSlots,
   setup(props) {
-    const { prefixCls } = useComponentConfig('file-card', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('file-card');
 
     return () => {
       return (
-        <div
-          class={[hashId.value, prefixCls.value, `is-${props.size}`]}
-          title={props.title || props.src}
-        >
+        <div class={[bem.b(), bem.is(props.size)]} title={props.title || props.src}>
           <Icon name="co:document" />
-          <div class={[`${prefixCls.value}-filename`]}>{props.name}</div>
+          <div class={bem.e('filename')}>{props.name}</div>
         </div>
       );
     };

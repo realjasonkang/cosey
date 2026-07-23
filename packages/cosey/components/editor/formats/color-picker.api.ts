@@ -1,7 +1,7 @@
 import { zip } from 'lodash-es';
-import { getSolidColor } from '../../theme/themes/default/colorAlgorithm';
-import { defaultPresetColors } from '../../theme/themes/seed';
-import generate from '../../theme/themes/shared/generate';
+import { getSolidColor } from '../../../utils';
+import { defaultPresetColors } from '../../../utils';
+import { generate } from '../../../utils';
 
 export const colorNames = [
   'red',

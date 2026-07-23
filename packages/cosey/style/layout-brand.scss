@@ -1,0 +1,26 @@
+@use './base/index' as *;
+
+@include b(layout-brand) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: css-var(size-xs);
+
+  @include is(horizontal) {
+    min-width: 220px;
+    justify-content: flex-start;
+    padding-inline: css-var(padding-sm);
+  }
+
+  @include e(logo) {
+    height: auto;
+    width: 24px;
+    object-fit: contain;
+  }
+
+  @include e(name) {
+    font-size: css-var(font-size-large);
+    font-weight: css-var(font-weight-strong);
+    white-space: nowrap;
+  }
+}

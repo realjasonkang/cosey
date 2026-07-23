@@ -1,21 +1,18 @@
 import { defineComponent, ref, Teleport } from 'vue';
 import Mask from '../mask/mask';
 import Close from '../close/close';
-import { useComponentConfig } from '../config-provider';
-import useStyle from './media-viewer-dialog.style';
 import { useZIndex } from 'element-plus';
 import { mediaViewerDialogEmits, mediaViewerDialogProps } from './media-viewer-dialog.api';
 import Transition from '../transition/transition';
 import { ElFocusTrap } from 'element-plus/es/components/focus-trap/index.mjs';
+import { createBem } from '../../utils';
 
 export const MediaViewerDialog = defineComponent({
   name: 'CoMediaViewerDialog',
   props: mediaViewerDialogProps,
   emits: mediaViewerDialogEmits,
   setup(props, { emit, slots }) {
-    const { prefixCls } = useComponentConfig('media-viewer-dialog', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('media-viewer-dialog');
 
     const { nextZIndex } = useZIndex();
 
@@ -43,12 +40,7 @@ export const MediaViewerDialog = defineComponent({
       return (
         <Teleport to="body" disabled={!props.teleported}>
           <Transition name="fade" appear>
-            <div
-              ref="wrapper"
-              tabindex={-1}
-              class={[hashId.value, prefixCls.value]}
-              style={{ zIndex: zIndex.value }}
-            >
+            <div ref="wrapper" tabindex={-1} class={bem.b()} style={{ zIndex: zIndex.value }}>
               <ElFocusTrap
                 loop
                 trapped
@@ -61,7 +53,7 @@ export const MediaViewerDialog = defineComponent({
 
                 <Close onClick={() => hide()} />
 
-                <div class={`${prefixCls.value}-content`}>{slots.default?.()}</div>
+                <div class={bem.e('content')}>{slots.default?.()}</div>
               </ElFocusTrap>
             </div>
           </Transition>

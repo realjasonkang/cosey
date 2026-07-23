@@ -2,11 +2,10 @@ import { computed, defineComponent, type PropType } from 'vue';
 import { useEditor, useElement } from 'slate-vue3';
 import { Range } from 'slate-vue3/core';
 import { DOMEditor } from 'slate-vue3/dom';
-import { useComponentConfig } from '../../config-provider';
 import { useObjectUrl } from '../../../hooks';
+import { createBem } from '../../../utils';
 import Resize from './resize';
 import Upload from './upload';
-import useStyle from './content-image.style';
 
 export default defineComponent({
   name: 'CoEditorContentImage',
@@ -25,8 +24,7 @@ export default defineComponent({
     },
   },
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('editor-content-image', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-content-image');
 
     const editor = useEditor();
 
@@ -75,17 +73,8 @@ export default defineComponent({
 
     return () => {
       return (
-        <div
-          class={[
-            hashId.value,
-            prefixCls.value,
-            {
-              'is-active': isActive.value,
-            },
-          ]}
-          onClick={onClick}
-        >
-          <div class={[`${prefixCls.value}-wrapper`]} contenteditable={false}>
+        <div class={[bem.b(), bem.is('active', isActive.value)]} onClick={onClick}>
+          <div class={bem.e('wrapper')}>
             <img src={mergedUrl.value} width={props.width} height={props.height} />
             <Resize visible={isActive.value} onResize={onResize} />
             {props.file && <Upload file={props.file} onSuccess={onSuccess} />}

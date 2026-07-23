@@ -1,27 +1,16 @@
 <template>
   <div
     ref="outer"
-    :class="[
-      hashId,
-      prefixCls,
-      {
-        'is-top': isTop,
-        'is-bottom': isBottom,
-      },
-    ]"
+    :class="[bem.b(), bem.is('top', isTop), bem.is('bottom', isBottom)]"
     @pointerenter="onEnter"
   >
-    <div ref="inner" :class="`${prefixCls}-inner`" :style="innerStyle" @scroll="onScroll">
+    <div ref="inner" :class="bem.e('inner')" :style="innerStyle" @scroll="onScroll">
       <slot></slot>
     </div>
-    <div
-      ref="track"
-      :class="[`${prefixCls}-track`, { 'is-hide': hide }]"
-      @pointerdown="onTrackDown"
-    >
+    <div ref="track" :class="[bem.e('track'), bem.is('hide', hide)]" @pointerdown="onTrackDown">
       <div
         ref="thumb"
-        :class="`${prefixCls}-thumb`"
+        :class="bem.e('thumb')"
         :style="thumbStyle"
         @pointerdown="onThumbDown"
         @pointermove="onThumbMove"
@@ -36,9 +25,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue';
 import { type ScrollViewProps, type ScrollViewSlots } from './scroll-view.api';
 import { useResizeObserver } from '../../hooks';
-
-import useStyle from './scroll-view.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoScrollView',
@@ -48,9 +35,7 @@ defineProps<ScrollViewProps>();
 
 defineSlots<ScrollViewSlots>();
 
-const { prefixCls } = useComponentConfig('scroll-view');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('scroll-view');
 
 const outerRef = useTemplateRef('outer');
 const innerRef = useTemplateRef('inner');

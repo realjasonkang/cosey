@@ -10,7 +10,7 @@
 
 要建立一个增删改查表格，可通过以下步骤：
 
-- 首先在 `RootConfigProvider` 中配置全局列表接口结构；
+- 首先在 `ConfigProvider` 中配置全局列表接口结构；
 - 使用 `useTable` 配置表格属性，简化表格组件方法的调用；
 - 使用 `columns` 属性配置表格列；
 - 使用 `actionColumn` 属性配置操作列；

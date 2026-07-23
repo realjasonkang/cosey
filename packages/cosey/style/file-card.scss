@@ -1,0 +1,8 @@
+@use './base/index' as *;
+@use './card-shared' as card;
+
+@include b(file-card) {
+  @include card.card-base;
+  @include card.card-filename;
+  background-color: css-var(fill-color-light);
+}

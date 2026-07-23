@@ -3,8 +3,7 @@ import { type VideoCardExpose, videoCardProps, videoCardEmits } from './video-ca
 import { useLockscreen } from 'element-plus';
 import VideoViewer from '../video-viewer/video-viewer';
 import Icon from '../icon/icon';
-import useStyle from './video-card.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoVideoCard',
@@ -12,9 +11,7 @@ export default defineComponent({
   props: videoCardProps,
   emits: videoCardEmits,
   setup(props, { emit, attrs, expose }) {
-    const { prefixCls } = useComponentConfig('video-card', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('video-card');
 
     const viewerVisible = ref(false);
 
@@ -41,13 +38,13 @@ export default defineComponent({
         <>
           <div
             {...attrs}
-            class={[hashId.value, prefixCls.value, `is-${props.size}`]}
+            class={[bem.b(), bem.is(props.size)]}
             title={props.title || props.src}
             onClick={openViewer}
           >
-            <video src={props.src} class={`${prefixCls.value}-video`} />
-            <div class={`${prefixCls.value}-play-mask`}>
-              <Icon name="co:play-circle-outline" class={`${prefixCls.value}-play-icon`} />
+            <video src={props.src} class={bem.e('video')} />
+            <div class={bem.e('play-mask')}>
+              <Icon name="co:play-circle-outline" class={bem.e('play-icon')} />
             </div>
           </div>
 

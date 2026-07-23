@@ -3,16 +3,13 @@ import { SvgIcon } from '../svg-icon';
 import { IconifyIcon } from '../iconify-icon';
 import { FontIcon } from '../font-icon';
 import { iconProps } from './icon.api';
-import useStyle from './icon.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoIcon',
   props: iconProps,
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('icon', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('icon');
 
     const prefix = ref();
     const name = ref('');
@@ -43,13 +40,13 @@ export default defineComponent({
     const sizes = ['sm', 'md', 'lg', 'xl'] as const;
 
     const sizeClass = computed(() => {
-      return sizes.includes(props.size as any) ? `${prefixCls.value}-${props.size}` : '';
+      return sizes.includes(props.size as any) ? bem.m(props.size) : '';
     });
 
     const mergedProps = computed(() => {
       return {
         name: name.value,
-        class: [hashId.value, prefixCls.value, sizeClass.value],
+        class: [bem.b(), sizeClass.value],
         style: styles.value,
       } as any;
     });
@@ -69,7 +66,7 @@ export default defineComponent({
     }
 
     return () => {
-      return <span class={[hashId.value, `${prefixCls.value}-wrapper`]}>{getDefualtSlot()}</span>;
+      return <span class={bem.bem('icon-wrapper')}>{getDefualtSlot()}</span>;
     };
   },
 });

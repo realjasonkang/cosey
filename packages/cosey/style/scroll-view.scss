@@ -1,0 +1,86 @@
+@use './base/index' as *;
+
+@include b(scroll-view) {
+  position: relative;
+
+  &::before,
+  &::after {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    height: 40px;
+    z-index: 1;
+    content: '';
+    pointer-events: none;
+  }
+
+  &::before {
+    inset-block-start: 0;
+    background: linear-gradient(to bottom, css-var(bg-color), transparent);
+  }
+
+  &::after {
+    inset-block-end: 0;
+    background: linear-gradient(to top, css-var(bg-color), transparent);
+  }
+
+  @include is(top) {
+    &::before {
+      display: none;
+    }
+  }
+
+  @include is(bottom) {
+    &::after {
+      display: none;
+    }
+  }
+
+  &:hover {
+    @include e(track) {
+      opacity: 1;
+    }
+  }
+
+  @include e(inner) {
+    height: 100%;
+    max-height: inherit;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  @include e(track) {
+    position: absolute;
+    inset-block-start: 2px;
+    inset-inline-end: 2px;
+    inset-block-end: 2px;
+    width: 6px;
+    touch-action: none;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity css-var(transition-duration);
+    user-select: none;
+
+    @include is(hide) {
+      display: none;
+    }
+  }
+
+  @include e(thumb) {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    border-radius: css-var(border-radius-base);
+    background-color: css-var(text-color-tertiary);
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

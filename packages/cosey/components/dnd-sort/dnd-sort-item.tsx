@@ -2,17 +2,14 @@ import { dndSortItemProps, dndSortItemSlots } from './dnd-sort-item.api';
 import { defineComponent, reactive, toRef } from 'vue';
 import { useDndSortItem } from './useDndSortItem';
 import Icon from '../icon/icon';
-import useStyle from './dnd-sort.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoDndSortItem',
   props: dndSortItemProps,
   slots: dndSortItemSlots,
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('dnd-sort', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('dnd-sort');
 
     const { disabled, itemRef, holderRef, itemBinder, holderBinder } = useDndSortItem(
       reactive({
@@ -23,14 +20,14 @@ export default defineComponent({
     return () => {
       return (
         <div ref={itemRef} {...itemBinder}>
-          <div class={[hashId.value, `${prefixCls.value}-item`]}>
+          <div class={bem.e('item')}>
             {slots.prepend?.({})}
             {!disabled.value && (
-              <div ref={holderRef} {...holderBinder} class={`${prefixCls.value}-item-holder`}>
+              <div ref={holderRef} {...holderBinder} class={bem.e('item-holder')}>
                 <Icon name="co:draggable" size="lg" />
               </div>
             )}
-            <div class={`${prefixCls.value}-item-content`}>{slots.default?.({})}</div>
+            <div class={bem.e('item-content')}>{slots.default?.({})}</div>
           </div>
         </div>
       );

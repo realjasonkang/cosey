@@ -1,0 +1,27 @@
+@use './base/index' as *;
+
+@include b(dnd-sort) {
+  @include e(item) {
+    position: relative;
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+
+    @include e(item-holder) {
+      margin-inline-end: css-var(margin-xs);
+      width: css-var(size);
+      flex: none;
+      color: css-var(text-color-regular);
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+
+    @include e(item-content) {
+      min-width: 0;
+      flex: 1;
+    }
+  }
+}

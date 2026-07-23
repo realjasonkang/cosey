@@ -1,18 +1,15 @@
-import { computed, defineComponent, inject } from 'vue';
-import { containerProps, containerSlots, containerContextKey } from './container.api';
-import { useComponentConfig } from '../config-provider';
-import useStyle from './container.style';
+import { computed, defineComponent } from 'vue';
+import { containerProps, containerSlots, useContainer } from './container.api';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoContainer',
   props: containerProps,
   slots: containerSlots,
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('container', props);
+    const bem = createBem('container');
 
-    const { hashId } = useStyle(prefixCls);
-
-    const context = inject(containerContextKey, null);
+    const context = useContainer();
 
     const height = computed(() => {
       return props.fullPage ? context?.height || '100vh' : undefined;
@@ -20,12 +17,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <div
-          class={[hashId.value, prefixCls.value]}
-          style={{
-            height: height.value,
-          }}
-        >
+        <div class={bem.b()} style={{ height: height.value }}>
           {slots.default?.({})}
         </div>
       );

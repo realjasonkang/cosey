@@ -1,0 +1,9 @@
+@use './base/index' as *;
+
+@include b(layout-content) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  transition: margin-inline-start css-var(transition-duration);
+}

@@ -1,17 +1,15 @@
 <template>
   <div
     :class="[
-      prefixCls,
-      {
-        'is-disabled': disabled,
-        'is-active': isActive,
-      },
-      `is-${context.mode}`,
+      bem.b(),
+      bem.is('disabled', disabled),
+      bem.is('active', isActive),
+      bem.is(context.mode),
     ]"
     @click="onClick"
   >
-    <Icon v-if="icon" :name="icon" size="xl" :class="[`${prefixCls}-icon`]" />
-    <div :class="[`${prefixCls}-title`]" :title="title">
+    <Icon v-if="icon" :name="icon" size="xl" :class="bem.e('icon')" />
+    <div :class="bem.e('title')" :title="title">
       {{ title }}
     </div>
   </div>
@@ -26,7 +24,7 @@ import {
 } from './snug-menu-item';
 import { type SnugMenuContext, snugMenuContextSymbol } from './snug-menu';
 import Icon from '../icon/icon';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 import { useI18n } from 'vue-i18n';
 
 defineOptions({
@@ -41,7 +39,7 @@ const emit = defineEmits<SnugMenuItemEmits>();
 
 const { t } = useI18n();
 
-const { prefixCls } = useComponentConfig('snug-menu-item', props);
+const bem = createBem('snug-menu-item');
 
 const context = inject<SnugMenuContext>(snugMenuContextSymbol)!;
 

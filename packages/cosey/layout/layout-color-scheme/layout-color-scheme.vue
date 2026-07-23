@@ -1,13 +1,8 @@
 <template>
   <div>
-    <el-button ref="button" link size="large" :class="[hashId, prefixCls]" @click="onClick">
+    <el-button ref="button" link size="large" :class="bem.b()" @click="onClick">
       <Icon
-        :class="[
-          `${prefixCls}-icon`,
-          {
-            ['is-light']: !isDark,
-          },
-        ]"
+        :class="[bem.e('icon'), bem.is('light', !isDark)]"
         :name="`${isDark ? 'co:moon' : 'co:sun'}`"
         size="xl"
       />
@@ -17,20 +12,16 @@
 
 <script lang="tsx" setup>
 import { useColorScheme } from '../../hooks';
-import { Icon, useComponentConfig } from '../../components';
+import { Icon } from '../../components';
 import { computed, nextTick, useTemplateRef } from 'vue';
-import useStyle, { useGlobalStyle } from './style';
 import { type ButtonInstance, ElButton } from 'element-plus';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutColorScheme',
 });
 
-useGlobalStyle();
-
-const { prefixCls } = useComponentConfig('layout-color-scheme');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-color-scheme');
 
 const { appliedColorScheme, colorScheme } = useColorScheme();
 

@@ -3,8 +3,7 @@ import katex from 'katex';
 import { useEditor, useElement } from 'slate-vue3';
 import { Range } from 'slate-vue3/core';
 import { DOMEditor } from 'slate-vue3/dom';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './content-formula.style';
+import { createBem } from '../../../utils';
 
 export default defineComponent({
   name: 'CoEditorContentFormula',
@@ -15,8 +14,7 @@ export default defineComponent({
     },
   },
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('editor-content-formula', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-content-formula');
 
     const mathml = computed(() =>
       katex.renderToString(props.formula, {
@@ -39,15 +37,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <span
-          class={[
-            hashId.value,
-            prefixCls.value,
-            {
-              'is-active': isActive.value,
-            },
-          ]}
-        >
+        <span class={[bem.b(), bem.is('active', isActive.value)]}>
           <span v-html={mathml.value} contenteditable={false}></span>
           {slots.default?.()}
         </span>

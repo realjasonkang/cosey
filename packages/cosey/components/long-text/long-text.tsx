@@ -1,9 +1,7 @@
 import { computed, defineComponent } from 'vue';
 import { ElScrollbar, ElTooltip } from 'element-plus';
 import { longTextProps, longTextSlots } from './long-text.api';
-import useStyle from './long-text.style';
-import { addPxUnit } from '../../utils';
-import { useComponentConfig } from '../config-provider';
+import { addPxUnit, createBem } from '../../utils';
 import Copy from '../copy';
 
 export default defineComponent({
@@ -11,9 +9,7 @@ export default defineComponent({
   props: longTextProps,
   slots: longTextSlots,
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('long-text');
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('long-text');
 
     const textStyle = computed(() => {
       return {
@@ -28,21 +24,21 @@ export default defineComponent({
           showAfter={200}
           v-slots={{
             default: () => (
-              <div class={[hashId.value, prefixCls.value]} style={textStyle.value}>
+              <div class={bem.b()} style={textStyle.value}>
                 {props.text || slots.default?.({})}
               </div>
             ),
             content: () => (
-              <div class={[hashId.value, `${prefixCls.value}-tooltip`]}>
+              <div class={bem.e('tooltip')}>
                 <ElScrollbar
-                  class={`${prefixCls.value}-scrollbar`}
+                  class={bem.e('scrollbar')}
                   maxHeight={props.maxHeight}
                   style={{ maxWidth: addPxUnit(props.maxWidth) }}
                   always
                 >
                   {props.text || slots.default?.({})}
                 </ElScrollbar>
-                <Copy text={props.text} color="inherit" class={`${prefixCls.value}-copy`} />
+                <Copy text={props.text} color="inherit" class={bem.e('copy')} />
               </div>
             ),
           }}

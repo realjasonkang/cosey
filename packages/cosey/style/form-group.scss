@@ -1,0 +1,59 @@
+@use './base/index' as *;
+
+@include b(form-group) {
+  @include is(bordered) {
+    position: relative;
+    margin-block: css-var(margin-lg);
+    padding: css-var(padding-md);
+    padding-block-start: css-var(padding-lg);
+    border: css-var(border-width) css-var(border-style) css-var(border-color);
+    border-radius: css-var(border-radius-base);
+
+    @include is(collapsed) {
+      padding-block-end: 0;
+    }
+  }
+
+  @include e(title) {
+    position: absolute;
+    inset-block-start: 0;
+    padding-inline: css-var(padding-md);
+    font-size: css-var(font-size-base);
+    font-weight: css-var(font-weight-strong);
+    color: css-var(text-color-primary);
+    background-color: css-var(bg-color);
+
+    @include is(left) {
+      inset-inline-start: css-var(size-md);
+      transform: translateY(-50%);
+    }
+
+    @include is(center) {
+      left: 50%;
+      transform: translate(-50%) translateY(-50%);
+    }
+
+    @include is(right) {
+      inset-inline-end: css-var(size-md);
+      transform: translateY(-50%);
+    }
+  }
+
+  @include e(title-icon) {
+    margin-inline-start: css-var(margin-xxs);
+    cursor: pointer;
+    align-self: center;
+  }
+
+  @include e(space) {
+    display: flex;
+
+    & > * {
+      max-width: 100%;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
+}

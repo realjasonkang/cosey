@@ -1,0 +1,286 @@
+@use './base/index' as *;
+
+// ===== Article content styles (shared inside editor content area) =====
+@mixin editor-article {
+  p,
+  ol,
+  ul,
+  pre,
+  blockquote,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  table {
+    margin: 0;
+    padding: 0;
+    margin-block: css-var(margin-sm);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: css-var(font-weight-strong);
+  }
+
+  h1 {
+    font-size: css-var(font-size-heading-1);
+  }
+  h2 {
+    font-size: css-var(font-size-heading-2);
+  }
+  h3 {
+    font-size: css-var(font-size-heading-3);
+  }
+  h4 {
+    font-size: css-var(font-size-heading-4);
+  }
+  h5 {
+    font-size: css-var(font-size-heading-5);
+  }
+  h6 {
+    font-size: css-var(font-size-heading-6);
+  }
+
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+
+    td {
+      outline: none;
+      border: css-var(border-width) css-var(border-style) css-var(border-color);
+      padding-inline: css-var(padding-xs);
+      padding-block: css-var(padding-xxs);
+    }
+
+    thead {
+      td,
+      th {
+        background-color: css-var(fill-color-light);
+      }
+    }
+  }
+
+  a {
+    color: css-var(color-primary);
+    text-decoration: css-var(link-decoration);
+
+    &:hover {
+      color: css-var(color-primary-light-3);
+      text-decoration: css-var(link-hover-decoration);
+    }
+    &:active {
+      color: css-var(color-primary-dark-2);
+    }
+    &:focus {
+      text-decoration: css-var(link-focus-decoration);
+    }
+  }
+
+  img {
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  blockquote {
+    border-left: 4px solid css-var(border-color);
+    padding-left: 16px;
+  }
+
+  code {
+    font-size: 85%;
+    padding-block: 2px;
+    padding-inline: 4px;
+    border-radius: css-var(border-radius-small);
+    background-color: #f0f0f0;
+  }
+
+  kbd {
+    padding: 2px 6px;
+    font-size: 0.875em;
+    color: css-var(text-color-primary);
+    background-color: css-var(bg-color);
+    border: css-var(border-style) css-var(border-width) css-var(border-color);
+    border-radius: css-var(border-radius-small);
+    box-shadow:
+      0 2px 0 -1px css-var(bg-color),
+      0 2px css-var(border-color);
+  }
+
+  pre {
+    position: relative;
+    overflow: hidden;
+
+    select {
+      position: absolute;
+      right: css-var(size-xxs);
+      top: css-var(size-xxs);
+      z-index: 1;
+      padding: 2px 6px;
+      border: css-var(border-width) css-var(border-style) css-var(border-color);
+      color: css-var(text-color-primary);
+      border-radius: css-var(border-radius-base);
+      font-size: css-var(font-size-extra-small);
+    }
+
+    > div {
+      padding: 1rem;
+      overflow: auto;
+    }
+  }
+}
+
+// ===== Button styles =====
+@include b(editor-button) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  font-size: 20px;
+  white-space: nowrap;
+  border-radius: css-var(border-radius-small);
+  border: css-var(border-width) css-var(border-style) transparent;
+  cursor: pointer;
+
+  &:hover {
+    background-color: css-var(fill-color);
+  }
+
+  &:active {
+    background-color: css-var(color-primary-light-9);
+  }
+
+  @include is(active) {
+    background-color: css-var(color-primary-light-9);
+  }
+
+  &:focus-visible {
+    outline: 2px solid css-var(color-primary-light-5);
+    outline-offset: 1px;
+  }
+
+  @include e(group) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  @include e(select) {
+    width: 130px;
+    justify-content: space-between;
+    padding-inline: css-var(padding-xs);
+    font-size: css-var(font-size-base);
+    background-color: css-var(fill-color-light);
+  }
+
+  @include e(chevron) {
+    width: 16px;
+  }
+
+  @include e(text) {
+    @include truncate;
+  }
+
+  @include e(arrow) {
+    flex: none;
+  }
+
+  @include e(split) {
+    display: flex;
+    border-radius: css-var(border-radius-small);
+    border: css-var(border-width) css-var(border-style) transparent;
+
+    @include is(active) {
+      border-color: css-var(border-color-lighter);
+    }
+
+    &:hover {
+      border-color: css-var(border-color-lighter);
+    }
+
+    .co-editor__button-button {
+      border: none;
+      border-radius: calc(css-var(border-radius-small) - 1px);
+
+      &:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      &:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+}
+
+// ===== Main editor container =====
+@include b(editor) {
+  position: relative;
+  line-height: css-var(line-height);
+  border-radius: css-var(border-radius-base);
+  border: 1px solid css-var(border-color);
+
+  @include e(toolbar) {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: css-var(size-lg);
+    row-gap: css-var(size-xxs);
+    padding-inline: css-var(padding-sm);
+    padding-block: css-var(padding-xs);
+    border-bottom: 1px solid css-var(border-color);
+  }
+
+  @include e(container) {
+    position: relative;
+
+    @include is(focus) {
+      &::before {
+        content: '';
+        position: absolute;
+        z-index: 10;
+        inset: 0;
+        border: 2px solid css-var(color-primary-light-5);
+        border-radius: css-var(border-radius-base);
+        pointer-events: none;
+      }
+    }
+  }
+
+  @include e(wrapper) {
+    overflow: auto;
+  }
+
+  @include is(error) {
+    &,
+    .co-editor__toolbar {
+      border-color: css-var(color-error);
+    }
+  }
+
+  @include e(content) {
+    min-height: 100% !important;
+    padding: css-var(padding-sm);
+    border-radius: css-var(border-radius-base);
+    font-size: css-var(font-size-base);
+    outline: none;
+
+    @include editor-article;
+  }
+
+  @include is(disabled) {
+    .co-editor__content {
+      background-color: css-var(disabled-bg-color);
+      color: css-var(text-color-disabled);
+      cursor: not-allowed;
+    }
+  }
+}

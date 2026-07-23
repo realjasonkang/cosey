@@ -1,16 +1,14 @@
 import { defineComponent, onMounted, reactive, ref, shallowRef, useTemplateRef } from 'vue';
-import useStyle from './format-table.style';
 import Picker from './picker';
 import Button from '../button';
 import Icon from '../../icon/icon';
-import { useComponentConfig } from '../../config-provider';
+import { createBem } from '../../../utils';
 import { useEditor } from 'slate-vue3';
 
 export default defineComponent({
   name: 'CoEditorFormatTable',
   setup() {
-    const { prefixCls } = useComponentConfig('editor-format-table');
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-format-table');
 
     const editor = useEditor();
 
@@ -54,7 +52,7 @@ export default defineComponent({
     return () => {
       return (
         <Picker
-          popperClass={[hashId.value, prefixCls.value]}
+          popperClass={bem.b()}
           v-model:visible={visible.value}
           trigger-target={triggerTarget.value}
           nopadding
@@ -66,12 +64,12 @@ export default defineComponent({
             ),
             content: () => (
               <>
-                <div class={`${prefixCls.value}-grid`}>
+                <div class={bem.e('grid')}>
                   {Array(count)
                     .fill(0)
                     .map((_, row) => {
                       return (
-                        <div key={row} class={`${prefixCls.value}-row`}>
+                        <div key={row} class={bem.e('row')}>
                           {Array(count)
                             .fill(0)
                             .map((_, col) => {
@@ -79,10 +77,8 @@ export default defineComponent({
                                 <div
                                   key={col}
                                   class={[
-                                    `${prefixCls.value}-cell`,
-                                    {
-                                      'is-selected': col <= grid.col && row <= grid.row,
-                                    },
+                                    bem.e('cell'),
+                                    bem.is('selected', col <= grid.col && row <= grid.row),
                                   ]}
                                   onPointerover={() => onCellPointerOver(row, col)}
                                   onClick={() => onCellClick(row + 1, col + 1)}
@@ -93,7 +89,7 @@ export default defineComponent({
                       );
                     })}
                 </div>
-                <div class={`${prefixCls.value}-count`}>{`${grid.col}x${grid.row}`}</div>
+                <div class={bem.e('count')}>{`${grid.col}x${grid.row}`}</div>
               </>
             ),
           }}

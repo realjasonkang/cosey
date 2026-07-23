@@ -1,5 +1,5 @@
 <template>
-  <component ref="row" :is="tag" :class="[hashId, prefixCls]" :style="rowStyle">
+  <component ref="row" :is="tag" :class="bem.b()" :style="rowStyle">
     <slot></slot>
   </component>
 </template>
@@ -26,8 +26,7 @@ import {
   watch,
   type CSSProperties,
 } from 'vue';
-import useStyle from './style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoRow',
@@ -39,9 +38,7 @@ defineSlots<RowSlots>();
 
 const emit = defineEmits<RowEmits>();
 
-const { prefixCls } = useComponentConfig('row', props);
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('row');
 
 const currentSize = ref<RowSize>('xs');
 

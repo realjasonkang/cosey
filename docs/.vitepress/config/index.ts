@@ -119,6 +119,10 @@ export default defineConfig({
             { text: '国际化', link: '/guide/i18n' },
           ],
         },
+        {
+          text: '迁移',
+          items: [{ text: '0.x.x 升级到 1.x.x', link: '/guide/upgrade-to-1' }],
+        },
       ],
       '/components/': [
         {
@@ -139,8 +143,8 @@ export default defineConfig({
           text: '配置组件',
           items: [
             {
-              text: 'RootConfigProvider 根全局配置',
-              link: '/components/root-config-provider',
+              text: 'ConfigProvider 全局配置',
+              link: '/components/config-provider',
             },
           ],
         },

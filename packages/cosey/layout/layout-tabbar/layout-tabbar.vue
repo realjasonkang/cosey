@@ -1,10 +1,10 @@
 <template>
-  <div v-if="layoutStore.tabbarVisible" :class="[hashId, prefixCls]" :style="tabbarStyle">
-    <div :class="`${prefixCls}-tabs-wrapper`">
+  <div v-if="layoutStore.tabbarVisible" :class="bem.b()" :style="tabbarStyle">
+    <div :class="bem.e('tabs-wrapper')">
       <el-tabs
         v-model="layoutStore.activeTab"
         type="card"
-        :style="{ '--el-border-color-light': token.colorBorder }"
+        :style="{ '--el-border-color-light': getCssVar('border-color') }"
         @tab-remove="onTabRemove"
       >
         <el-tab-pane
@@ -14,12 +14,12 @@
           :closable="item.meta.closable"
         >
           <template #label>
-            <Icon v-if="item.meta.icon" :name="item.meta.icon" :class="`${prefixCls}-icon`" />
+            <Icon v-if="item.meta.icon" :name="item.meta.icon" :class="bem.e('icon')" />
             {{ _t(item.meta.title ?? '') }}
 
             <ContextMenu>
               <template #reference>
-                <div :class="`${prefixCls}-context-menu-reference`"></div>
+                <div :class="bem.e('context-menu-reference')"></div>
               </template>
               <ContextMenuItem
                 :title="t('co.common.reload')"
@@ -57,7 +57,7 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-    <div :class="`${prefixCls}-toolbar`">
+    <div :class="bem.e('toolbar')">
       <el-divider direction="vertical" />
       <Reload />
     </div>
@@ -69,12 +69,12 @@ import { computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useGlobalConfig } from '../../config';
 import { useLayoutStore } from '../../store';
-import { ContextMenu, ContextMenuItem, Icon, useComponentConfig, useToken } from '../../components';
+import { ContextMenu, ContextMenuItem, Icon } from '../../components';
 import Reload from './reload.vue';
 
-import useStyle from './style';
 import { useLocale } from '../../hooks';
 import { useI18n } from 'vue-i18n';
+import { createBem, getCssVar } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutTabbar',
@@ -84,11 +84,7 @@ const { t } = useLocale();
 
 const { t: _t } = useI18n();
 
-const { prefixCls } = useComponentConfig('layout-tabbar');
-
-const { hashId } = useStyle(prefixCls);
-
-const { token } = useToken();
+const bem = createBem('layout-tabbar');
 
 const router = useRouter();
 const route = useRoute();

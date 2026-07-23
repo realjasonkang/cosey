@@ -10,8 +10,8 @@
     size="360px"
     :title="t('setting.settings')"
     append-to-body
-    :header-class="`${prefixCls}-header`"
-    :class="[hashId, prefixCls]"
+    :header-class="bem.e('header')"
+    :class="bem.b()"
   >
     <Title>{{ t('setting.menuType') }}</Title>
     <el-radio-group v-model="layoutStore.menuType">
@@ -21,7 +21,7 @@
         :value="item"
         :style="{
           margin: 0,
-          marginBlockEnd: token.marginXS + 'px',
+          marginBlockEnd: getCssVar('margin-xs'),
           width: '50%',
         }"
       >
@@ -51,23 +51,18 @@
 import { defineComponent, inject, ref } from 'vue';
 import { ElButton } from 'element-plus';
 import { useLayoutStore } from 'cosey/store';
-import { Icon, useComponentConfig, useToken } from 'cosey/components';
+import { Icon } from 'cosey/components';
+import { getCssVar } from 'cosey/utils';
+import { createBem } from 'cosey/utils';
 import { HttpMessageManager, resetDB } from '@cosey/mock';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-
-import useStyle from './style';
-
 defineOptions({
   name: 'LayoutSetting',
 });
 
-const { prefixCls } = useComponentConfig('layout-setting');
-
-const { hashId } = useStyle(prefixCls);
-
-const { token } = useToken();
+const bem = createBem('layout-setting');
 
 const layoutStore = useLayoutStore();
 
@@ -94,10 +89,10 @@ const Title = defineComponent({
     () => (
       <div
         style={{
-          marginBlockStart: token.value.marginSM + 'px',
-          marginBlockEnd: token.value.marginXS + 'px',
-          fontSize: token.value.fontSize + 'px',
-          fontWeight: token.value.fontWeightStrong,
+          marginBlockStart: getCssVar('margin-sm'),
+          marginBlockEnd: getCssVar('margin-xs'),
+          fontSize: getCssVar('font-size-base'),
+          fontWeight: getCssVar('font-weight-strong'),
         }}
       >
         {slots.default?.()}

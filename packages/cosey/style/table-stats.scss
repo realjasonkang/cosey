@@ -1,0 +1,30 @@
+@use './base/index' as *;
+
+@include b(table-stats) {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: css-var(size-xxl);
+  align-items: center;
+
+  @include e(column) {
+    display: flex;
+    align-items: center;
+  }
+
+  @include e(label) {
+    font-size: css-var(font-size-base);
+    color: css-var(text-color-secondary);
+  }
+
+  @include e(colon) {
+    font-size: css-var(font-size-base);
+    color: css-var(text-color-secondary);
+    margin-inline-start: css-var(margin-xxs);
+    margin-inline-end: css-var(margin-xs);
+  }
+
+  @include e(value) {
+    font-size: css-var(font-size-base);
+    color: css-var(text-color-primary);
+  }
+}

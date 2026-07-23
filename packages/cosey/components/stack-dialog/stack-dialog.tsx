@@ -5,9 +5,7 @@ import {
   stackDialogSlots,
   stackDialogEmits,
 } from './stack-dialog.api';
-import useStyle from './stack-dialog.style';
-import { useComponentConfig } from '../config-provider';
-import { createMergedExpose } from '../../utils';
+import { createMergedExpose, createBem } from '../../utils';
 import { elFormDialogExposeKeys } from '../form-dialog';
 import { defineComponent, ref } from 'vue';
 import { ElDialog } from 'element-plus';
@@ -19,8 +17,7 @@ export default defineComponent({
   slots: stackDialogSlots,
   emits: stackDialogEmits,
   setup(props, { slots, emit, expose: _expose }) {
-    const { prefixCls } = useComponentConfig('stack-dialog', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('stack-dialog');
 
     const elPopupRef = ref();
 
@@ -35,10 +32,10 @@ export default defineComponent({
         <ElDialog
           ref={elPopupRef}
           {...props}
-          class={[hashId.value, prefixCls.value]}
-          headerClass={classNames(props.headerClass, `${prefixCls.value}-header`)}
-          bodyClass={classNames(props.bodyClass, `${prefixCls.value}-body`)}
-          footerClass={classNames(props.footerClass, `${prefixCls.value}-footer`)}
+          class={bem.b()}
+          headerClass={classNames(props.headerClass, bem.e('header'))}
+          bodyClass={classNames(props.bodyClass, bem.e('body'))}
+          footerClass={classNames(props.footerClass, bem.e('footer'))}
           onUpdate:modelValue={(value) => emit('update:modelValue', value)}
           style={{ maxWidth: props.fullscreen ? null : 'calc(100vw - 32px)', ...info }}
           append-to-body={true}

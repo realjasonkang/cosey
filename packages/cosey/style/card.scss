@@ -1,0 +1,7 @@
+@use './base/index' as *;
+
+@include b(card) {
+  background-color: css-var(bg-color);
+  padding-inline: css-var(size-sm);
+  padding-block: css-var(size);
+}

@@ -1,0 +1,56 @@
+@use './base/index' as *;
+
+@include b(transition-group) {
+  @include m(slide) {
+    &-move,
+    &-enter-active,
+    &-leave-active {
+      transition: all 0.3s ease;
+    }
+
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+
+    &-leave-active {
+      position: absolute;
+    }
+  }
+
+  @include m(flip) {
+    &-move,
+    &-enter-active,
+    &-leave-active {
+      transition: all 0.3s ease;
+    }
+
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+
+    &-leave-active {
+      position: absolute;
+    }
+  }
+
+  @include m(fade) {
+    &-move,
+    &-enter-active,
+    &-leave-active {
+      transition: all 0.3s ease;
+    }
+
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+    }
+
+    &-leave-active {
+      position: absolute;
+    }
+  }
+}

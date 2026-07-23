@@ -1,20 +1,15 @@
 import { computed, defineComponent } from 'vue';
 import { ElScrollbar } from 'element-plus';
 import { Prism, highlightProps, highlightSlots } from './highlight.api';
-import useStyle, { useGlobalHighlightStyle } from './highlight.style';
-import { useComponentConfig } from '../config-provider';
 import Copy from '../copy/copy';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoHighlight',
   props: highlightProps,
   slots: highlightSlots,
   setup(props) {
-    const { prefixCls } = useComponentConfig('highlight', props);
-
-    const { hashId } = useStyle(prefixCls);
-
-    useGlobalHighlightStyle();
+    const bem = createBem('highlight');
 
     const highlightedCode = computed(() =>
       Prism.highlight(
@@ -26,17 +21,17 @@ export default defineComponent({
 
     return () => {
       return (
-        <div class={[hashId.value, prefixCls.value]}>
+        <div class={bem.b()}>
           <ElScrollbar
             tag="pre"
-            class={`${prefixCls.value}-scroll`}
+            class={bem.e('scroll')}
             view-class={`language-${props.lang}`}
             maxHeight={props.maxHeight}
           >
             <code class={`language-${props.lang}`} innerHTML={highlightedCode.value}></code>
           </ElScrollbar>
-          <div class={`${prefixCls.value}-copy`}>
-            <Copy text={props.code} class={`${prefixCls.value}-copy`} />
+          <div class={bem.e('copy')}>
+            <Copy text={props.code} />
           </div>
         </div>
       );

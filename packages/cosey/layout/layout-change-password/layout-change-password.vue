@@ -1,6 +1,6 @@
 <template>
-  <div :class="[hashId, prefixCls]">
-    <div :class="`${prefixCls}-title`">{{ t('co.auth.changePassword') }}</div>
+  <div :class="bem.b()">
+    <div :class="bem.e('title')">{{ t('co.auth.changePassword') }}</div>
     <el-form ref="formRef" :model="formState" @keyup.enter.prevent="onSubmit">
       <el-form-item
         prop="oldPassword"
@@ -14,7 +14,7 @@
           :placeholder="t('co.auth.currentPassword')"
         >
           <template #prefix>
-            <co-icon name="co:password" :class="`${prefixCls}-icon`" />
+            <co-icon name="co:password" :class="bem.e('icon')" />
           </template>
         </el-input>
       </el-form-item>
@@ -31,7 +31,7 @@
           :placeholder="t('co.auth.newPassword')"
         >
           <template #prefix>
-            <co-icon name="co:password" :class="`${prefixCls}-icon`" />
+            <co-icon name="co:password" :class="bem.e('icon')" />
           </template>
         </el-input>
       </el-form-item>
@@ -57,7 +57,7 @@
           :placeholder="t('co.auth.confirmPassword')"
         >
           <template #prefix>
-            <co-icon name="co:password" :class="`${prefixCls}-icon`" />
+            <co-icon name="co:password" :class="bem.e('icon')" />
           </template>
         </el-input>
       </el-form-item>
@@ -66,7 +66,7 @@
         <el-button
           size="large"
           type="primary"
-          :class="`${prefixCls}-button`"
+          :class="bem.e('button')"
           :loading="loading"
           @click="onSubmit"
         >
@@ -75,7 +75,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button size="large" :class="`${prefixCls}-button`" @click="router.back()">
+        <el-button size="large" :class="bem.e('button')" @click="router.back()">
           {{ t('co.common.back') }}
         </el-button>
       </el-form-item>
@@ -86,17 +86,14 @@
 <script setup lang="ts">
 import { reactive, ref, useTemplateRef } from 'vue';
 import { useRouter } from 'vue-router';
-import { useComponentConfig } from '../../components';
-import useStyle from './style';
 import { useUserStore } from '../../store';
 import { ElMessage, type FormInstance, ElButton } from 'element-plus';
 import { useLocale } from '../../hooks';
+import { createBem } from '../../utils';
 
 const { t } = useLocale();
 
-const { prefixCls } = useComponentConfig('layout-change-password');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-change-password');
 
 const userStore = useUserStore();
 

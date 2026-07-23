@@ -1,15 +1,15 @@
 <template>
-  <div :class="[hashId, prefixCls]">
-    <div :class="`${prefixCls}-bg`"></div>
-    <div :class="`${prefixCls}-main`">
+  <div :class="bem.b()">
+    <div :class="bem.e('bg')"></div>
+    <div :class="bem.e('main')">
       <router-view></router-view>
     </div>
 
-    <div :class="`${prefixCls}-brand`">
+    <div :class="bem.e('brand')">
       <MergedLayoutBrand />
     </div>
 
-    <div :class="`${prefixCls}-widget`">
+    <div :class="bem.e('widget')">
       <component :is="AuthWidget" />
       <MergedLayoutLocale />
       <MergedLayoutColorScheme />
@@ -21,17 +21,15 @@
 import MergedLayoutColorScheme from '../merged/layout-color-scheme';
 import MergedLayoutBrand from '../merged/layout-brand';
 import MergedLayoutLocale from '../merged/layout-locale';
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
 import { defineTemplate } from '../../utils';
 import { useGlobalConfig } from '../../config';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutAuth',
 });
 
-const { prefixCls } = useComponentConfig('layout-auth');
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-auth');
 
 const slotsConfig = useGlobalConfig().slots;
 const AuthWidget = defineTemplate(() => slotsConfig.authWidget?.());

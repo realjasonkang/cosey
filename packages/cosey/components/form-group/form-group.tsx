@@ -2,9 +2,8 @@ import { computed, defineComponent, ref, watch } from 'vue';
 import { formGroupEmits, formGroupProps, formGroupSlots } from './form-group.api';
 import { reactiveOmit } from '@vueuse/core';
 import Icon from '../icon/icon';
-import useStyle from './form-group.style';
-import { useComponentConfig } from '../config-provider';
 import { ElTooltip } from 'element-plus';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoFormGroup',
@@ -12,9 +11,7 @@ export default defineComponent({
   slots: formGroupSlots,
   emits: formGroupEmits,
   setup(props, { slots, emit }) {
-    const { prefixCls } = useComponentConfig('form-group', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('form-group');
 
     const spaceProps = reactiveOmit(props, [
       'title',
@@ -50,16 +47,16 @@ export default defineComponent({
       return (
         <div
           class={[
-            hashId.value,
-            prefixCls.value,
-            { 'is-bordered': isBordered.value, 'is-collapsed': innerCollapsed.value },
+            bem.b(),
+            bem.is('bordered', isBordered.value),
+            bem.is('collapsed', innerCollapsed.value),
           ]}
           style={{
             borderStyle: isBordered.value ? props.borderStyle : undefined,
           }}
         >
           {(props.title || slots.title) && (
-            <div class={[`${prefixCls.value}-title`, `is-${props.position}`]}>
+            <div class={[bem.e('title'), bem.is(props.position)]}>
               <div
                 style={{
                   display: 'inline-flex',
@@ -77,9 +74,7 @@ export default defineComponent({
                     placement="top"
                     v-slots={{
                       content: () => props.tooltip || slots.tooltip?.(),
-                      default: () => (
-                        <Icon name="co:help" class={`${prefixCls.value}-title-icon`} size="md" />
-                      ),
+                      default: () => <Icon name="co:help" class={bem.e('title-icon')} size="md" />,
                     }}
                   />
                 )}
@@ -87,11 +82,7 @@ export default defineComponent({
             </div>
           )}
 
-          <el-space
-            v-show={!innerCollapsed.value}
-            {...spaceProps}
-            class={`${prefixCls.value}-space`}
-          >
+          <el-space v-show={!innerCollapsed.value} {...spaceProps} class={bem.e('space')}>
             {slots.default?.({})}
           </el-space>
         </div>

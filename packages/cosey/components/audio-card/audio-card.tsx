@@ -3,8 +3,7 @@ import { useLockscreen } from 'element-plus';
 import { audioCardProps, audioCardEmits } from './audio-card.api';
 import Icon from '../icon/icon';
 import AudioViewer from '../audio-viewer/audio-viewer';
-import useStyle from './audio-card.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoAudioCard',
@@ -12,9 +11,7 @@ export default defineComponent({
   props: audioCardProps,
   emits: audioCardEmits,
   setup(props, { attrs, emit, expose }) {
-    const { prefixCls } = useComponentConfig('audio-card', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('audio-card');
 
     const viewerVisible = ref(false);
 
@@ -41,12 +38,12 @@ export default defineComponent({
         <>
           <div
             {...attrs}
-            class={[hashId.value, prefixCls.value, `is-${props.size}`]}
+            class={[bem.b(), bem.is(props.size)]}
             title={props.title || props.src}
             onClick={() => openViewer()}
           >
             <Icon name="co:volume-up" />
-            <div class={[`${prefixCls.value}-filename`]}>{props.name}</div>
+            <div class={bem.e('filename')}>{props.name}</div>
           </div>
 
           {viewerVisible.value && <AudioViewer src={props.src} onClose={() => closeViewer()} />}

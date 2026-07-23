@@ -1,5 +1,5 @@
 <template>
-  <div :class="[hashId, prefixCls, `is-${mode}`]">
+  <div :class="[bem.b(), bem.is(mode)]">
     <slot></slot>
   </div>
 </template>
@@ -13,8 +13,7 @@ import {
   type SnugMenuContext,
   snugMenuContextSymbol,
 } from './snug-menu';
-import useStyle from './style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoSnugMenu',
@@ -28,9 +27,7 @@ defineSlots<SnugMenuSlots>();
 
 const emit = defineEmits<SnugMenuEmits>();
 
-const { prefixCls } = useComponentConfig('snug-menu', props);
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('snug-menu');
 
 const activeName = ref<string>();
 

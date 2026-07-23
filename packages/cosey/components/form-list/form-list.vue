@@ -34,10 +34,9 @@ import {
   isString,
   arrayMove,
   defineTemplate,
+  createBem,
 } from '../../utils';
-import useStyle from './form-list.style';
-import { useComponentConfig } from '../config-provider';
-import { useToken } from '../theme';
+import { getCssVar } from '../../utils';
 import { useLocale } from '../../hooks';
 
 defineOptions({
@@ -63,11 +62,7 @@ const formItemProps = reactiveOmit(
 
 const { t } = useLocale();
 
-const { prefixCls } = useComponentConfig('form-list', props);
-
-const { hashId } = useStyle(prefixCls);
-
-const { token } = useToken();
+const bem = createBem('form-list');
 
 // readonly
 const formContext = inject<FormContext | null>(formContextSymbol, null);
@@ -235,19 +230,19 @@ const template = defineTemplate(() => {
           move,
         })
       ) : (
-        <div class={[hashId.value, prefixCls.value]}>
+        <div class={bem.b()}>
           {props.modelValue.length > 0 && (
             <ElSpace
-              class={[`${prefixCls.value}-space`, 'is-head']}
+              class={[bem.e('space'), bem.is('head')]}
               style={{
-                marginInlineStart: props.draggable ? token.value.marginLG + 'px' : '',
+                marginInlineStart: props.draggable ? getCssVar('margin-lg') : '',
               }}
               size={[16, 16]}
             >
               {columns.value.map((column: any) => {
                 return (
                   <div
-                    class={[`${prefixCls.value}-title`, { 'is-required': column.required }]}
+                    class={[bem.e('title'), bem.is('required', column.required)]}
                     style={getFormItemWidth(column.width)}
                   >
                     {column.label}
@@ -256,17 +251,13 @@ const template = defineTemplate(() => {
               })}
             </ElSpace>
           )}
-          <div class={`${prefixCls.value}-content`}>
+          <div class={bem.e('content')}>
             <DndSort disabled={!props.draggable} onMove={move}>
               <InternalTransitionGroup effect="slide">
                 {props.modelValue.map((row, index) => {
                   return (
-                    <DndSortItem
-                      key={getKey(row)}
-                      index={index}
-                      class={`${prefixCls.value}-sort-item`}
-                    >
-                      <ElSpace size={[16, 16]} class={`${prefixCls.value}-space`}>
+                    <DndSortItem key={getKey(row)} index={index} class={bem.e('sort-item')}>
+                      <ElSpace size={[16, 16]} class={bem.e('space')}>
                         {slots.default?.({
                           row,
                           index,
@@ -285,7 +276,7 @@ const template = defineTemplate(() => {
             </DndSort>
             {!mergedReadonly.value && showAddButton.value && (
               <ElButton link type="primary" onClick={handleAdd}>
-                <Icon name="co:add-large" class={`${prefixCls.value}-plus-icon`} />
+                <Icon name="co:add-large" class={bem.e('plus-icon')} />
                 {t(props.addText)}
               </ElButton>
             )}

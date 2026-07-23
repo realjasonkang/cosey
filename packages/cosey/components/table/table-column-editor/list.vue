@@ -1,5 +1,5 @@
 <template>
-  <div :class="`${prefixCls}-list`">
+  <div :class="bem.e('list')">
     <InternalTransitionGroup :css="false" effect="slide">
       <Item
         v-for="(node, i) in nodeList"
@@ -18,8 +18,7 @@ import { TransitionGroup as InternalTransitionGroup } from '../../transition-gro
 import { type TableColumnProps } from '../table-column/table-column.api';
 import Item from './item.vue';
 import { watch } from 'vue';
-import { auid, arrayMove } from '../../../utils';
-import { useComponentConfig } from '../../config-provider';
+import { auid, arrayMove, createBem } from '../../../utils';
 import { type CheckableNode } from '../../../hooks';
 
 const props = defineProps<{
@@ -27,7 +26,7 @@ const props = defineProps<{
   isSub?: boolean;
 }>();
 
-const { prefixCls } = useComponentConfig('table-column-editor');
+const bem = createBem('table-column-editor');
 
 // key - 用于拖拽
 let mapTargetKey = new Map<object, string>();

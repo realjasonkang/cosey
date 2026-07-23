@@ -1,0 +1,55 @@
+@use './base/index' as *;
+
+@include b(snug-menu) {
+  display: flex;
+
+  @include is(vertical) {
+    flex-direction: column;
+  }
+}
+
+@include b(snug-menu-item) {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  gap: css-var(size-xs);
+  border-radius: css-var(border-radius-large);
+  transition: css-var(transition-duration);
+
+  @include is(vertical) {
+    flex-direction: column;
+    padding-block: css-var(padding-sm);
+  }
+
+  @include is(horizontal) {
+    padding-inline: css-var(padding-sm);
+    height: 38px;
+  }
+
+  @include is(active) {
+    color: css-var(color-primary);
+  }
+
+  @include is(disabled) {
+    cursor: not-allowed;
+    opacity: 0.25;
+  }
+
+  &:not(.is-disabled):hover {
+    background: css-var(fill-color-light);
+
+    @include e(icon) {
+      transform: scale(1.15);
+    }
+  }
+
+  @include e(title) {
+    font-size: css-var(font-size-base);
+    white-space: nowrap;
+  }
+
+  @include e(icon) {
+    transition: transform css-var(transition-duration);
+  }
+}

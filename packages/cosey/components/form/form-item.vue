@@ -1,10 +1,6 @@
 <template>
   <OptionalWrapper :when="formContext?.grid" :component="Col" :props="mergedColProps">
-    <ElFormItem
-      v-bind="mergedFormItemProps"
-      ref="formItemRef"
-      :class="[hashId, `${prefixCls}-item`]"
-    >
+    <ElFormItem v-bind="mergedFormItemProps" ref="formItemRef" :class="bem.b()">
       <template v-if="label || slots.label" #label>
         <template v-if="label">{{ label }}</template>
         <slot v-else name="label"></slot>
@@ -14,12 +10,12 @@
             <slot v-else name="tooltip"></slot>
           </template>
           <template #default>
-            <Icon name="co:help" :class="`${prefixCls}-item-label-icon`" size="md" />
+            <Icon name="co:help" :class="bem.e('label-icon')" size="md" />
           </template>
         </ElTooltip>
       </template>
       <template #default>
-        <div :class="`${prefixCls}-item-content`" :style="fixedWidthStyle">
+        <div :class="bem.e('content')" :style="fixedWidthStyle">
           <slot>
             <Field
               :readonly="mergedReadonly"
@@ -29,7 +25,7 @@
               :component-ref="fieldRef"
             />
           </slot>
-          <div v-if="extra || slots.extra" :class="`${prefixCls}-item-extra`">
+          <div v-if="extra || slots.extra" :class="bem.e('extra')">
             <template v-if="extra">{{ extra }}</template>
             <slot v-else name="extra"></slot>
           </div>
@@ -67,11 +63,16 @@ import { OptionalWrapper } from '../optional-wrapper';
 import { Col } from '../col';
 import Icon from '../icon/icon';
 import { useFormItemWidth } from './useFormItemWidth';
-import { omitUndefined, createMergedExpose, isString, isNumber, toArray } from '../../utils';
+import {
+  omitUndefined,
+  createMergedExpose,
+  isString,
+  isNumber,
+  toArray,
+  createBem,
+} from '../../utils';
 import { ElFormItem, ElTooltip, type FormItemInstance } from 'element-plus';
 import { reactiveOmit } from '@vueuse/core';
-import { useComponentConfig } from '../config-provider';
-import { useToken } from '../theme';
 import { useLocale } from '../../hooks';
 import { omit } from 'lodash-es';
 
@@ -90,9 +91,7 @@ const attrs = useAttrs() as any;
 
 const emit = defineEmits<FormItemEmits>();
 
-const { prefixCls } = useComponentConfig('form', props);
-
-const { hashId } = useToken();
+const bem = createBem('form-item');
 
 const { t } = useLocale();
 
@@ -210,66 +209,4 @@ const fieldSlots = computed(() => {
     ...props.fieldSlots,
   };
 });
-
-// const formItemSlotNames = ['error'] as const;
-// const template = defineTemplate(() => {
-//   return (
-//     <OptionalWrapper when={formContext?.grid} component={Col} props={mergedColProps.value}>
-//       <ElFormItem
-//         {...mergedFormItemProps}
-//         ref={formItemRef}
-//         class={[hashId.value, `${prefixCls.value}-item`]}
-//         v-slots={{
-//           ...pick(slots, formItemSlotNames),
-//           label: () => {
-//             if (props.label || slots.label) {
-//               return (
-//                 <>
-//                   {props.label ? props.label : slots.label?.({})}
-//                   {(props.tooltip || slots.tooltip) && (
-//                     <ElTooltip
-//                       placement="top"
-//                       v-slots={{
-//                         content: () => (props.tooltip ? props.tooltip : slots.tooltip?.({})),
-//                         default: () => (
-//                           <Icon
-//                             name="co:help"
-//                             class={`${prefixCls.value}-item-label-icon`}
-//                             size="md"
-//                           />
-//                         ),
-//                       }}
-//                     ></ElTooltip>
-//                   )}
-//                 </>
-//               );
-//             }
-//           },
-//           default: () => {
-//             return (
-//               <div class={`${prefixCls.value}-item-content`} style={fixedWidthStyle.value}>
-//                 {slots.default ? (
-//                   slots.default()
-//                 ) : (
-//                   <Field
-//                     readonly={mergedReadonly.value!}
-//                     type={props.fieldType!}
-//                     componentProps={mergedFieldProps.value}
-//                     componentSlots={fieldSlots.value}
-//                     componentRef={props.fieldRef!}
-//                   />
-//                 )}
-//                 {(props.extra || slots.extra) && (
-//                   <div class={`${prefixCls.value}-item-extra`}>
-//                     {props.extra ? props.extra : slots.extra?.({})}
-//                   </div>
-//                 )}
-//               </div>
-//             );
-//           },
-//         }}
-//       ></ElFormItem>
-//     </OptionalWrapper>
-//   );
-// });
 </script>

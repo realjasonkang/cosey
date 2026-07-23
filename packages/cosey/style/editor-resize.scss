@@ -1,0 +1,78 @@
+@use './base/index' as *;
+
+@include b(editor-resize) {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: none;
+  outline: 3px solid css-var(color-primary-light-5);
+  pointer-events: none;
+
+  @include is(show) {
+    display: block;
+  }
+
+  @include e(corner) {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: css-var(color-primary-light-3);
+    pointer-events: auto;
+
+    @include m(nw) {
+      cursor: nw-resize;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    @include m(ne) {
+      cursor: ne-resize;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      transform: translate(50%, -50%);
+    }
+
+    @include m(sw) {
+      cursor: sw-resize;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+      transform: translate(-50%, 50%);
+    }
+
+    @include m(se) {
+      cursor: se-resize;
+      inset-block-end: 0;
+      inset-inline-end: 0;
+      transform: translate(50%, 50%);
+    }
+  }
+
+  @include e(align) {
+    position: absolute;
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
+    display: flex;
+    column-gap: css-var(padding);
+    padding-inline: css-var(padding-xs);
+    padding-block: css-var(padding-xxs);
+    border: css-var(border-width) css-var(border-style) css-var(border-color-lighter);
+    border-radius: css-var(border-radius-base);
+    background-color: css-var(bg-color-overlay);
+    box-shadow: css-var(box-shadow);
+    transform: translate(-50%, -4px);
+  }
+
+  @include e(size) {
+    position: fixed;
+    left: css-var(size-xs);
+    top: css-var(size-xs);
+    padding-inline: css-var(padding-sm);
+    padding-block: css-var(padding-xxs);
+    font-size: css-var(font-size-small);
+    line-height: css-var(line-height);
+    border-radius: css-var(border-radius-base);
+    background-color: css-var(text-color-primary);
+    color: css-var(bg-color-overlay);
+  }
+}

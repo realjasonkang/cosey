@@ -23,8 +23,6 @@ export { type CoseyOptions, type LayoutComponents, type LayoutSlots } from './co
 import { persist } from './persist';
 import { i18n } from './locale';
 
-import RootConfigProvider from './config/root-config-provider';
-
 function launchGlobalComponents(app: App) {
   app.use(ElementPlus);
   app.use(registerGlobalComponents);
@@ -49,14 +47,9 @@ function launch(app: App, options: CoseyOptions = {}) {
 export * from './layout/layout';
 export * from './layout/merged';
 
-export * from './config/root-config-provider.api';
-
 export {
   // components
   registerGlobalComponents,
-
-  // config
-  RootConfigProvider,
 
   // http
   Http,

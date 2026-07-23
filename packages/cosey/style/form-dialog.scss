@@ -1,0 +1,7 @@
+@use './base/index' as *;
+
+@include b(form-dialog) {
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}

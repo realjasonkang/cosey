@@ -1,10 +1,9 @@
-import { computed, defineComponent, nextTick, ref, unref } from 'vue';
+import { computed, defineComponent, nextTick, ref, toValue } from 'vue';
 import { reactiveComputed } from '@vueuse/core';
 import { get, merge, omit } from 'lodash-es';
 import { ElOption, ElPagination, ElSelect, PaginationProps } from 'element-plus';
 import { remoteSelectEmits, remoteSelectProps, remoteSelectSlots } from './remote-select.api';
-import useStyle from './remote-select.style';
-import { useComponentConfig, useConfig } from '../config-provider';
+import { useConfig } from '../config-provider';
 import { defaultTableConfig } from '../table/table';
 import {
   bulkBindEvents,
@@ -13,6 +12,7 @@ import {
   isFunction,
   isObject,
   auid,
+  createBem,
 } from '../../utils';
 import { useFetch, useProps } from '../../hooks';
 import TableQuery from '../table/table-query/table-query';
@@ -25,10 +25,9 @@ export default defineComponent({
   slots: remoteSelectSlots,
   emits: remoteSelectEmits,
   setup(props, { slots, emit, attrs }) {
-    const { prefixCls } = useComponentConfig('remote-select', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('remote-select');
 
-    const { table: tableConfig } = useConfig();
+    const tableConfig = useConfig()?.table;
 
     // data
     const isFirstFetch = ref(true);
@@ -38,7 +37,7 @@ export default defineComponent({
     const tableQueryRef = ref<TableQueryExpose>();
 
     const tableKeys = reactiveComputed(() => {
-      return merge({}, defaultTableConfig.keys, unref(tableConfig)?.keys, props.keys);
+      return merge({}, defaultTableConfig.keys, toValue(tableConfig)?.keys, props.keys);
     });
 
     const getFetchParams = () => {
@@ -91,7 +90,7 @@ export default defineComponent({
         {
           layout: 'prev, pager, next',
         },
-        unref(tableConfig)?.pagination,
+        toValue(tableConfig)?.pagination,
         isObject(props.pagination) ? props.pagination : null,
       );
     });
@@ -174,8 +173,8 @@ export default defineComponent({
           {...attrs}
           {...selectProps.value}
           {...events}
-          class={`${hashId.value} ${prefixCls.value}`}
-          popper-class={`${hashId.value} ${prefixCls.value}-popper ${popperId} ${selectProps.value.popperClass}`}
+          class={bem.b()}
+          popper-class={[bem.e('popper'), popperId, selectProps.value.popperClass].join(' ')}
           onVisible-change={onVisibleChange}
         >
           {{
@@ -198,7 +197,7 @@ export default defineComponent({
                           inline
                           grid={false}
                           size="small"
-                          class={`${prefixCls.value}-form`}
+                          class={bem.e('form')}
                           width={120}
                           {...props.formProps}
                           reset={onReset}

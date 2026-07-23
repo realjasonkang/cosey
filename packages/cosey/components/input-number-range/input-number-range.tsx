@@ -1,18 +1,14 @@
 import { inputNumberRangeProps, inputNumberRangeEmits } from './input-number-range.api';
-import useStyle from './input-number-range.style';
-import { useComponentConfig } from '../config-provider';
 import { CHANGE_EVENT, ElInputNumber, useFormItem } from 'element-plus';
 import { defineComponent, ref, watch } from 'vue';
-import { debugWarn, isNullish } from '../../utils';
+import { debugWarn, isNullish, createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoInputNumberRange',
   props: inputNumberRangeProps,
   emits: inputNumberRangeEmits,
   setup(props, { emit }) {
-    const { prefixCls } = useComponentConfig('input-number-range', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('input-number-range');
 
     const { formItem } = useFormItem();
 
@@ -78,18 +74,11 @@ export default defineComponent({
     return () => {
       return (
         <div
-          class={[
-            hashId.value,
-            prefixCls.value,
-            {
-              'is-focus': isFocused.value,
-            },
-            'el-input__wrapper',
-          ]}
+          class={[bem.b(), bem.is('focus', isFocused.value), 'el-input__wrapper']}
           onFocusin={onFocusIn}
           onFocusout={onFocusOut}
         >
-          <div class={`${prefixCls.value}-start`}>
+          <div class={bem.e('start')}>
             <ElInputNumber
               v-model={start.value}
               min={props.min}
@@ -103,8 +92,8 @@ export default defineComponent({
               placeholder={props.startPlaceholder}
             />
           </div>
-          <div class={`${prefixCls.value}-separator`}>-</div>
-          <div class={`${prefixCls.value}-end`}>
+          <div class={bem.e('separator')}>-</div>
+          <div class={bem.e('end')}>
             <ElInputNumber
               v-model={end.value}
               min={props.min}

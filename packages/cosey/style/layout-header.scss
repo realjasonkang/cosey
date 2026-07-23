@@ -1,0 +1,11 @@
+@use './base/index' as *;
+
+@include b(layout-header) {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  z-index: 1000;
+  background-color: css-var(bg-color);
+  transition: inset-inline-start css-var(transition-duration);
+}

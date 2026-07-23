@@ -1,5 +1,8 @@
 import type { Theme } from 'vitepress';
 
+import 'element-plus/dist/index.css';
+import 'element-plus/theme-chalk/dark/css-vars.css';
+import 'cosey/style/index.scss';
 import './style.css';
 
 import dayjs from 'dayjs';

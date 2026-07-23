@@ -1,0 +1,74 @@
+@use './base/index' as *;
+
+@include b(context-menu) {
+  position: fixed;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  padding-block: css-var(padding-xxs);
+  border: css-var(border-width) css-var(border-style) css-var(border-color-lighter);
+  border-radius: css-var(border-radius-base);
+  background-color: css-var(bg-color-overlay);
+  box-shadow: css-var(box-shadow);
+
+  @include e(divider) {
+    margin-block: css-var(margin-xxs);
+    border-block-start: css-var(border-width) css-var(border-style) css-var(border-color-lighter);
+  }
+
+  @include e(content) {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    align-items: center;
+    padding-inline: css-var(padding);
+    padding-block: css-var(padding-xxs);
+    line-height: css-var(line-height);
+    color: css-var(text-color-primary);
+    outline: none;
+
+    &:is(:hover, .is-hover):not(.is-disabled) {
+      color: css-var(color-primary);
+      background-color: css-var(fill-color-light);
+    }
+
+    @include is(disabled) {
+      cursor: not-allowed;
+      color: css-var(text-color-disabled);
+    }
+
+    @include e(content-icon) {
+      margin-inline-end: css-var(margin-xs);
+      width: css-var(size);
+      font-size: css-var(font-size-large);
+    }
+
+    @include e(content-title) {
+      min-width: 0;
+      flex: 1;
+      font-size: css-var(font-size-base);
+      line-height: css-var(line-height);
+      @include truncate;
+    }
+
+    @include e(content-arrow) {
+      display: flex;
+      align-items: center;
+      margin-inline-start: auto;
+    }
+
+    @include e(content-arrow-icon) {
+      margin-inline-start: css-var(margin-lg);
+    }
+  }
+
+  @include e(mask) {
+    position: fixed;
+    inset: 0;
+  }
+
+  @include e(point) {
+    position: fixed;
+    width: 0;
+    height: 0;
+  }
+}

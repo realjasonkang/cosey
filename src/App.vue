@@ -1,16 +1,29 @@
 <template>
-  <RootConfigProvider>
-    <router-view></router-view>
-  </RootConfigProvider>
+  <ConfigProvider
+    :theme="{
+      token: {
+        colorPrimary: '#1677ff',
+        colorSuccess: '#52c41a',
+        colorWarning: '#faad14',
+        colorError: '#ff4d4f',
+      },
+    }"
+    #default="{ locale }"
+  >
+    <ElConfigProvider :locale="locale">
+      <router-view></router-view>
+    </ElConfigProvider>
+  </ConfigProvider>
 </template>
 
 <script setup lang="ts">
-import { RootConfigProvider } from 'cosey';
+import { ConfigProvider } from 'cosey/components';
+import { ElConfigProvider } from 'element-plus';
 import { onMounted } from 'vue';
 
 // 移除 index.html 的加载动画
 onMounted(() => {
-  const loading = document.querySelector('.loading');
+  const loading = document.querySelector('.launch');
   if (loading) {
     loading
       .animate(

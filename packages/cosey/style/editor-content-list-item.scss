@@ -1,0 +1,52 @@
+@use 'sass:string';
+@use './base/index' as *;
+
+$max-level: 9;
+
+@include b(editor-content-list-item) {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    user-select: none;
+    pointer-events: none;
+    transform: translate(calc(-100% - 0.6em), -50%);
+  }
+
+  @include is(bulleted-list) {
+    &::before {
+      content: '';
+      width: 0.35em;
+      height: 0.35em;
+      background-color: currentcolor;
+      border-radius: 50%;
+    }
+  }
+
+  @include is(numbered-list) {
+    @for $i from 0 through $max-level {
+      &.is-level-#{$i} {
+        counter-increment: numbered-list#{$i};
+
+        &::before {
+          content: counter(numbered-list#{$i}) '.';
+        }
+      }
+
+      @if $i > 0 {
+        $sel: '';
+        @for $j from 0 through $i - 1 {
+          @if $j > 0 {
+            $sel: $sel + ', ';
+          }
+          $sel: $sel + '&.is-level-#{$j}';
+        }
+        :is(#{$sel}) + &.is-level-#{$i} {
+          counter-reset: numbered-list#{$i};
+        }
+      }
+    }
+  }
+}

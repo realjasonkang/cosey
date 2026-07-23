@@ -1,0 +1,102 @@
+@use './index' as *;
+
+:root {
+  // ============================================================
+  // Border Radius
+  // ============================================================
+
+  #{css-var-name(border-radius-large)}: 8px;
+
+  // ============================================================
+  // Typography
+  // ============================================================
+
+  // -- Heading Font Size --
+  #{css-var-name(font-size-heading-1)}: 38px;
+  #{css-var-name(font-size-heading-2)}: 30px;
+  #{css-var-name(font-size-heading-3)}: 24px;
+  #{css-var-name(font-size-heading-4)}: 20px;
+  #{css-var-name(font-size-heading-5)}: 16px;
+  #{css-var-name(font-size-heading-6)}: 14px;
+
+  // -- Line Height (unitless) --
+  #{css-var-name(line-height)}: 1.57142857;
+  #{css-var-name(line-height-sm)}: 1.66666667;
+  #{css-var-name(line-height-lg)}: 1.5;
+  #{css-var-name(line-height-heading-1)}: 1.2105263;
+  #{css-var-name(line-height-heading-2)}: 1.2666667;
+  #{css-var-name(line-height-heading-3)}: 1.3333333;
+  #{css-var-name(line-height-heading-4)}: 1.4;
+  #{css-var-name(line-height-heading-5)}: 1.5;
+  #{css-var-name(line-height-heading-6)}: 1.57142857;
+
+  #{css-var-name(font-weight-strong)}: 600;
+
+  // -- Link Decoration --
+  #{css-var-name(link-decoration)}: none;
+  #{css-var-name(link-hover-decoration)}: none;
+  #{css-var-name(link-focus-decoration)}: none;
+
+  // ============================================================
+  // Spacing / Size
+  // ============================================================
+
+  // -- Size Scale (sizeUnit=4, sizeStep=4) --
+  #{css-var-name(size-xxl)}: 48px;
+  #{css-var-name(size-xl)}: 32px;
+  #{css-var-name(size-lg)}: 24px;
+  #{css-var-name(size-md)}: 20px;
+  #{css-var-name(size-ms)}: 16px;
+  #{css-var-name(size)}: 16px;
+  #{css-var-name(size-sm)}: 12px;
+  #{css-var-name(size-xs)}: 8px;
+  #{css-var-name(size-xxs)}: 4px;
+
+  // -- Padding --
+  #{css-var-name(padding-xxs)}: 4px;
+  #{css-var-name(padding-xs)}: 8px;
+  #{css-var-name(padding-sm)}: 12px;
+  #{css-var-name(padding)}: 16px;
+  #{css-var-name(padding-md)}: 20px;
+  #{css-var-name(padding-lg)}: 24px;
+  #{css-var-name(padding-xl)}: 32px;
+
+  #{css-var-name(padding-content-horizontal-lg)}: 24px;
+  #{css-var-name(padding-content-vertical-lg)}: 16px;
+  #{css-var-name(padding-content-horizontal)}: 16px;
+  #{css-var-name(padding-content-vertical)}: 12px;
+  #{css-var-name(padding-content-horizontal-sm)}: 16px;
+  #{css-var-name(padding-content-vertical-sm)}: 8px;
+
+  // -- Margin --
+  #{css-var-name(margin-xxs)}: 4px;
+  #{css-var-name(margin-xs)}: 8px;
+  #{css-var-name(margin-sm)}: 12px;
+  #{css-var-name(margin)}: 16px;
+  #{css-var-name(margin-md)}: 20px;
+  #{css-var-name(margin-lg)}: 24px;
+  #{css-var-name(margin-xl)}: 32px;
+  #{css-var-name(margin-xxl)}: 48px;
+
+  // ============================================================
+  // Screen / Breakpoint
+  // ============================================================
+
+  #{css-var-name(screen-xs)}: 480px;
+  #{css-var-name(screen-xs-min)}: 480px;
+  #{css-var-name(screen-xs-max)}: 575px;
+  #{css-var-name(screen-sm)}: 576px;
+  #{css-var-name(screen-sm-min)}: 576px;
+  #{css-var-name(screen-sm-max)}: 767px;
+  #{css-var-name(screen-md)}: 768px;
+  #{css-var-name(screen-md-min)}: 768px;
+  #{css-var-name(screen-md-max)}: 991px;
+  #{css-var-name(screen-lg)}: 992px;
+  #{css-var-name(screen-lg-min)}: 992px;
+  #{css-var-name(screen-lg-max)}: 1199px;
+  #{css-var-name(screen-xl)}: 1200px;
+  #{css-var-name(screen-xl-min)}: 1200px;
+  #{css-var-name(screen-xl-max)}: 1599px;
+  #{css-var-name(screen-xxl)}: 1600px;
+  #{css-var-name(screen-xxl-min)}: 1600px;
+}

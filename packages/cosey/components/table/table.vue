@@ -3,29 +3,22 @@
     <div
       ref="rootRef"
       v-loading="isFetching"
-      :class="[
-        hashId,
-        prefixCls,
-        {
-          'is-fullpage': isFullPage,
-          'is-split': isSplit,
-        },
-      ]"
+      :class="[bem.b(), bem.is('fullpage', isFullPage), bem.is('split', isSplit)]"
       :style="{ ...containerStyle, zIndex }"
     >
-      <div v-if="formProps" :class="`${prefixCls}-header`">
+      <div v-if="formProps" :class="bem.e('header')">
         <TableQuery ref="tableQuery" v-bind="formProps" :reset="onReset" :submit="onSubmit" />
       </div>
 
-      <div v-if="$slots['before-body']" :class="`${prefixCls}-before-body`">
+      <div v-if="$slots['before-body']" :class="bem.e('before-body')">
         <slot name="before-body"></slot>
       </div>
 
-      <div v-if="$slots['before-body-plain']" :class="`${prefixCls}-before-body-plain`">
+      <div v-if="$slots['before-body-plain']" :class="bem.e('before-body-plain')">
         <slot name="before-body-plain"></slot>
       </div>
 
-      <div :class="`${prefixCls}-body`">
+      <div :class="bem.e('body')">
         <div
           v-if="
             $slots['toolbar-left'] ||
@@ -33,17 +26,17 @@
             mergedToolbarConfig ||
             isStatsVisible
           "
-          :class="`${prefixCls}-toolbar`"
+          :class="bem.e('toolbar')"
         >
-          <div :class="`${prefixCls}-toolbar-left`">
+          <div :class="bem.e('toolbar-left')">
             <slot name="toolbar-left"></slot>
-            <div v-if="isStatsVisible" :class="`${prefixCls}-stats-wrapper`">
+            <div v-if="isStatsVisible" :class="bem.e('stats-wrapper')">
               <TableStats :columns="finalStatsColumns" :data="statsData" />
             </div>
           </div>
-          <div :class="`${prefixCls}-toolbar-right`">
+          <div :class="bem.e('toolbar-right')">
             <slot name="toolbar-right"></slot>
-            <div v-if="mergedToolbarConfig" :class="`${prefixCls}-toolbar-preset`">
+            <div v-if="mergedToolbarConfig" :class="bem.e('toolbar-preset')">
               <div v-if="mergedToolbarConfig.reload">
                 <el-tooltip
                   :content="t('co.common.reload')"
@@ -55,12 +48,7 @@
                     <Icon
                       name="co:rotate-360"
                       size="md"
-                      :class="[
-                        `${prefixCls}-refresh-icon`,
-                        {
-                          'is-spinning': reloading,
-                        },
-                      ]"
+                      :class="[bem.e('refresh-icon'), bem.is('spinning', reloading)]"
                     />
                   </el-button>
                 </el-tooltip>
@@ -123,15 +111,15 @@
           </div>
         </div>
 
-        <div v-if="$slots['before-table']" :class="`${prefixCls}-before-table`">
+        <div v-if="$slots['before-table']" :class="bem.e('before-table')">
           <slot name="before-table"></slot>
         </div>
 
-        <div v-if="$slots['before-table-plain']" :class="`${prefixCls}-before-table-plain`">
+        <div v-if="$slots['before-table-plain']" :class="bem.e('before-table-plain')">
           <slot name="before-table-plain"></slot>
         </div>
 
-        <div :class="`${prefixCls}-table`" dir="ltr">
+        <div :class="bem.e('table')" dir="ltr">
           <el-table
             ref="elTableRef"
             v-bind="elTableProps"
@@ -191,7 +179,7 @@
           v-bind="paginationProps"
           v-model:current-page="page"
           v-model:page-size="pageSize"
-          :class="`${prefixCls}-pagination`"
+          :class="bem.e('pagination')"
           style="
             --el-pagination-bg-color: transparent;
             --el-pagination-button-disabled-bg-color: transparent;
@@ -214,6 +202,7 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
+  toValue,
   unref,
   useTemplateRef,
   watch,
@@ -259,9 +248,9 @@ import {
   auid,
   walkTree,
 } from '../../utils';
-import { useConfig, useComponentConfig } from '../config-provider';
+import { useConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
-import useStyle from './table.style';
 import { useLocale } from '../../hooks';
 import { hColgroup } from 'element-plus/es/components/table/src/h-helper.mjs';
 import TableFooter from './table-footer';
@@ -293,18 +282,16 @@ const { t } = useLocale();
 
 const tableId = auid();
 
-const { prefixCls } = useComponentConfig('table');
+const bem = createBem('table');
 
-const { hashId } = useStyle(prefixCls);
-
-const { table: tableConfig } = useConfig();
+const tableConfig = useConfig()?.table;
 
 const tableKeys = reactiveComputed(() => {
-  return merge({}, defaultTableConfig.keys, unref(tableConfig)?.keys, props.keys);
+  return merge({}, defaultTableConfig.keys, toValue(tableConfig)?.keys, props.keys);
 });
 
 const isSplit = computed(() => {
-  return props.split ?? unref(tableConfig)?.split ?? defaultTableConfig.split;
+  return props.split ?? toValue(tableConfig)?.split ?? defaultTableConfig.split;
 });
 
 const passedElSlotsName = computed(() => {
@@ -355,7 +342,7 @@ const elTableProps = computed(() => {
 
 const containerStyle = computed(() => {
   return {
-    height: addPxUnit(props.height ?? unref(tableConfig)?.height ?? defaultTableConfig.height),
+    height: addPxUnit(props.height ?? toValue(tableConfig)?.height ?? defaultTableConfig.height),
   };
 });
 
@@ -577,7 +564,7 @@ const pagination = reactiveComputed(() => {
   return merge(
     {},
     defaultTableConfig.pagination,
-    unref(tableConfig)?.pagination,
+    toValue(tableConfig)?.pagination,
     isObject(props.pagination) ? props.pagination : null,
   );
 });

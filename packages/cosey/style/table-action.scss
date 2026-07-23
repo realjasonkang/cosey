@@ -1,0 +1,19 @@
+@use './base/index' as *;
+
+@include b(table-action) {
+  display: inline-flex;
+  flex-direction: column;
+  row-gap: css-var(size-sm);
+
+  @include e(row) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: css-var(size-xxs);
+    row-gap: css-var(size-xxs);
+
+    @include is(divider) {
+      column-gap: 0;
+    }
+  }
+}

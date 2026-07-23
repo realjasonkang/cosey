@@ -1,13 +1,11 @@
 import { computed, defineComponent, ref } from 'vue';
 import Picker from './picker';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './color-picker.style';
 import { colorNames, colorPalettes } from './color-picker.api';
 import Icon from '../../icon/icon';
 import { ElInput } from 'element-plus';
 import { TinyColor } from '@ctrl/tinycolor';
 import { useHistoryColor } from '../hooks/useHistoryColor';
-import { isBoolean, isString } from '../../../utils';
+import { isBoolean, isString, createBem } from '../../../utils';
 
 export default defineComponent({
   name: 'CoEditorColorPicker',
@@ -20,8 +18,7 @@ export default defineComponent({
     clear: () => true,
   },
   setup(props, { slots, emit }) {
-    const { prefixCls } = useComponentConfig('editor-color-picker');
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-color-picker');
 
     const innerVisible = computed({
       get() {
@@ -79,21 +76,21 @@ export default defineComponent({
     return () => {
       return (
         <Picker
-          popperClass={[hashId.value, prefixCls.value]}
+          popperClass={bem.b()}
           v-model:visible={innerVisible.value}
           v-slots={{
             default: slots.default,
             content: () => (
               <>
-                <div class={`${prefixCls.value}-title`}>预设</div>
-                <div class={`${prefixCls.value}-preset`}>
+                <div class={bem.e('title')}>预设</div>
+                <div class={bem.e('preset')}>
                   {colorPalettes.map((row, i) => (
-                    <div key={i} class={`${prefixCls.value}-row`}>
+                    <div key={i} class={bem.e('row')}>
                       {row.map((color, j) => (
-                        <div key={j} class={`${prefixCls.value}-item`}>
+                        <div key={j} class={bem.e('item')}>
                           <button
                             type="button"
-                            class={[`${prefixCls.value}-color`, `${prefixCls.value}-btn`]}
+                            class={[bem.e('color'), bem.e('btn')]}
                             style={{ background: color }}
                             onClick={() => onSelect(color)}
                           ></button>
@@ -103,19 +100,13 @@ export default defineComponent({
                   ))}
                 </div>
 
-                <div class={`${prefixCls.value}-title`}>最近使用</div>
-                <div class={`${prefixCls.value}-row`}>
+                <div class={bem.e('title')}>最近使用</div>
+                <div class={bem.e('row')}>
                   {mapHistoryColors.value.map((color, i) => (
-                    <div key={i} class={`${prefixCls.value}-item`}>
+                    <div key={i} class={bem.e('item')}>
                       <button
                         type="button"
-                        class={[
-                          `${prefixCls.value}-color`,
-                          `${prefixCls.value}-btn`,
-                          {
-                            'is-empty': !color,
-                          },
-                        ]}
+                        class={[bem.e('color'), bem.e('btn'), bem.is('empty', !color)]}
                         style={{ background: color }}
                         onClick={() => onSelect(color)}
                       ></button>
@@ -123,10 +114,10 @@ export default defineComponent({
                   ))}
                 </div>
 
-                <div class={`${prefixCls.value}-title`}>手动设置</div>
-                <div class={`${prefixCls.value}-manual`}>
+                <div class={bem.e('title')}>手动设置</div>
+                <div class={bem.e('manual')}>
                   {isEyeDropperSupported.value && (
-                    <button type="button" class={[`${prefixCls.value}-btn`]} onClick={onAbsorb}>
+                    <button type="button" class={bem.e('btn')} onClick={onAbsorb}>
                       <Icon name="co:eyedropper" size="lg" />
                     </button>
                   )}
@@ -134,21 +125,17 @@ export default defineComponent({
                     v-model={inputColor.value}
                     size="small"
                     placeholder="请输入"
-                    class={[`${prefixCls.value}-input`]}
+                    class={bem.e('input')}
                   />
                   <button
                     type="button"
-                    class={[`${prefixCls.value}-color`, `${prefixCls.value}-btn`]}
+                    class={[bem.e('color'), bem.e('btn')]}
                     style={{ backgroundColor: normalInputColor.value }}
                     onClick={onCustomSelect}
                   ></button>
                   <button
                     type="button"
-                    class={[
-                      `${prefixCls.value}-color`,
-                      `${prefixCls.value}-btn`,
-                      `${prefixCls.value}-clear`,
-                    ]}
+                    class={[bem.e('color'), bem.e('btn'), bem.e('clear')]}
                     onClick={onClear}
                   >
                     <Icon name="co:slash-forward" size="lg" />

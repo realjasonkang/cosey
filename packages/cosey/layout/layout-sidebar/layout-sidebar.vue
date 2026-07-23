@@ -1,5 +1,5 @@
 <template>
-  <div ref="sidebar" :class="[hashId, prefixCls]" :style="sidebarStyle">
+  <div ref="sidebar" :class="bem.b()" :style="sidebarStyle">
     <slot></slot>
   </div>
 </template>
@@ -7,17 +7,14 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
 import { useLayoutStore } from '../../store';
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
 import { useDir } from '../../hooks';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutSidebar',
 });
 
-const { prefixCls } = useComponentConfig('layout-sidebar');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-sidebar');
 
 const layoutStore = useLayoutStore();
 

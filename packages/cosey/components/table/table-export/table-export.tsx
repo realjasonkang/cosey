@@ -9,6 +9,7 @@ import {
   bookFormats,
   walkTree,
   isObject,
+  createBem,
 } from '../../../utils';
 import List from './list';
 import { type TableColumnProps } from '../table-column/table-column.api';
@@ -18,8 +19,6 @@ import FormDialog from '../../form-dialog/form-dialog';
 import { Form, FormItem } from '../../form';
 import { Panel } from '../../panel';
 
-import useStyle from './table-export.style';
-import { useComponentConfig } from '../../config-provider';
 import { CheckableNode, useTreeCheck } from '../../../hooks';
 import { useLocale } from '../../../hooks';
 
@@ -28,9 +27,7 @@ export default defineComponent({
   props: tableExportProps,
   emits: tableExportEmits,
   setup(props, { attrs, emit }) {
-    const { prefixCls } = useComponentConfig('table-export');
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('table-export');
 
     const { t } = useLocale();
 
@@ -194,14 +191,8 @@ export default defineComponent({
           onClosed={onClosed}
           onUpdate:modelValue={(value) => emit('update:modelValue', value)}
         >
-          <Form
-            model={formModel}
-            label-width="auto"
-            width="lg"
-            submit={onSubmit}
-            class={[hashId.value, prefixCls.value]}
-          >
-            <FormItem v-model={formModel.filename} label={t('co.table.filename')} prop="filename" />
+          <Form model={formModel} label-width="auto" width="lg" submit={onSubmit} class={bem.b()}>
+            <FormItem label={t('co.table.filename')} prop="filename" />
             <FormItem
               v-model={formModel.bookType}
               label={t('co.table.fileType')}

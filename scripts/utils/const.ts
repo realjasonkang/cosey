@@ -12,10 +12,3 @@ export const mapPackageDirName = {
 };
 
 export const repositories = Object.values(mapPackageDirName);
-
-export const dependenciesTypes = [
-  'dependencies',
-  'devDependencies',
-  'peerDependencies',
-  'optionalDependencies',
-];

@@ -14,8 +14,7 @@ import 'vitepress/dist/client/theme-default/styles/components/vp-code-group.css'
 import 'vitepress/dist/client/theme-default/styles/components/vp-sponsor.css';
 
 import './styles/vp-doc.scss';
-
-import { useOverrideVitePress } from './override-vite-press';
+import './styles/override-vite-press.scss';
 
 import { useData } from 'vitepress';
 import { useColorScheme } from 'cosey/hooks';
@@ -28,6 +27,4 @@ const { colorScheme } = useColorScheme();
 watch(isDark, () => {
   colorScheme.value = isDark.value ? 'dark' : 'light';
 });
-
-useOverrideVitePress();
 </script>

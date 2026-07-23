@@ -2,6 +2,7 @@ export * from './array';
 export * from './bem';
 export * from './browser';
 export * from './collection';
+export * from './color';
 export * from './css';
 export * from './date';
 export * from './echarts';

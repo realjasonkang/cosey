@@ -1,5 +1,3 @@
-import useStyle from './panel-week-range.style';
-import { useComponentConfig } from '../config-provider';
 import { computed, defineComponent, ref, shallowRef, watch } from 'vue';
 import { ElIcon } from 'element-plus';
 import { DArrowLeft, DArrowRight } from '@element-plus/icons-vue';
@@ -16,6 +14,7 @@ import {
 } from './panel-week-range.api';
 import { isValidRange } from 'element-plus/es/components/date-picker-panel/src/utils.mjs';
 import { useLocale } from '../../hooks';
+import { createBem } from '../../utils';
 
 dayjs.extend(weekYear);
 dayjs.extend(weekOfYear);
@@ -41,9 +40,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const { t } = useLocale();
 
-    const { prefixCls } = useComponentConfig('panel-week-range', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('panel-week-range');
 
     const currentYearDate = shallowRef(dayjs());
 
@@ -188,39 +185,32 @@ export default defineComponent({
         : value.format('gggg[w]ww');
     };
 
-    const handleClear = () => {
-      innerValue.value = [];
-      selectedDates.value = [];
-      emit('pick', null);
-    };
-
     emit('set-picker-option', ['isValidValue', isValidValue]);
     emit('set-picker-option', ['formatToString', formatToString]);
-    emit('set-picker-option', ['handleClear', handleClear]);
 
     return () => {
       return (
-        <div class={[hashId.value, prefixCls.value]}>
-          <div class={`${prefixCls.value}-header`}>
-            <div class={`${prefixCls.value}-prev-btn`}>
-              <button class={`${prefixCls.value}-icon-btn`} onClick={onPrevYear}>
+        <div class={bem.b()}>
+          <div class={bem.e('header')}>
+            <div class={bem.e('prev-btn')}>
+              <button class={bem.e('icon-btn')} onClick={onPrevYear}>
                 <ElIcon>
                   <DArrowLeft />
                 </ElIcon>
               </button>
             </div>
-            <span role="button" class={`${prefixCls.value}-header-label`}>
+            <span role="button" class={bem.e('header-label')}>
               {yearLabel.value}
             </span>
-            <div class={`${prefixCls.value}-next-btn`}>
-              <button class={`${prefixCls.value}-icon-btn`} onClick={onNextYear}>
+            <div class={bem.e('next-btn')}>
+              <button class={bem.e('icon-btn')} onClick={onNextYear}>
                 <ElIcon>
                   <DArrowRight />
                 </ElIcon>
               </button>
             </div>
           </div>
-          <div class={`${prefixCls.value}-content`}>
+          <div class={bem.e('content')}>
             <table onClick={onPickWeek} onMousemove={onMouseMove}>
               <tbody>
                 {weeks.value.map((row, i) => {
@@ -231,14 +221,15 @@ export default defineComponent({
                         return (
                           <td
                             key={j}
-                            class={{
-                              'is-start': start === weekInfo.id,
-                              'is-end': end === weekInfo.id,
-                              'in-range': start <= weekInfo.id && weekInfo.id <= end,
-                            }}
+                            class={[
+                              bem.e('td'),
+                              bem.is('start', start === weekInfo.id),
+                              bem.is('end', end === weekInfo.id),
+                              bem.is('in-range', start <= weekInfo.id && weekInfo.id <= end),
+                            ]}
                           >
-                            <div class={`${prefixCls.value}-cell`}>
-                              <div class={`${prefixCls.value}-cell-text`}>
+                            <div class={bem.e('cell')}>
+                              <div class={bem.e('cell-text')}>
                                 <div>{weekInfo.weekStr}</div>
                                 <div>{`${weekInfo.startStr}~${weekInfo.endStr}`}</div>
                               </div>

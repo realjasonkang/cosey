@@ -8,7 +8,7 @@
       >
         {{ t('co.editor.checkAll') }}
       </el-checkbox>
-      <div :style="{ marginInlineStart: 'auto', fontSize: token.fontSizeSM }">
+      <div :style="{ marginInlineStart: 'auto', fontSize: getCssVar('font-size-small') }">
         {{ modelValue.length }} / {{ options.length }}
       </div>
     </template>
@@ -20,7 +20,7 @@
 import { type CheckboxValueType } from 'element-plus';
 import { ref, watch } from 'vue';
 import { Panel } from '../../../panel';
-import { useToken } from '../../../theme';
+import { getCssVar } from '../../../../utils';
 import { useLocale } from '../../../../hooks';
 
 defineOptions({
@@ -41,8 +41,6 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useLocale();
-
-const { token } = useToken();
 
 const checkAll = ref(false);
 const isIndeterminate = ref(true);

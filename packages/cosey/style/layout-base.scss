@@ -1,0 +1,7 @@
+@use './base/index' as *;
+
+@include b(layout-base) {
+  display: flex;
+  min-height: 100vh;
+  background-color: css-var(bg-color-page);
+}

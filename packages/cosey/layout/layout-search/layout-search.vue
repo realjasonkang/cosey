@@ -1,41 +1,35 @@
 <template>
   <div>
-    <el-button link :class="[hashId, `${prefixCls}-button`]" @click="open = !open">
+    <el-button link :class="[bem.e('button')]" @click="open = !open">
       <Icon v-if="layoutStore.isMobile" size="xl" name="co:search" />
-      <div v-else :class="`${prefixCls}-button-wrapper`">
+      <div v-else :class="bem.e('button-wrapper')">
         <Icon name="co:search" size="lg" />
-        <span :class="`${prefixCls}-button-text`">{{ t('co.form.search') }}</span>
-        <span :class="`${prefixCls}-button-kbd`">
+        <span :class="bem.e('button-text')">{{ t('co.form.search') }}</span>
+        <span :class="bem.e('button-kbd')">
           {{ controlKey }}
           <kbd>K</kbd>
         </span>
       </div>
     </el-button>
 
-    <el-dialog
-      v-model="open"
-      :show-close="false"
-      append-to-body
-      width="560px"
-      :class="[hashId, prefixCls]"
-    >
+    <el-dialog v-model="open" :show-close="false" append-to-body width="560px" :class="bem.b()">
       <template #header>
         <el-input
           ref="input"
           v-model="searchValue"
           :placeholder="t('co.search.searchPage')"
           size="large"
-          :class="`${prefixCls}-input`"
+          :class="bem.e('input')"
           clearable
           @keydown="onKeydown"
         >
           <template #prefix>
-            <Icon name="co:search" size="xl" :class="`${prefixCls}-input-icon`" />
+            <Icon name="co:search" size="xl" :class="bem.e('input-icon')" />
           </template>
         </el-input>
       </template>
-      <el-scrollbar :class="`${prefixCls}-content`" max-height="calc(100vh - 15vh - 50px - 150px)">
-        <div v-if="searchResult.length === 0" :class="`${prefixCls}-empty`">
+      <el-scrollbar :class="bem.e('content')" max-height="calc(100vh - 15vh - 50px - 150px)">
+        <div v-if="searchResult.length === 0" :class="bem.e('empty')">
           {{ t('co.search.noResults') }}
         </div>
         <template v-else>
@@ -43,7 +37,7 @@
             v-for="(item, index) in searchResult"
             ref="item"
             :key="item.value"
-            :class="[`${prefixCls}-item`, { 'is-active': activeIndex === index }]"
+            :class="[bem.e('item'), bem.is('active', activeIndex === index)]"
             @mouseenter="onMouseEnter(index)"
             @click="onSelect(item)"
           >
@@ -52,25 +46,25 @@
               v-show="activeIndex === index"
               name="co:return"
               size="xl"
-              :class="`${prefixCls}-enter`"
+              :class="bem.e('enter')"
             />
           </div>
         </template>
       </el-scrollbar>
       <template #footer>
-        <div :class="`${prefixCls}-footer`">
+        <div :class="bem.e('footer')">
           <div>
             <Icon name="co:return" />
-            <span :class="`${prefixCls}-footer-text`">{{ t('co.search.select') }}</span>
+            <span :class="bem.e('footer-text')">{{ t('co.search.select') }}</span>
           </div>
           <div>
             <Icon name="co:arrow-up" />
             <Icon name="co:arrow-down" />
-            <span :class="`${prefixCls}-footer-text`">{{ t('co.search.switch') }}</span>
+            <span :class="bem.e('footer-text')">{{ t('co.search.switch') }}</span>
           </div>
           <div>
             <small>Esc</small>
-            <span :class="`${prefixCls}-footer-text`">{{ t('co.common.close') }}</span>
+            <span :class="bem.e('footer-text')">{{ t('co.common.close') }}</span>
           </div>
         </div>
       </template>
@@ -86,13 +80,13 @@ import { type MenuItem } from '../../router';
 import { useLayoutStore } from '../../store';
 import { useDocumentEvent } from '../../hooks';
 import { getControlKey } from '../../utils';
-import { Icon, useComponentConfig } from '../../components';
+import { Icon } from '../../components';
 
-import useStyle from './style';
 import { type InputInstance, ElButton } from 'element-plus';
 import { useTimeoutFn } from '@vueuse/core';
 import { useLocale } from '../../hooks';
 import { useI18n } from 'vue-i18n';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutSearch',
@@ -102,9 +96,7 @@ const { t } = useLocale();
 
 const { t: _t } = useI18n();
 
-const { prefixCls } = useComponentConfig('layout-search');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-search');
 
 const controlKey = getControlKey();
 

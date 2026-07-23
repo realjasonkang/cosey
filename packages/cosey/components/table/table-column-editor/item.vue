@@ -1,32 +1,18 @@
 <template>
-  <div
-    ref="itemRef"
-    v-bind="itemBinder"
-    :class="[
-      `${prefixCls}-item`,
-      {
-        'is-pressing': isPressing,
-      },
-    ]"
-  >
-    <div :class="`${prefixCls}-item-content`">
+  <div ref="itemRef" v-bind="itemBinder" :class="[bem.e('item'), bem.is('pressing', isPressing)]">
+    <div :class="bem.e('item-content')">
       <el-checkbox
         :model-value="node.checkedStatus === 'checked'"
         :indeterminate="node.checkedStatus === 'indeterminate'"
         @change="onCheckChange($event, node)"
       />
-      <div
-        v-if="!disabled"
-        ref="holderRef"
-        v-bind="holderBinder"
-        :class="`${prefixCls}-item-holder`"
-      >
+      <div v-if="!disabled" ref="holderRef" v-bind="holderBinder" :class="bem.e('item-holder')">
         <Icon name="co:draggable" size="lg" />
       </div>
-      <div :class="`${prefixCls}-item-label`">
+      <div :class="bem.e('item-label')">
         {{ column.label }}
       </div>
-      <div v-if="!isSub" :class="`${prefixCls}-item-pins`">
+      <div v-if="!isSub" :class="bem.e('item-pins')">
         <el-button
           link
           :style="{ border: 0 }"
@@ -62,7 +48,7 @@ import { useDndSortItem } from '../../dnd-sort';
 import { Icon } from '../../icon';
 import { type TableColumnProps } from '../table-column/table-column.api';
 import List from './list.vue';
-import { useComponentConfig } from '../../config-provider';
+import { createBem } from '../../../utils';
 import { useTreeCheckInject, type CheckableNode } from '../../../hooks';
 import { computed } from 'vue';
 import { ElButton } from 'element-plus';
@@ -73,7 +59,7 @@ const props = defineProps<{
   isSub?: boolean;
 }>();
 
-const { prefixCls } = useComponentConfig('table-column-editor');
+const bem = createBem('table-column-editor');
 
 const column = computed(() => props.node.data);
 

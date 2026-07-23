@@ -1,0 +1,7 @@
+@use './base/index' as *;
+
+@include b(media-card-group) {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: css-var(size-xs);
+}

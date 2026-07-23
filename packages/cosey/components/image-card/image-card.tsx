@@ -6,8 +6,7 @@ import {
   imageCardEmits,
   imageCardProps,
 } from './image-card.api';
-import useStyle from './image-card.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoImageCard',
@@ -15,9 +14,7 @@ export default defineComponent({
   emits: imageCardEmits,
   slots: imageCardSlots,
   setup(props, { slots, expose }) {
-    const { prefixCls } = useComponentConfig('image-card', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('image-card');
 
     const imageRef = ref();
 
@@ -53,7 +50,7 @@ export default defineComponent({
     const mergedProps = computed(() => {
       return mergeProps(props, {
         title: props.title || props.src,
-        class: [hashId.value, prefixCls.value, `is-${props.size}`],
+        class: [bem.b(), bem.is(props.size)],
         previewSrcList: mergedPreviewSrcList.value,
         previewTeleported: true,
         onShow,

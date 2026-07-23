@@ -2,8 +2,7 @@ import { computed, defineComponent } from 'vue';
 import { useEditor, useElement } from 'slate-vue3';
 import { Range } from 'slate-vue3/core';
 import { DOMEditor } from 'slate-vue3/dom';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './content-table.style';
+import { createBem } from '../../../utils';
 import { getSortedRange } from '../utils';
 import Icon from '../../icon/icon';
 import ButtonGroup from '../button-group';
@@ -13,9 +12,8 @@ import WidgetPopover from './widget-popover';
 export default defineComponent({
   name: 'CoEditorContentTable',
   inheritAttrs: false,
-  setup(props, { slots, attrs }) {
-    const { prefixCls } = useComponentConfig('editor-content-table', props);
-    const { hashId } = useStyle(prefixCls);
+  setup(_props, { slots, attrs }) {
+    const bem = createBem('editor-content-table');
 
     const editor = useEditor();
 
@@ -64,42 +62,33 @@ export default defineComponent({
           visible={popperVisible.value}
           v-slots={{
             reference: () => (
-              <table
-                {...attrs}
-                class={[
-                  hashId.value,
-                  prefixCls.value,
-                  {
-                    'is-active': isActive.value,
-                  },
-                ]}
-              >
+              <table {...attrs} class={[bem.b(), bem.is('active', isActive.value)]}>
                 {slots.default?.()}
               </table>
             ),
             default: () => (
-              <div class={[hashId.value, `${prefixCls.value}-toolbar`]}>
+              <div class={bem.e('toolbar')}>
                 <ButtonGroup>
                   <Button
                     onClick={() =>
                       cellPath.value && editor.insertRowAbove(tablePath.value, cellPath.value)
                     }
                   >
-                    <Icon name="co:table-row-plus-before" class={`${prefixCls.value}-icon`} />
+                    <Icon name="co:table-row-plus-before" class={bem.e('icon')} />
                   </Button>
                   <Button
                     onClick={() =>
                       cellPath.value && editor.insertRowBelow(tablePath.value, cellPath.value)
                     }
                   >
-                    <Icon name="co:table-row-plus-after" class={`${prefixCls.value}-icon`} />
+                    <Icon name="co:table-row-plus-after" class={bem.e('icon')} />
                   </Button>
                   <Button
                     onClick={() =>
                       cellPath.value && editor.deleteRow(tablePath.value, cellPath.value)
                     }
                   >
-                    <Icon name="co:table-row-remove" class={`${prefixCls.value}-icon`} />
+                    <Icon name="co:table-row-remove" class={bem.e('icon')} />
                   </Button>
                 </ButtonGroup>
                 <ButtonGroup>
@@ -108,21 +97,21 @@ export default defineComponent({
                       cellPath.value && editor.insertColumnLeft(tablePath.value, cellPath.value)
                     }
                   >
-                    <Icon name="co:table-column-plus-before" class={`${prefixCls.value}-icon`} />
+                    <Icon name="co:table-column-plus-before" class={bem.e('icon')} />
                   </Button>
                   <Button
                     onClick={() =>
                       cellPath.value && editor.insertColumnRight(tablePath.value, cellPath.value)
                     }
                   >
-                    <Icon name="co:table-column-plus-after" class={`${prefixCls.value}-icon`} />
+                    <Icon name="co:table-column-plus-after" class={bem.e('icon')} />
                   </Button>
                   <Button
                     onClick={() =>
                       cellPath.value && editor.deleteColumn(tablePath.value, cellPath.value)
                     }
                   >
-                    <Icon name="co:table-column-remove" class={`${prefixCls.value}-icon`} />
+                    <Icon name="co:table-column-remove" class={bem.e('icon')} />
                   </Button>
                 </ButtonGroup>
                 <ButtonGroup>
@@ -143,7 +132,7 @@ export default defineComponent({
                 </ButtonGroup>
                 <ButtonGroup>
                   <Button onClick={() => editor.deleteTable(tablePath.value)}>
-                    <Icon name="co:table-remove" class={`${prefixCls.value}-icon`} />
+                    <Icon name="co:table-remove" class={bem.e('icon')} />
                   </Button>
                 </ButtonGroup>
               </div>

@@ -1,0 +1,27 @@
+@use './base/index' as *;
+
+@include b(stack-dialog) {
+  display: flex;
+  flex-direction: column;
+  margin: 5vh auto 10vh;
+  width: 80%;
+  height: calc(100vh - 15vh);
+  transition: css-var(transition-duration);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  @include e(header) {
+    flex: none;
+  }
+
+  @include e(body) {
+    flex: 1;
+    min-height: 0;
+  }
+
+  @include e(footer) {
+    flex: none;
+  }
+}

@@ -26,4 +26,9 @@ export const weekRangePickerEmits = {
 
 export type WeekRangePickerEmits = typeof weekRangePickerEmits;
 
-export interface WeekRangePickerExpose {}
+export interface WeekRangePickerExpose {
+  focus: () => void;
+  blur: () => void;
+  handleOpen: () => void;
+  handleClose: () => void;
+}

@@ -1,0 +1,33 @@
+@use './base/index' as *;
+
+@include b(horizontal-tree) {
+  width: 100%;
+  border-collapse: collapse;
+
+  @include e(empty) {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 60px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: css-var(text-color-regular);
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td {
+    padding-inline: css-var(padding-sm);
+    padding-block: css-var(padding-xs);
+    border: css-var(border-width) css-var(border-style) css-var(border-color-lighter);
+  }
+
+  @include e(node) {
+    display: inline-flex;
+    width: css-var(horizontal-tree-node-width);
+  }
+}

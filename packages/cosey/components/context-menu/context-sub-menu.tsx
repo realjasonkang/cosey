@@ -18,8 +18,7 @@ import Content from './content';
 import Divider from './divider';
 import { useItemInject, useItemProvide } from './useItemProvide';
 import { useSubInject, useSubProvide } from './useSubProvide';
-import { useComponentConfig } from '../config-provider';
-import { useToken } from '../theme';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoContextSubMenu',
@@ -27,9 +26,7 @@ export default defineComponent({
   props: contextSubMenuProps,
   slots: contextSubMenuSlots,
   setup(props, { attrs, slots }) {
-    const { prefixCls } = useComponentConfig('context-menu-submenu', props);
-
-    const { hashId } = useToken();
+    const bem = createBem('context-menu');
 
     const itemRef = useTemplateRef<HTMLElement>('item');
     const subRef = useTemplateRef<HTMLElement>('sub');
@@ -218,7 +215,7 @@ export default defineComponent({
               <Teleport to="body">
                 <div
                   ref="sub"
-                  class={[hashId.value, prefixCls.value]}
+                  class={bem.b()}
                   style={subStyle.value}
                   onPointerenter={onEnter}
                   onPointerleave={onLeave}

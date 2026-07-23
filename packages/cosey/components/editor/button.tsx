@@ -1,5 +1,5 @@
 import { defineComponent, useTemplateRef } from 'vue';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export interface EditorButtonExpose {
   el?: HTMLButtonElement;
@@ -12,7 +12,7 @@ export default defineComponent({
     click: (event: MouseEvent) => event instanceof MouseEvent,
   },
   setup(props, { slots, emit, expose }) {
-    const { prefixCls } = useComponentConfig('editor-button');
+    const bem = createBem('editor-button');
 
     const buttonRef = useTemplateRef('button');
 
@@ -25,12 +25,7 @@ export default defineComponent({
         <button
           ref="button"
           type="button"
-          class={[
-            prefixCls.value,
-            {
-              'is-active': props.active,
-            },
-          ]}
+          class={[bem.b(), bem.is('active', props.active)]}
           onClick={(event) => emit('click', event)}
           onMousedown={(event) => event.preventDefault()}
         >

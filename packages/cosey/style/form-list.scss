@@ -1,0 +1,59 @@
+@use './base/index' as *;
+
+@include b(form-list) {
+  @include e(title) {
+    color: css-var(text-color-regular);
+
+    @include is(required) {
+      &::before {
+        margin-inline-end: css-var(margin-xxs);
+        color: css-var(color-danger);
+        content: '*';
+      }
+    }
+  }
+
+  @include e(content) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: css-var(size);
+  }
+
+  @include e(plus-icon) {
+    margin-inline-end: css-var(margin-xxs);
+  }
+
+  .el-form-item__label {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: inline-flex;
+    }
+  }
+
+  @include e(sort-item) {
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  @include e(space) {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include is(head) {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    & > * {
+      max-width: 100%;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
+}

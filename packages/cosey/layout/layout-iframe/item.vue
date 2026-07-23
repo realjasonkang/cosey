@@ -1,8 +1,8 @@
 <template>
   <MergedLayoutSwitchEffect>
-    <div v-show="name === layoutStore.activeTab" :class="[hashId, prefixCls]">
-      <div v-loading="loading" :class="`${prefixCls}-loading`">
-        <iframe :src="src" :class="`${prefixCls}-iframe`" @load="onLoad" />
+    <div v-show="name === layoutStore.activeTab" :class="bem.b()">
+      <div v-loading="loading" :class="bem.e('loading')">
+        <iframe :src="src" :class="bem.e('iframe')" @load="onLoad" />
       </div>
     </div>
   </MergedLayoutSwitchEffect>
@@ -12,9 +12,7 @@
 import { ref } from 'vue';
 import MergedLayoutSwitchEffect from '../merged/layout-switch-effect';
 import { useLayoutStore } from '../../store';
-
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutIframeItem',
@@ -25,9 +23,7 @@ defineProps<{
   src: string;
 }>();
 
-const { prefixCls } = useComponentConfig('layout-iframe');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-iframe');
 
 const layoutStore = useLayoutStore();
 

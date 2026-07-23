@@ -12,8 +12,7 @@ import { useFormTemplate } from './useFormTemplate';
 import { Row } from '../row';
 import { OptionalWrapper } from '../optional-wrapper';
 import FormItem from './form-item.vue';
-import useStyle from './form.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 import { useLocale } from '../../hooks';
 import { useLayoutStore } from '../../store';
 
@@ -23,9 +22,7 @@ export default defineComponent({
   slots: formSlots,
   emits: formEmits,
   setup(props, { slots, expose: _expose }) {
-    const { prefixCls } = useComponentConfig('form', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('form');
 
     const { t } = useLocale();
 
@@ -67,7 +64,7 @@ export default defineComponent({
           ref="form"
           {...elFormProps}
           inline={innerInline.value}
-          class={[hashId.value, prefixCls.value]}
+          class={bem.b()}
           {...{
             onSubmit: (event: SubmitEvent) => {
               event.preventDefault();
@@ -83,7 +80,7 @@ export default defineComponent({
           <OptionalWrapper when={props.grid} component={Row} props={props.rowProps}>
             {slots.default?.({})}
             {!props.readonly && !formBubbleContext && !props.hideButtons && (
-              <FormItem class={`${prefixCls}-form-item-buttons`}>
+              <FormItem class={bem.bem('form', 'form-item-buttons')}>
                 {{
                   label: () => {},
                   default: () => (

@@ -7,8 +7,8 @@ import {
 import { defineComponent } from 'vue';
 import { CommonPicker, UPDATE_MODEL_EVENT } from 'element-plus';
 import PanelWeekRange from './panel-week-range';
-import { useComponentConfig } from '../config-provider';
-import useStyle from './week-range-picker.style';
+import { createBem } from '../../utils';
+import { ref } from 'vue';
 
 export default defineComponent({
   name: 'CoWeekRangePicker',
@@ -16,10 +16,25 @@ export default defineComponent({
   slots: weekRangePickerSlots,
   emits: weekRangePickerEmits,
   setup(props, { slots, emit, expose }) {
-    const { prefixCls } = useComponentConfig('week-range-picker', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('week-range-picker');
 
-    expose<WeekRangePickerExpose>();
+    const commonPicker = ref<InstanceType<typeof CommonPicker>>();
+    const refProps: WeekRangePickerExpose = {
+      focus: () => {
+        commonPicker.value?.focus();
+      },
+      blur: () => {
+        commonPicker.value?.blur();
+      },
+      handleOpen: () => {
+        commonPicker.value?.handleOpen();
+      },
+      handleClose: () => {
+        commonPicker.value?.handleClose();
+      },
+    };
+
+    expose(refProps);
 
     const onModelValueUpdated = (val: Date[] | null) => {
       emit(UPDATE_MODEL_EVENT, val);
@@ -29,14 +44,16 @@ export default defineComponent({
       return (
         <CommonPicker
           {...(props as any)}
+          ref={commonPicker}
           type="weekrange"
           editable={false}
-          class={[hashId.value, prefixCls.value]}
+          class={bem.b()}
           onUpdate:modelValue={onModelValueUpdated}
         >
           {{
-            default: (props: any) => {
-              return <PanelWeekRange {...props} />;
+            default: (scopedProps: any) => {
+              if (!scopedProps.visible && !scopedProps.actualVisible) return null;
+              return <PanelWeekRange {...scopedProps} />;
             },
             'range-separator': slots['range-separator'],
           }}

@@ -1,7 +1,5 @@
 import { CSSProperties, defineComponent, PropType } from 'vue';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './select-list.style';
-import { isObject } from '../../../utils';
+import { isObject, createBem } from '../../../utils';
 
 export interface SelectListItem {
   label: string;
@@ -24,8 +22,7 @@ export default defineComponent({
     select: (item: SelectListItem) => isObject(item),
   },
   setup(props, { emit }) {
-    const { prefixCls } = useComponentConfig('editor-select-list');
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-select-list');
 
     const onSelect = (item: SelectListItem) => {
       emit('select', item);
@@ -33,16 +30,11 @@ export default defineComponent({
 
     return () => {
       return (
-        <div class={[hashId.value, prefixCls.value]}>
+        <div class={bem.b()}>
           {props.list.map((item) => (
             <div
               key={item.value}
-              class={[
-                `${prefixCls.value}-item`,
-                {
-                  'is-active': props.selectedValue === item.value,
-                },
-              ]}
+              class={[bem.e('item'), bem.is('active', props.selectedValue === item.value)]}
               style={item.style}
               onClick={() => onSelect(item)}
             >

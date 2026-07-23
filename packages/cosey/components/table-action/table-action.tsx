@@ -1,11 +1,10 @@
 import { defaultTableActionProps, tableActionProps } from './table-action.api';
 import Item from './item';
 
-import useStyle from './table-action.style';
-import { useComponentConfig, useConfig } from '../config-provider';
-import { computed, defineComponent, unref } from 'vue';
+import { useConfig } from '../config-provider';
+import { computed, defineComponent, toValue } from 'vue';
 import { TableActionItemProps } from './item.api';
-import { isObject } from '../../utils';
+import { isObject, createBem } from '../../utils';
 import { ElDivider } from 'element-plus';
 import { defaults } from 'lodash-es';
 
@@ -18,24 +17,22 @@ export default defineComponent({
       return (Array.isArray(actions[0]) ? actions : [actions]) as TableActionItemProps[][];
     });
 
-    const { prefixCls } = useComponentConfig('table-action', props);
+    const bem = createBem('table-action');
 
-    const { hashId } = useStyle(prefixCls);
-
-    const { tableAction: tableActionConfig } = useConfig();
+    const tableActionConfig = useConfig()?.tableAction;
 
     const mergeProps = computed(() => {
-      return defaults({}, props, unref(tableActionConfig), defaultTableActionProps);
+      return defaults({}, props, toValue(tableActionConfig), defaultTableActionProps);
     });
 
     return () => {
       return (
-        <div class={[hashId.value, prefixCls.value]}>
+        <div class={bem.b()}>
           {dyadicActions.value.map((actions, rowIndex) => {
             return (
               <div
                 key={rowIndex}
-                class={[`${prefixCls.value}-row`, { 'is-divider': mergeProps.value.divider }]}
+                class={[bem.e('row'), bem.is('divider', mergeProps.value.divider)]}
               >
                 {actions
                   .filter(

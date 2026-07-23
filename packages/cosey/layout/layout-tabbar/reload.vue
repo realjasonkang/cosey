@@ -1,14 +1,9 @@
 <template>
-  <el-button link size="small" :class="`${prefixCls}-reload`" @click="layoutStore.reload()">
+  <el-button link size="small" :class="bem.e('reload')" @click="layoutStore.reload()">
     <Icon
       name="co:rotate-360"
       size="xl"
-      :class="[
-        `${prefixCls}-reload-icon`,
-        {
-          'is-spinning': spinning,
-        },
-      ]"
+      :class="[bem.e('reload-icon'), bem.is('spinning', spinning)]"
     />
   </el-button>
 </template>
@@ -16,15 +11,16 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { ElButton } from 'element-plus';
-import { Icon, useComponentConfig } from '../../components';
+import { Icon } from '../../components';
 import { useLayoutStore } from '../../store';
 import { useTimeoutFn } from '@vueuse/core';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutReload',
 });
 
-const { prefixCls } = useComponentConfig('layout-tabbar');
+const bem = createBem('layout-tabbar');
 
 const layoutStore = useLayoutStore();
 

@@ -1,0 +1,22 @@
+@use './base/index' as *;
+
+@include b(highlight) {
+  position: relative;
+
+  @include e(scroll) {
+    border-radius: css-var(border-radius-base);
+  }
+
+  pre {
+    display: inline-block;
+    min-width: 100%;
+    padding: css-var(padding-sm);
+  }
+
+  @include e(copy) {
+    position: absolute;
+    inset-block-start: css-var(size-xxs);
+    inset-inline-end: css-var(size-xxs);
+    z-index: 10;
+  }
+}

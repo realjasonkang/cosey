@@ -1,8 +1,7 @@
 import { computed, defineComponent } from 'vue';
 import { ribbonProps, ribbonSlots, ribbonEmits } from './ribbon.api';
-import { useComponentConfig } from '../config-provider';
-import { useToken } from '../theme';
-import useStyle from './ribbon.style';
+import { getCssVar } from '../../utils';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoRibbon',
@@ -10,18 +9,14 @@ export default defineComponent({
   slots: ribbonSlots,
   emits: ribbonEmits,
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('ribbon', props);
-
-    const { hashId } = useStyle(prefixCls);
-
-    const { token } = useToken();
+    const bem = createBem('ribbon');
 
     const ribbon = computed(() => {
       return {
         width: props.size + 'px',
         height: props.size + 'px',
         '--gap': props.gap + 'px',
-        '--bg': props.background || token.value.colorPrimary,
+        '--bg': props.background || getCssVar('color-primary'),
       };
     });
 
@@ -38,8 +33,8 @@ export default defineComponent({
 
     return () => {
       return (
-        <div class={[hashId.value, prefixCls.value, `is-${props.direction}`]} style={ribbon.value}>
-          <div class={`${prefixCls.value}-silk`} style={silkStyle.value}>
+        <div class={[bem.b(), bem.is(props.direction)]} style={ribbon.value}>
+          <div class={bem.e('silk')} style={silkStyle.value}>
             {slots.default?.({})}
           </div>
         </div>

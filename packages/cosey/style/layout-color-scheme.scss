@@ -1,0 +1,10 @@
+@use './base/index' as *;
+
+@include b(layout-color-scheme) {
+  @include e(icon) {
+    @include is(light) {
+      animation-name: co-ani-rotation45;
+      animation-duration: 1s;
+    }
+  }
+}

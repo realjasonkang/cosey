@@ -1,6 +1,3 @@
-import '@/styles/index.css';
-import '@/styles/override-element-plus.scss';
-
 import { createApp } from 'vue';
 import { launch } from 'cosey';
 import App from '@/App.vue';
@@ -23,6 +20,9 @@ import { addIconifyIcon } from 'cosey/components';
 
 import { createMock } from '@cosey/mock';
 import { createWebHashHistory } from 'vue-router';
+
+import '@/styles/index.scss';
+import '@/styles/tailwindcss.css';
 
 addIconifyIcon('carbon', carbonIcons);
 

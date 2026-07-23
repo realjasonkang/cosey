@@ -1,0 +1,11 @@
+@use './base/index' as *;
+
+@include b(editor-content-link) {
+  display: flex;
+  align-items: center;
+
+  @include e(icon) {
+    margin-inline-end: css-var(margin-xxs);
+    font-size: css-var(font-size-large);
+  }
+}

@@ -1,0 +1,36 @@
+@use './base/index' as *;
+
+@include b(layout-topbar) {
+  display: flex;
+  justify-content: center;
+  padding-inline: css-var(padding);
+  gap: css-var(size);
+  border-block-end: css-var(border-width) css-var(border-style) css-var(border-color);
+
+  @include e(left) {
+    display: flex;
+    align-items: center;
+    flex: none;
+    column-gap: css-var(size);
+  }
+
+  @include e(right) {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @include e(right-wrap) {
+    display: flex;
+  }
+
+  @include e(right-view) {
+    display: flex;
+    align-items: center;
+    column-gap: css-var(size-sm);
+    margin-inline-start: auto;
+
+    & > * {
+      flex: none;
+    }
+  }
+}

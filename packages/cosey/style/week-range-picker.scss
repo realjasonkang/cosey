@@ -1,0 +1,5 @@
+@use './base/index' as *;
+
+@include b(week-range-picker) {
+  --el-date-editor-width: 300px;
+}

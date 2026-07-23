@@ -1,0 +1,118 @@
+@use './base/index' as *;
+
+$contrarotation: 'co-ani-contrarotation';
+
+@include b(table) {
+  display: flex;
+  flex-direction: column;
+  background-color: css-var(bg-color);
+
+  @include is(fullpage) {
+    position: fixed;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  @include e(header) {
+    flex: none;
+    padding-inline: css-var(padding-sm);
+    padding-block-start: css-var(size);
+  }
+
+  @include e(body) {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  @include e(toolbar) {
+    display: flex;
+    flex: none;
+    align-items: flex-end;
+    justify-content: center;
+    padding-block-start: css-var(padding-sm);
+    padding-inline: css-var(padding-sm);
+  }
+
+  @include e(toolbar-left) {
+  }
+
+  @include e(toolbar-right) {
+    margin-inline-start: auto;
+  }
+
+  @include e(toolbar-preset) {
+    display: flex;
+    gap: css-var(size-xs);
+  }
+
+  @include e(refresh-icon) {
+    @include is(spinning) {
+      animation-name: $contrarotation;
+      animation-duration: 0.6s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  @include e(before-body) {
+    flex: none;
+    padding: css-var(padding-sm);
+  }
+
+  @include e(before-body-plain) {
+    flex: none;
+  }
+
+  @include e(stats-wrapper) {
+    padding-block-start: css-var(padding-sm);
+  }
+
+  @include e(before-table) {
+    flex: none;
+    padding-block-start: css-var(padding-sm);
+    padding-inline: css-var(padding-sm);
+  }
+
+  @include e(table) {
+    min-height: 0;
+    flex: 1;
+    padding: css-var(padding-sm);
+
+    thead th.el-table__cell {
+      background-color: css-var(fill-color-lighter) !important;
+    }
+  }
+
+  @include e(pagination) {
+    flex: none;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding-block-end: css-var(padding-sm);
+    padding-inline: css-var(padding-sm);
+  }
+
+  @include is(split) {
+    background-color: css-var(bg-color-page);
+
+    @include e(header) {
+      margin-block-end: css-var(margin-sm);
+      background-color: css-var(bg-color);
+    }
+
+    @include e(before-body) {
+      margin-block-end: css-var(margin-sm);
+      background-color: css-var(bg-color);
+    }
+
+    @include e(before-body-plain) {
+      margin-block-end: css-var(margin-sm);
+    }
+
+    @include e(body) {
+      background-color: css-var(bg-color);
+    }
+  }
+}

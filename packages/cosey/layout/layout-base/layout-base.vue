@@ -1,5 +1,5 @@
 <template>
-  <div :class="[hashId, prefixCls]">
+  <div :class="bem.b()">
     <MergedLayoutSidebar v-if="layoutStore.isMobile || !layoutStore.isHorizontal">
       <MergedLayoutSnugAside
         v-if="!layoutStore.isMobile && (layoutStore.isBiserial || layoutStore.isHorizontalBiserial)"
@@ -85,19 +85,16 @@ import MergedLayoutColorScheme from '../merged/layout-color-scheme';
 import MergedLayoutSearch from '../merged/layout-search';
 import MergedLayoutUserMenu from '../merged/layout-user-menu';
 
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
-
 import { useLayoutStore } from '../../store';
 import { useGlobalConfig } from '../../config';
 import { defineTemplate } from '../../utils';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutBase',
 });
 
-const { prefixCls } = useComponentConfig('layout-base');
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-base');
 
 const layoutStore = useLayoutStore();
 const slotsConfig = useGlobalConfig().slots;

@@ -2,7 +2,7 @@
   <InternalTransition name="fade">
     <div
       v-show="layoutStore.sidebarVisible"
-      :class="[hashId, prefixCls]"
+      :class="bem.b()"
       @click="layoutStore.sidebarVisible = false"
     ></div>
   </InternalTransition>
@@ -10,16 +10,14 @@
 
 <script lang="ts" setup>
 import { useLayoutStore } from '../../store';
-import useStyle from './style';
-import { useComponentConfig, Transition as InternalTransition } from '../../components';
+import { Transition as InternalTransition } from '../../components';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutMask',
 });
 
-const { prefixCls } = useComponentConfig('layout-mask');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-mask');
 
 const layoutStore = useLayoutStore();
 </script>

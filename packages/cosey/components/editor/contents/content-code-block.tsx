@@ -3,7 +3,6 @@ import { useEditor, useElement } from 'slate-vue3';
 import { DOMEditor } from 'slate-vue3/dom';
 import { isString } from '../../../utils';
 import { languageOptions } from '../plugins/code-block';
-import { useGlobalHighlightStyle } from '../../highlight/highlight.style';
 
 export default defineComponent({
   name: 'CoEditorContentCodeBlock',
@@ -17,8 +16,6 @@ export default defineComponent({
     'update:value': (value: string) => isString(value),
   },
   setup(props, { slots }) {
-    useGlobalHighlightStyle();
-
     const language = useModel(props, 'language');
     const editor = useEditor();
 

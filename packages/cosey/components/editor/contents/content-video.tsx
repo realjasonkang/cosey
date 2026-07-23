@@ -2,8 +2,7 @@ import { computed, defineComponent } from 'vue';
 import { useEditor, useElement } from 'slate-vue3';
 import { Range } from 'slate-vue3/core';
 import { DOMEditor } from 'slate-vue3/dom';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './content-video.style';
+import { createBem } from '../../../utils';
 import Resize from './resize';
 
 export default defineComponent({
@@ -21,8 +20,7 @@ export default defineComponent({
     },
   },
   setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('editor-content-video', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-content-video');
 
     const editor = useEditor();
 
@@ -55,17 +53,8 @@ export default defineComponent({
 
     return () => {
       return (
-        <div
-          class={[
-            hashId.value,
-            prefixCls.value,
-            {
-              'is-active': isActive.value,
-            },
-          ]}
-          onClick={onClick}
-        >
-          <div class={[`${prefixCls.value}-wrapper`]} contenteditable={false}>
+        <div class={[bem.b(), bem.is('active', isActive.value)]} onClick={onClick}>
+          <div class={bem.e('wrapper')}>
             <video src={props.url} width={props.width} height={props.height} controls />
             <Resize visible={isActive.value} onResize={onResize} />
           </div>

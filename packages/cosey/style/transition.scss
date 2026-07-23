@@ -1,0 +1,15 @@
+@use './base/index' as *;
+
+@include b(transition) {
+  @include m(fade) {
+    &-enter-active,
+    &-leave-active {
+      transition: opacity 0.3s ease;
+    }
+
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+    }
+  }
+}

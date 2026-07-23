@@ -22,10 +22,9 @@ import {
   unref,
 } from 'vue';
 import { useTwoWayBinding } from '../../hooks';
-import useStyle from './form-query.style';
-import { useComponentConfig } from '../config-provider';
 import { useLocale } from '../../hooks';
 import { Search } from '@element-plus/icons-vue';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoFormQuery',
@@ -33,9 +32,7 @@ export default defineComponent({
   slots: formQuerySlots,
   emits: formQueryEmits,
   setup(props, { slots, emit, expose: _expose }) {
-    const { prefixCls } = useComponentConfig('form-query', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('form-query');
 
     const { t } = useLocale();
 
@@ -122,11 +119,8 @@ export default defineComponent({
       }
 
       return (
-        <FormItem
-          class={`${prefixCls.value}-form-item-buttons`}
-          width={props.inline ? 'auto' : undefined}
-        >
-          <div class={[`${prefixCls.value}-buttons`, { 'is-inline': props.inline }]}>
+        <FormItem class={bem.e('form-item-buttons')} width={props.inline ? 'auto' : undefined}>
+          <div class={[bem.e('buttons'), bem.is('inline', props.inline)]}>
             {slots.button ? (
               slots.button({ reset, submit, submitting: submitting.value })
             ) : (
@@ -172,7 +166,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <ElForm ref="form" {...elFormProps} class={[hashId.value, prefixCls.value]}>
+        <ElForm ref="form" {...elFormProps} class={bem.b()}>
           {props.grid ? (
             <Row {...mergedRowProps.value} onSize-change={handleSizeChange}>
               {mapChildren()}

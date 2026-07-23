@@ -9,8 +9,7 @@ import { useBubbleTemplate } from '../form';
 import { computed, defineComponent, h } from 'vue';
 import { useFormDialogWidth } from './useFormDialogWidth';
 import { ElDialog } from 'element-plus';
-import { useComponentConfig } from '../config-provider';
-import useStyle from './form-dialog.style';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoFormDialog',
@@ -18,8 +17,7 @@ export default defineComponent({
   slots: formDialogSlots,
   emits: formDialogEmits,
   setup(props, { emit, slots, expose: _expose }) {
-    const { prefixCls } = useComponentConfig('form-dialog', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('form-dialog');
 
     const { visible, handleOpen, handleClosed, expose, buttonTemplate, elPopupRef } =
       useBubbleTemplate({
@@ -38,7 +36,7 @@ export default defineComponent({
         <ElDialog
           ref={elPopupRef}
           {...props}
-          class={[hashId.value, prefixCls.value]}
+          class={bem.b()}
           v-model={visible.value}
           style={{ maxWidth: props.fullscreen ? null : 'calc(100vw - 32px)' }}
           width={width.value}

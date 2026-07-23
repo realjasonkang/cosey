@@ -1,26 +1,22 @@
-import { transformSync } from '@babel/core';
-import esbuild, { type Loader } from 'esbuild';
-import * as compiler from 'vue/compiler-sfc';
-import { glob } from 'glob';
-import { rollup } from 'rollup';
-import { type PluginOption } from 'vite';
 import path from 'node:path';
-import fs from 'node:fs';
-import json from '@rollup/plugin-json';
+import { existsSync, globSync } from 'node:fs';
+import { transformSync as babelTransformSync } from '@babel/core';
+import { transformSync as oxcTransformSync, TransformOptions } from 'oxc-transform';
+import * as compiler from 'vue/compiler-sfc';
+import { rolldown, RolldownPluginOption } from 'rolldown';
 
-export function transformTs(code: string, loader: Loader = 'ts') {
-  return esbuild.transformSync(code, {
+export function transformTs(file: string, code: string, lang: TransformOptions['lang'] = 'ts') {
+  return oxcTransformSync(file, code, {
     jsx: 'preserve',
-    loader,
-    format: 'esm',
+    lang,
     target: 'esnext',
   }).code;
 }
 
 export function transformJSX(code: string) {
   return (
-    transformSync(code, {
-      plugins: [['@vue/babel-plugin-jsx']],
+    babelTransformSync(code, {
+      plugins: ['@vue/babel-plugin-jsx'],
     })?.code || ''
   );
 }
@@ -35,12 +31,16 @@ export function transformVue(code: string, file: string) {
     inlineTemplate: true,
   });
 
-  const content = transformTs(scriptBlock.content, scriptBlock.lang as Loader);
+  const content = transformTs(
+    file,
+    scriptBlock.content,
+    (scriptBlock.lang as 'ts' | 'js' | undefined) || 'js',
+  );
 
   return transformJSX(content);
 }
 
-function transformPlugin(): PluginOption {
+function transformPlugin(): RolldownPluginOption {
   return {
     name: 'transform',
     async resolveId(source, importer) {
@@ -51,21 +51,21 @@ function transformPlugin(): PluginOption {
         const extensions = ['.ts', '.tsx', '/index.ts', '/index.tsx', '.js'];
         for (const ext of extensions) {
           const fullPath = `${resolved}${ext}`;
-          if (fs.existsSync(fullPath)) return fullPath;
+          if (existsSync(fullPath)) return fullPath;
         }
       }
     },
     transform(code, id) {
-      if (/\.ts$/.test(id)) {
-        return transformTs(code);
+      if (id.endsWith('.ts')) {
+        return transformTs(id, code);
       }
-      if (/\.tsx$/.test(id)) {
-        return transformJSX(transformTs(code, 'tsx'));
+      if (id.endsWith('.tsx')) {
+        return transformJSX(transformTs(id, code, 'tsx'));
       }
-      if (/\.jsx$/.test(id)) {
+      if (id.endsWith('.jsx')) {
         return transformJSX(code);
       }
-      if (/\.vue$/.test(id)) {
+      if (id.endsWith('.vue')) {
         return transformVue(code, id);
       }
     },
@@ -73,39 +73,30 @@ function transformPlugin(): PluginOption {
 }
 
 export async function compileAllScript(options: {
-  srcDir: string;
-  distDir: string;
+  rootDir: string;
+  outDir: string;
   externals: string[];
+  exclude: string[];
 }) {
-  const { srcDir, distDir, externals } = options;
+  const { rootDir, outDir, externals, exclude } = options;
 
-  const files = await glob(`${srcDir}/**/*.{vue,js,jsx,ts,tsx}`.replace(/\\/g, '/'), {
-    ignore: '**/node_modules/**',
+  const files = globSync(`${rootDir}/**/*.{vue,js,jsx,ts,tsx}`, {
+    exclude,
   });
 
-  const sideEffects = ['element-plus/dist/index.css', 'element-plus/theme-chalk/dark/css-vars.css'];
-
-  const bundle = await rollup({
+  const bundle = await rolldown({
     input: files,
     external: (source) => externals.some((item) => source.startsWith(item)),
-    treeshake: {
-      moduleSideEffects: (id) => {
-        if (sideEffects.includes(id) || id.startsWith('prismjs')) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-    },
-    plugins: [transformPlugin(), json()],
+    treeshake: {},
+    plugins: [transformPlugin()],
     logLevel: 'silent',
   });
 
   await bundle.write({
     format: 'esm',
-    dir: distDir,
+    dir: outDir,
     preserveModules: true,
-    preserveModulesRoot: srcDir,
+    preserveModulesRoot: rootDir,
     entryFileNames: `[name].js`,
   });
 }

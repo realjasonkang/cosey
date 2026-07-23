@@ -1,18 +1,15 @@
 <template>
-  <div :class="[hashId, prefixCls]">
+  <div :class="bem.b()">
     <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts" setup>
-import useStyle from './style';
-import { useComponentConfig } from '../../components';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutException',
 });
 
-const { prefixCls } = useComponentConfig('layout-exception');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-exception');
 </script>

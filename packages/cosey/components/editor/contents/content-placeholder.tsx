@@ -1,15 +1,13 @@
 import { defineComponent } from 'vue';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './content-placeholder.style';
+import { createBem } from '../../../utils';
 
 export default defineComponent({
   name: 'CoEditorContentPlaceholder',
-  setup(props, { slots }) {
-    const { prefixCls } = useComponentConfig('editor-content-placeholder', props);
-    const { hashId } = useStyle(prefixCls);
+  setup(_props, { slots }) {
+    const bem = createBem('editor-content-placeholder');
 
     return () => {
-      return <div class={[hashId.value, prefixCls.value]}>{slots.default?.()}</div>;
+      return <div class={bem.b()}>{slots.default?.()}</div>;
     };
   },
 });

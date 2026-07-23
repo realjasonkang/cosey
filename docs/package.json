@@ -20,7 +20,7 @@
     "consola": "^3.3.3",
     "glob": "^11.0.2",
     "markdown-it-container": "^4.0.0",
-    "sass": "^1.89.0",
+    "sass": "^1.101.3",
     "tailwindcss": "^4.0.9",
     "vite": "^7.1.7",
     "vite-plugin-svg-icons": "^2.0.1",

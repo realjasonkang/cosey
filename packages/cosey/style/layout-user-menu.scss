@@ -1,0 +1,34 @@
+@use './base/index' as *;
+
+@include b(layout-user-menu) {
+  display: flex;
+  align-items: center;
+  border-radius: css-var(border-radius-base);
+  cursor: pointer;
+
+  &:hover {
+    img {
+      opacity: 0.6;
+    }
+  }
+
+  &:active {
+    img {
+      opacity: 1;
+    }
+  }
+
+  @include e(name) {
+    margin-inline-start: css-var(margin-xs);
+    max-width: 160px;
+    @include truncate;
+  }
+
+  @include e(dropdown) {
+    min-width: 140px;
+  }
+
+  @include e(item-title) {
+    margin-inline-start: css-var(margin-xs);
+  }
+}

@@ -26,15 +26,13 @@ import FormatVideo from './formats/format-video';
 import FormatFormula from './formats/format-formula';
 
 import { editorProps, editorSlots, editorEmits } from './editor.api';
-import useStyle from './editor.style';
-import { useComponentConfig } from '../config-provider';
+import { createBem, debugWarn } from '../../utils';
 import { useFocus } from './hooks/useFocus';
 import { withDefaultPlugins } from './plugins';
 import contentPlaceholder from './contents/content-placeholder';
 import { useLocale } from '../../hooks';
 import { usePopoverContainer } from './usePopoverContainer';
 import { CHANGE_EVENT, useFormDisabled, useFormItem } from 'element-plus';
-import { debugWarn } from '../../utils';
 
 export default defineComponent({
   name: 'CoEditor',
@@ -42,9 +40,7 @@ export default defineComponent({
   slots: editorSlots,
   emits: editorEmits,
   setup(props, { emit }) {
-    const { prefixCls } = useComponentConfig('editor', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor');
 
     const { t } = useLocale();
 
@@ -115,12 +111,9 @@ export default defineComponent({
       return (
         <div
           class={[
-            hashId.value,
-            prefixCls.value,
-            {
-              'is-error': formItem?.validateState === 'error',
-              'is-disabled': disabled.value,
-            },
+            bem.b(),
+            bem.is('error', formItem?.validateState === 'error'),
+            bem.is('disabled', disabled.value),
           ]}
         >
           <Slate
@@ -186,17 +179,10 @@ export default defineComponent({
                 </ButtonGroup>
               </Toolbar>
             )}
-            <div
-              class={[
-                `${prefixCls.value}-container`,
-                {
-                  'is-focus': isFocus.value,
-                },
-              ]}
-            >
+            <div class={[bem.e('container'), bem.is('focus', isFocus.value)]}>
               <div
                 ref={mountPoint}
-                class={[`${prefixCls.value}-wrapper`]}
+                class={bem.e('wrapper')}
                 style={{
                   height: props.height,
                   maxHeight: props.maxHeight,
@@ -205,7 +191,7 @@ export default defineComponent({
                 <Editable
                   placeholder=" "
                   readOnly={props.readonly || disabled.value}
-                  class={`${prefixCls.value}-content`}
+                  class={bem.e('content')}
                   {...{ onFocus: onFocus, onBlur: onBlur, onKeydown: editor.onKeydown }}
                 />
               </div>

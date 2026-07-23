@@ -1,0 +1,68 @@
+// ============================================================
+// VitePress Theme Override
+// 从 docs/components/layout/override-vite-press.ts 迁移
+// palette 值由 generate(seedColor) 算法生成
+// ============================================================
+
+@use 'cosey/style/base/index' as *;
+
+:root {
+  // ============================================================
+  // VitePress Color Palettes
+  // palette: 1=darkest 2=darker 3=mid soft=border
+  // ============================================================
+
+  // Indigo / Blue — tint/shade from color-primary
+  --vp-c-indigo-1: color-mix(in srgb, var(--el-color-primary), #fff 0%);
+  --vp-c-indigo-2: color-mix(in srgb, var(--el-color-primary), #fff 5%);
+  --vp-c-indigo-3: color-mix(in srgb, var(--el-color-primary), #fff 15%);
+  --vp-c-indigo-soft: color-mix(in srgb, var(--el-color-primary), #fff 25%);
+
+  // ============================================================
+  // Layout
+  // ============================================================
+  --vp-layout-max-width: 100vw;
+
+  // ============================================================
+  // VitePress Docs Override
+  // ============================================================
+  .vp-doc {
+    table {
+      display: table;
+      margin: 0;
+    }
+
+    ul {
+      margin: 0;
+    }
+
+    li + li {
+      margin: 0;
+    }
+
+    // Custom
+    > div > :where(ul, ol) {
+      margin-block: var(--el-margin);
+
+      li + li {
+        margin-block-start: var(--el-margin-xs);
+      }
+    }
+
+    > div :not(pre) > code {
+      color: var(--el-color-text);
+      border: var(--el-line-width) var(--el-line-type) var(--el-color-border-secondary);
+    }
+
+    > div > table {
+      display: table;
+      width: 100%;
+      margin-block: var(--el-margin);
+      font-family: var(--el-font-family-code);
+    }
+  }
+
+  .content-container {
+    max-width: 1200px !important;
+  }
+}

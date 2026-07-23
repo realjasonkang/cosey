@@ -1,20 +1,17 @@
 import { defineComponent } from 'vue';
 import Icon from '../icon/icon';
-import useStyle from './close.style';
-import { useComponentConfig } from '../config-provider';
 import { closeEmits } from './close.api';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoClose',
   emits: closeEmits,
-  setup(props, { emit }) {
-    const { prefixCls } = useComponentConfig('close', props);
-
-    const { hashId } = useStyle(prefixCls);
+  setup(_props, { emit }) {
+    const bem = createBem('close');
 
     return () => {
       return (
-        <span class={[hashId.value, prefixCls.value]} onClick={(event) => emit('click', event)}>
+        <span class={bem.b()} onClick={(event) => emit('click', event)}>
           <Icon name="co:close-large" />
         </span>
       );

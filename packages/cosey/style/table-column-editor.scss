@@ -1,0 +1,76 @@
+@use './base/index' as *;
+
+@include b(table-column-editor) {
+  display: flex;
+  flex-direction: column;
+
+  @include e(header) {
+    display: flex;
+    padding-inline: css-var(padding-sm);
+    padding-block: css-var(padding-xs);
+    border-block-end: css-var(border-width) css-var(border-style) css-var(border-color);
+  }
+
+  @include e(body) {
+    padding-inline: css-var(padding-sm);
+    padding-block: css-var(padding-xs);
+  }
+
+  @include e(footer) {
+    display: flex;
+    padding-inline: css-var(padding-sm);
+    padding-block: css-var(padding-xs);
+    border-block-start: css-var(border-width) css-var(border-style) css-var(border-color);
+  }
+
+  @include e(list) {
+    display: flex;
+    flex-direction: column;
+    gap: css-var(size-xxs);
+
+    @include e(list) {
+      margin-inline-start: css-var(margin-lg);
+    }
+  }
+
+  @include e(item) {
+    position: relative;
+    max-width: 100%;
+
+    @include is(pressing) {
+      background-color: css-var(bg-color-overlay);
+      box-shadow: css-var(box-shadow);
+      opacity: 0.8;
+    }
+  }
+
+  @include e(item-content) {
+    display: flex;
+    align-items: center;
+    gap: css-var(size-xs);
+  }
+
+  @include e(item-holder) {
+    width: css-var(size);
+    flex: none;
+    color: css-var(text-color-regular);
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  @include e(item-label) {
+    flex: 1;
+    min-width: 0;
+    @include truncate;
+  }
+
+  @include e(item-pins) {
+    display: flex;
+    flex: none;
+    margin-inline-start: auto;
+    gap: css-var(size-xs);
+  }
+}

@@ -1,0 +1,27 @@
+@use './base/index' as *;
+
+@include b(layout-snug-aside) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-inline-end: css-var(border-width) css-var(border-style) css-var(border-color);
+  transition: width css-var(transition-duration);
+
+  @include is(hide) {
+    border: none;
+  }
+
+  @include e(header) {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex: none;
+  }
+
+  @include e(body) {
+    min-height: 0;
+    flex: 1;
+    padding-inline: css-var(padding-xs);
+    padding-block: css-var(padding-sm);
+  }
+}

@@ -1,0 +1,74 @@
+@use './base/index' as *;
+
+@include b(editor-color-picker) {
+  @include e(title) {
+    margin-block-end: css-var(margin-xs);
+    color: css-var(text-color-regular);
+
+    & ~ .co-editor-color-picker__title {
+      margin-block-start: css-var(margin-md);
+    }
+  }
+
+  @include e(preset) {
+    display: flex;
+    flex-direction: column;
+    gap: css-var(size-xxs);
+  }
+
+  @include e(row) {
+    display: flex;
+    gap: css-var(size-xxs);
+  }
+
+  @include e(item) {
+    display: flex;
+  }
+
+  @include e(manual) {
+    display: flex;
+    gap: css-var(size-xxs);
+  }
+
+  @include e(btn) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    flex: none;
+    border-radius: css-var(border-radius-small);
+    cursor: default;
+
+    &:not(.is-empty) {
+      cursor: pointer;
+    }
+
+    &:not(.is-empty):hover {
+      outline: 2px solid css-var(color-primary-light-5);
+    }
+
+    &:not(.co-editor-color-picker__color):not(.is-empty):hover {
+      background-color: css-var(color-primary-light-9);
+    }
+  }
+
+  @include e(color) {
+    border: css-var(border-width) css-var(border-style) css-var(border-color);
+
+    @include is(empty) {
+      border-color: css-var(border-color-lighter);
+    }
+  }
+
+  @include e(input) {
+    width: 0;
+    flex: 1;
+    height: 20px;
+    line-height: 20px;
+  }
+
+  @include e(clear) {
+    color: css-var(color-error);
+  }
+}

@@ -5,7 +5,7 @@ import inquirer from 'inquirer';
 import semver, { type ReleaseType } from 'semver';
 
 import { packagesDir } from './utils/const';
-import { flow, selectPackage, type Steps } from './utils/flow';
+import { selectPackage } from './utils/select-package';
 
 let pkgName = '';
 let pkgSrcDir = '';
@@ -77,9 +77,8 @@ async function updateVersion() {
 }
 
 async function version() {
-  const steps: Steps = [[updateVersion, `更新版本号`]];
-
-  await flow(steps);
+  await updateVersion();
+  consola.success(`更新版本号成功`);
 }
 
 version();

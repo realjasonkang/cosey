@@ -1,0 +1,12 @@
+@use './base/index' as *;
+
+@include b(editor-content-placeholder) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: css-var(padding-sm);
+  margin-block: css-var(margin-sm);
+  text-align: left;
+  color: css-var(text-color-placeholder);
+  pointer-events: none;
+}

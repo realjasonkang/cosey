@@ -1,0 +1,6 @@
+@use './base/index' as *;
+
+@include b(layout-main) {
+  position: relative;
+  flex: 1;
+}

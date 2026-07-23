@@ -1,19 +1,15 @@
 import { mediaCardGroupProps, mediaCardGroupSlots } from './media-card-group.api';
-import useStyle from './media-card-group.style';
-import { useComponentConfig } from '../config-provider';
 import { type MediaCardBaseProps } from '../media-card/media-card.api';
 import MediaCard from '../media-card/media-card';
 import { computed, defineComponent } from 'vue';
-import { isString } from '../../utils';
+import { createBem, isString } from '../../utils';
 
 export default defineComponent({
   name: 'CoMediaCardGroup',
   props: mediaCardGroupProps,
   slots: mediaCardGroupSlots,
   setup(props) {
-    const { prefixCls } = useComponentConfig('media-card-group', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('media-card-group');
 
     const mergedSrcset = computed(() => {
       if (isString(props.srcset)) {
@@ -40,7 +36,7 @@ export default defineComponent({
 
     return () => {
       return (
-        <div class={[hashId.value, prefixCls.value]}>
+        <div class={bem.b()}>
           {mergedSrcset.value.map((item) => {
             return <MediaCard {...item} key={item.src} size={props.size} srcList={srcList.value} />;
           })}

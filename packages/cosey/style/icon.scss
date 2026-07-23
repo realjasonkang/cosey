@@ -1,0 +1,30 @@
+@use './base/index' as *;
+
+@include b(icon-wrapper) {
+  display: inline-flex;
+}
+
+@include b(icon) {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  fill: currentcolor;
+  justify-content: center;
+  align-items: center;
+
+  @include m(sm) {
+    font-size: css-var(font-size-small);
+  }
+
+  @include m(md) {
+    font-size: css-var(font-size-base);
+  }
+
+  @include m(lg) {
+    font-size: css-var(font-size-large);
+  }
+
+  @include m(xl) {
+    font-size: css-var(font-size-extra-large);
+  }
+}

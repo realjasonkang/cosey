@@ -1,5 +1,5 @@
 import { defineComponent, inject, onMounted, useTemplateRef } from 'vue';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 import { pickerContextKey } from './formats/picker.api';
 import Button, { type EditorButtonExpose } from './button';
 import Icon from '../icon/icon';
@@ -15,7 +15,7 @@ export default defineComponent({
     'chevron-click': (event: MouseEvent) => event instanceof MouseEvent,
   },
   setup(props, { slots, emit }) {
-    const { prefixCls } = useComponentConfig('editor-button');
+    const bem = createBem('editor-button');
 
     const onBtnClick = (event: MouseEvent) => {
       emit('click', event);
@@ -37,24 +37,17 @@ export default defineComponent({
 
     return () => {
       return (
-        <div
-          class={[
-            `${prefixCls.value}-split`,
-            {
-              'is-active': props.chevronActive,
-            },
-          ]}
-        >
+        <div class={[bem.e('split'), bem.is('active', props.chevronActive)]}>
           <Button active={props.active} {...{ onClick: onBtnClick }}>
             {slots.default?.()}
           </Button>
           <Button
             ref="chevronButton"
             active={props.chevronActive}
-            class={`${prefixCls.value}-chevron`}
+            class={bem.e('chevron')}
             onClick={onChevronClick}
           >
-            <Icon class={`${prefixCls.value}-arrow`} name="co:chevron-down" size="lg" />
+            <Icon class={bem.e('arrow')} name="co:chevron-down" size="lg" />
           </Button>
         </div>
       );

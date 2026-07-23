@@ -9,8 +9,8 @@
       size="720px"
       :title="t('httpMessage.message')"
       append-to-body
-      :header-class="`${prefixCls}-header`"
-      :class="[hashId, prefixCls]"
+      :header-class="bem.e('header')"
+      :class="bem.b()"
     >
       <template #header>
         <el-button-group>
@@ -21,19 +21,15 @@
       </template>
 
       <el-empty v-if="httpMessageList.length === 0" :description="t('httpMessage.noRequest')" />
-      <el-tabs v-else tab-position="left" :class="`${prefixCls}-tabs`">
-        <el-tab-pane
-          v-for="(message, i) in httpMessageList"
-          :key="i"
-          :class="`${prefixCls}-tab-pane`"
-        >
+      <el-tabs v-else tab-position="left" :class="bem.e('tabs')">
+        <el-tab-pane v-for="(message, i) in httpMessageList" :key="i" :class="bem.e('tab-pane')">
           <template #label>
-            <div :class="`${prefixCls}-tab-label`">
+            <div :class="bem.e('tab-label')">
               {{ message.name }}
             </div>
           </template>
-          <el-tabs :class="`${prefixCls}-right-tabs`">
-            <div :class="`${prefixCls}-right-tabs-wrapper`">
+          <el-tabs :class="bem.e('right-tabs')">
+            <div :class="bem.e('right-tabs-wrapper')">
               <el-tab-pane :label="t('httpMessage.headers')">
                 <el-descriptions
                   :column="1"
@@ -41,7 +37,7 @@
                   border
                   :title="t('httpMessage.general')"
                   size="small"
-                  :style="{ marginBlockEnd: token.marginLG + 'px' }"
+                  :style="{ marginBlockEnd: getCssVar('margin-lg') }"
                 >
                   <el-descriptions-item :label="t('httpMessage.requestUrl')">
                     <div style="word-break: break-all">
@@ -66,7 +62,7 @@
                   border
                   :title="t('httpMessage.responseHeaders')"
                   size="small"
-                  :style="{ marginBlockEnd: token.marginLG + 'px' }"
+                  :style="{ marginBlockEnd: getCssVar('margin-lg') }"
                 >
                   <el-descriptions-item
                     v-for="item in message.res.headers"
@@ -121,7 +117,7 @@
                 <div v-if="message.payload.body">
                   <div
                     :style="{
-                      marginBlockEnd: token.marginSM + 'px',
+                      marginBlockEnd: getCssVar('margin-sm'),
                       fontWeight: 'bold',
                     }"
                   >
@@ -151,10 +147,11 @@
 <script lang="tsx" setup>
 import { inject, onMounted, onUnmounted, ref } from 'vue';
 import { ElButton } from 'element-plus';
-import { Icon, useComponentConfig, useToken } from 'cosey/components';
+import { Icon } from 'cosey/components';
+import { getCssVar } from 'cosey/utils';
+import { createBem } from 'cosey/utils';
 import HttpBodyPreview from './http-body-preview.vue';
 
-import useStyle from './style';
 import { type HttpMessage, HttpMessageManager } from '@cosey/mock';
 import { useI18n } from 'vue-i18n';
 
@@ -164,11 +161,7 @@ defineOptions({
   name: 'LayoutHttpMessage',
 });
 
-const { prefixCls } = useComponentConfig('layout-http-message');
-
-const { hashId } = useStyle(prefixCls);
-
-const { token } = useToken();
+const bem = createBem('layout-http-message');
 
 const httpMessageManager = inject<HttpMessageManager | null>('mockContext', null);
 

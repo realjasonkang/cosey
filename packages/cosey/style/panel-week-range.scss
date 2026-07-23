@@ -1,0 +1,101 @@
+@use './base/index' as *;
+
+@include b(panel-week-range) {
+  width: 860px;
+
+  @include e(header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid css-var(border-color-lighter);
+  }
+
+  @include e(header-label) {
+    font-size: css-var(font-size-large);
+    font-weight: 500;
+    padding-inline: 5px;
+    color: css-var(text-color-primary);
+  }
+
+  @include e(icon-btn) {
+    padding-block: 1px;
+    padding-inline: 6px;
+    border: 0;
+    font-size: css-var(font-size-small);
+    line-height: 1;
+    color: css-var(text-color-primary);
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      color: css-var(color-primary);
+    }
+  }
+
+  @include e(content) {
+    margin-inline: 15px;
+    margin-block-end: 15px;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+    font-size: css-var(font-size-small);
+    border-collapse: collapse;
+  }
+
+  @include e(td) {
+    padding-block: 3px;
+    text-align: center;
+    cursor: pointer;
+
+    @include is(start) {
+      @include e(cell) {
+        border-start-start-radius: 9999px;
+        border-end-start-radius: 9999px;
+      }
+    }
+
+    @include is(end) {
+      @include e(cell) {
+        border-start-end-radius: 9999px;
+        border-end-end-radius: 9999px;
+      }
+    }
+
+    @include is(start, end) {
+      @include e(cell-text) {
+        color: css-var(color-white);
+        background: css-var(color-primary);
+      }
+    }
+
+    @include is(in-range) {
+      @include e(cell) {
+        background: css-var(border-color-lighter);
+      }
+    }
+  }
+
+  @include e(cell) {
+    padding-block: 6px;
+  }
+
+  @include e(cell-text) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    margin-inline: 6px;
+    border-radius: 9999px;
+    line-height: 1.15;
+    color: css-var(text-color-primary);
+
+    &:hover {
+      color: css-var(color-primary);
+    }
+  }
+}

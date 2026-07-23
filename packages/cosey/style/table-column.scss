@@ -1,0 +1,14 @@
+@use './base/index' as *;
+
+@include b(table-column) {
+  &.is-media,
+  &.is-tag {
+    .cell {
+      text-overflow: initial;
+    }
+  }
+
+  @include e(label) {
+    vertical-align: middle;
+  }
+}

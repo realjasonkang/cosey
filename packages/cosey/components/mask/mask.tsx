@@ -1,20 +1,15 @@
 import { defineComponent } from 'vue';
-import useStyle from './mask.style';
 import { maskEmits } from './mask.api';
-import { useComponentConfig } from '../config-provider';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'CoMask',
   emits: maskEmits,
   setup(_, { emit }) {
-    const { prefixCls } = useComponentConfig('mask');
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('mask');
 
     return () => {
-      return (
-        <div class={[hashId.value, prefixCls.value]} onClick={(event) => emit('click', event)} />
-      );
+      return <div class={bem.b()} onClick={(event) => emit('click', event)} />;
     };
   },
 });

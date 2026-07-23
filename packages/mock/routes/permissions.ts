@@ -2,7 +2,19 @@ import { RequestInterceptor } from '@cosey/request-interceptor';
 import { db } from '../db';
 import { Resource } from '../utils/Resource';
 import { Result } from '../utils/Result';
-import { arrayToTree } from 'cosey/utils';
+
+function arrayToTree(array: any[], idKey: string, pidKey: string, childrenKey: string) {
+  const map: any = {};
+  const nodes: any[] = [];
+  for (const node of array) map[node[idKey]] = { ...node };
+  for (const node of array) {
+    const item = map[node[idKey]];
+    const parent = map[node[pidKey]];
+    if (parent) (parent[childrenKey] ??= []).push(item);
+    else nodes.push(item);
+  }
+  return [nodes, map] as const;
+}
 
 export default function register(interceptor: RequestInterceptor) {
   const prefix = '/rbac/permissions';

@@ -183,7 +183,7 @@ const onMouseleave = (block: string) => {
       &.is-active {
         &,
         & .linked {
-          background-color: var(--co-blue-3) !important;
+          background-color: var(--el-color-primary) !important;
         }
       }
     }

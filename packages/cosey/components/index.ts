@@ -7,7 +7,6 @@ export * from './config-provider';
 export * from './container';
 export * from './context-menu';
 export * from './copy';
-export * from './cssinjs';
 export * from './descriptions';
 export * from './dnd-sort';
 export * from './editor';
@@ -41,12 +40,10 @@ export * from './row';
 export * from './scroll-view';
 export * from './snug-menu';
 export * from './stack-dialog';
-export * from './style';
 export * from './svg-icon';
 export * from './table';
 export * from './table-action';
 export * from './table/table-query';
-export * from './theme';
 export * from './toggle';
 export * from './transition';
 export * from './transition-group';
@@ -55,15 +52,4 @@ export * from './video-card';
 export * from './video-viewer';
 export * from './week-range-picker';
 
-import { type App } from 'vue';
-import * as components from './components';
-
-const registerGlobalComponents = {
-  install(app: App) {
-    Object.keys(components).forEach((key) => {
-      app.use((components as any)[key]);
-    });
-  },
-};
-
-export { components, registerGlobalComponents };
+export { registerGlobalComponents } from './components';

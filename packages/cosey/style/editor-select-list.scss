@@ -1,0 +1,20 @@
+@use './base/index' as *;
+
+@include b(editor-select-list) {
+  @include e(item) {
+    padding-block: css-var(padding-xxs);
+    padding-inline: css-var(padding-sm);
+    font-size: css-var(font-size-base);
+    line-height: css-var(line-height);
+    border-radius: css-var(border-radius-small);
+    cursor: pointer;
+
+    &:hover {
+      background-color: css-var(fill-color-light);
+    }
+
+    @include is(active) {
+      background-color: css-var(color-primary-light-9);
+    }
+  }
+}

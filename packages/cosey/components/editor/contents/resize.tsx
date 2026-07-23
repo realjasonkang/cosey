@@ -1,8 +1,6 @@
 import { defineComponent, ref, useTemplateRef, watch } from 'vue';
 import { useZIndex } from 'element-plus';
-import { useComponentConfig } from '../../config-provider';
-import useStyle from './resize.style';
-import { isNumber } from '../../../utils';
+import { createBem, isNumber } from '../../../utils';
 
 export type ResizePosition = 'nw' | 'ne' | 'sw' | 'se';
 
@@ -70,8 +68,7 @@ export default defineComponent({
       isNumber(event.width) && isNumber(event.height),
   },
   setup(props, { emit }) {
-    const { prefixCls } = useComponentConfig('editor-resize', props);
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('editor-resize');
 
     const downs: { [K in ResizePosition]?: boolean } = {};
 
@@ -138,21 +135,12 @@ export default defineComponent({
 
     return () => {
       return (
-        <div
-          ref="el"
-          class={[
-            hashId.value,
-            prefixCls.value,
-            {
-              'is-show': props.visible,
-            },
-          ]}
-        >
+        <div ref="el" class={[bem.b(), bem.is('show', props.visible)]}>
           {corners.map((corner) => {
             return (
               <div
                 key={corner}
-                class={[`${prefixCls.value}-corner`, `${prefixCls.value}-corner-${corner}`]}
+                class={[bem.e('corner'), bem.em('corner', corner)]}
                 onPointerdown={(event) => onPointerDown(corner, event)}
                 onPointermove={(event) => onPointerMove(corner, event)}
                 onPointerup={() => onPointerUp(corner)}
@@ -162,7 +150,7 @@ export default defineComponent({
           })}
           <div
             v-show={sizeVisible.value}
-            class={`${prefixCls.value}-size`}
+            class={bem.e('size')}
             style={{
               transform: `translate(${sizeX.value}px, ${sizeY.value}px)`,
               zIndex: currentZIndex.value,

@@ -21,9 +21,8 @@ async function createFiles(
   await fse.outputFile(
     path.resolve(compDir, `${kebabName}.tsx`),
     `import { type ${pascalName}Expose, ${camelName}Props, ${camelName}Slots, ${camelName}Emits } from './${kebabName}.api';
-import useStyle from './${kebabName}.style';
-import { useComponentConfig } from '../config-provider';
 import { defineComponent } from 'vue';
+import { createBem } from '../../utils';
 
 export default defineComponent({
   name: 'Co${pascalName}',
@@ -31,14 +30,12 @@ export default defineComponent({
   slots: ${camelName}Slots,
   emits: ${camelName}Emits,
   setup(props, { slots, expose }) {
-    const { prefixCls } = useComponentConfig('${kebabName}', props);
-
-    const { hashId } = useStyle(prefixCls);
+    const bem = createBem('${kebabName}');
 
     expose<${pascalName}Expose>();
 
     return () => {
-      return <div class={[hashId.value, prefixCls.value]}>{slots.default?.({})}</div>;
+      return <div class={bem.b()}>{slots.default?.({})}</div>;
     };
   },
 });
@@ -86,23 +83,6 @@ export type ${pascalName}Emits = typeof ${camelName}Emits;
 export interface ${pascalName}Expose {
   method: () => void;
 }
-
-`,
-  );
-
-  // style
-  await fse.outputFile(
-    path.resolve(compDir, `${kebabName}.style.ts`),
-    `import { getSimpleStyleHook } from '../theme';
-
-export default getSimpleStyleHook('Co${pascalName}', (token) => {
-  const { componentCls } = token;
-
-  return {
-    [\`\${componentCls}\`]: {
-    },
-  };
-});
 
 `,
   );

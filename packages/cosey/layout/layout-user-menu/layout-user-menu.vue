@@ -1,29 +1,29 @@
 <template>
   <el-dropdown placement="bottom" trigger="click">
-    <el-button link :class="[hashId, prefixCls]">
+    <el-button link :class="bem.b()">
       <el-avatar :size="32" :src="userStore.userInfo?.avatar">
         <Icon name="co:user" />
       </el-avatar>
-      <span :class="`${prefixCls}-name`">
+      <span :class="bem.e('name')">
         {{ userStore.userInfo?.nickname }}
       </span>
     </el-button>
     <template #dropdown>
-      <el-dropdown-menu :class="[hashId, `${prefixCls}-dropdown`]">
+      <el-dropdown-menu :class="[bem.e('dropdown')]">
         <el-dropdown-item @click="toHome">
           <Icon name="co:home" size="lg" />
-          <span :class="`${prefixCls}-item-title`">{{ t('co.common.home') }}</span>
+          <span :class="bem.e('item-title')">{{ t('co.common.home') }}</span>
         </el-dropdown-item>
 
         <component :is="UserMenu" />
 
         <el-dropdown-item v-if="apiConfig.changePassword" @click="toChangePassword">
           <Icon name="co:password" size="lg" />
-          <span :class="`${prefixCls}-item-title`">{{ t('co.auth.changePassword') }}</span>
+          <span :class="bem.e('item-title')">{{ t('co.auth.changePassword') }}</span>
         </el-dropdown-item>
         <el-dropdown-item divided @click="logout">
           <Icon name="co:logout" size="lg" />
-          <span :class="`${prefixCls}-item-title`">{{ t('co.auth.logout') }}</span>
+          <span :class="bem.e('item-title')">{{ t('co.auth.logout') }}</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
@@ -34,13 +34,13 @@
 import { useRouter } from 'vue-router';
 import { useGlobalConfig } from '../../config';
 import { useUserStore } from '../../store';
-import { Icon, useComponentConfig } from '../../components';
+import { Icon } from '../../components';
 
-import useStyle from './style';
 import { defineTemplate } from '../../utils';
 import { useLocale } from '../../hooks';
 import { ref } from 'vue';
 import { ElLoading } from 'element-plus';
+import { createBem } from '../../utils';
 
 defineOptions({
   name: 'CoLayoutUserMenu',
@@ -48,9 +48,7 @@ defineOptions({
 
 const { t } = useLocale();
 
-const { prefixCls } = useComponentConfig('layout-user-menu');
-
-const { hashId } = useStyle(prefixCls);
+const bem = createBem('layout-user-menu');
 
 const router = useRouter();
 

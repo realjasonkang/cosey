@@ -1,0 +1,33 @@
+@use './base/index' as *;
+
+@include b(layout-aside) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-inline-end: css-var(border-width) css-var(border-style) css-var(border-color);
+  transition: width css-var(transition-duration);
+
+  @include is(hide) {
+    border: none;
+  }
+
+  @include e(header) {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include e(body) {
+    min-height: 0;
+    flex: 1;
+    padding-block: css-var(padding-xs);
+  }
+
+  @include e(footer) {
+    display: flex;
+    flex: none;
+    justify-content: center;
+    padding: css-var(padding-xs);
+  }
+}

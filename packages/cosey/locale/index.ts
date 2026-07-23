@@ -1,9 +1,10 @@
-import { type App, inject, InjectionKey, shallowRef, toValue, watch } from 'vue';
+import { type App, inject, InjectionKey, Ref, shallowRef, toValue, watch } from 'vue';
 import { createI18n, type I18n } from 'vue-i18n';
 import { defaultsDeep } from 'lodash-es';
 import dayjs from 'dayjs';
 import { defaultI18nConfig, RequiredI18nConfig, type I18nConfig } from '../config/i18n';
 import { persist } from '../persist';
+import { ref } from 'vue';
 
 export type TranslatePair = {
   [key: string]: string | string[] | TranslatePair;
@@ -27,7 +28,7 @@ function getMessages(config: RequiredI18nConfig, type: 'dayjs' | 'cosey' | 'app'
   return langs;
 }
 
-const coseyLocaleKey = Symbol('coseyLocale') as InjectionKey<Record<string, any>>;
+const coseyLocaleKey = Symbol('coseyLocale') as InjectionKey<Ref<Language>>;
 const localeMessagesKey = Symbol('localeMessages') as InjectionKey<RequiredI18nConfig['messages']>;
 
 export let i18n: I18n<Record<string, any>, {}, {}, any, false>;
@@ -40,7 +41,7 @@ export function launchLocale(app: App, config: I18nConfig = {}) {
   const dayjsMessages = getMessages(mergedConfig, 'dayjs');
 
   const locale = persist.get(langKey) || mergedConfig.locale;
-  const coseyLocale = shallowRef<Record<string, any>>({});
+  const coseyLocale = shallowRef<Language>({} as Language);
 
   i18n = createI18n({
     legacy: false,
@@ -75,7 +76,7 @@ export function launchLocale(app: App, config: I18nConfig = {}) {
 }
 
 export function useCoseyLocale() {
-  return inject(coseyLocaleKey, {});
+  return inject(coseyLocaleKey, ref({} as Language));
 }
 
 export function useLocaleMessages() {

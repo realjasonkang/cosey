@@ -1,0 +1,88 @@
+// ============================================================
+// Card Shared — 媒体卡片组件的共享 SCSS 样式
+// 被 audio-card, file-card, svga-card, pag-card, image-card 等组件 @use
+// ============================================================
+
+@use './base/index' as *;
+
+// ----- Card Base — 卡片基础尺寸/边框 -----
+@mixin card-base {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: css-var(border-width) css-var(border-style) css-var(border-color);
+  border-radius: css-var(border-radius-large);
+  overflow: hidden;
+
+  @include is(mini) {
+    width: 48px;
+    height: 48px;
+    font-size: 12px;
+    border-radius: css-var(border-radius-small);
+  }
+
+  @include is(small) {
+    width: 64px;
+    height: 64px;
+    font-size: 18px;
+    border-radius: css-var(border-radius-base);
+  }
+
+  @include is(middle) {
+    width: 80px;
+    height: 80px;
+    font-size: 24px;
+  }
+
+  @include is(large) {
+    width: 96px;
+    height: 96px;
+    font-size: 24px;
+  }
+}
+
+// ----- Card Filename — 文件名元素 -----
+@mixin card-filename {
+  @include e(filename) {
+    width: 100%;
+    height: calc(2em * 1.12);
+    padding-inline: css-var(padding-xxs);
+    margin-block-start: css-var(margin-xxs);
+    word-break: break-all;
+    font-size: css-var(font-size-small);
+    line-height: 1.12;
+    text-align: center;
+    @include line-clamp(2);
+    -webkit-align-content: center;
+  }
+
+  @include is(mini, small) {
+    @include e(filename) {
+      height: auto;
+      @include line-clamp(1);
+    }
+  }
+
+  @include is(middle) {
+    justify-content: flex-start;
+    padding-block-start: css-var(font-size-large);
+  }
+
+  @include is(large) {
+    justify-content: flex-start;
+    padding-block-start: css-var(font-size-extra-large);
+  }
+}
+
+// ----- Card Filetype — 文件类型元素 -----
+@mixin card-filetype {
+  @include e(type) {
+    font-size: 0.8em;
+    line-height: 1.12;
+    text-align: center;
+    color: css-var(color-primary);
+  }
+}
