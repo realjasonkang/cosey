@@ -98,6 +98,12 @@ export default {
       xmlLabel: 'XML Table',
       txtLabel: 'Unicode text',
     },
+    checkUpdates: {
+      newVersionAvailable: 'New version available',
+      updateNow: 'Update now?',
+      refreshNow: 'Refresh now',
+      refreshLater: 'Refresh later',
+    },
     auth: {
       changePassword: 'Change Password',
       enterCurrentPassword: 'Enter Current Password',

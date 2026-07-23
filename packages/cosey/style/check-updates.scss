@@ -1,0 +1,16 @@
+@use './base/index' as *;
+
+@include b(check-updates) {
+  width: fit-content;
+
+  @include e(title) {
+    margin-bottom: css-var(margin-xs);
+    font-size: css-var(font-size-large);
+    font-weight: css-var(font-weight-strong);
+  }
+
+  @include e(actions) {
+    display: flex;
+    margin-top: css-var(margin-xs);
+  }
+}

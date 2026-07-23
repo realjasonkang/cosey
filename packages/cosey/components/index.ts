@@ -1,6 +1,7 @@
 export * from './audio-card';
 export * from './audio-viewer';
 export * from './card';
+export * from './check-updates';
 export * from './close';
 export * from './col';
 export * from './config-provider';

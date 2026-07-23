@@ -13,11 +13,12 @@
     <ElConfigProvider :locale="locale">
       <router-view></router-view>
     </ElConfigProvider>
+    <CheckUpdates />
   </ConfigProvider>
 </template>
 
 <script setup lang="ts">
-import { ConfigProvider } from 'cosey/components';
+import { CheckUpdates, ConfigProvider } from 'cosey/components';
 import { ElConfigProvider } from 'element-plus';
 import { onMounted } from 'vue';
 

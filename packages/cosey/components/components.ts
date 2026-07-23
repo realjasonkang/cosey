@@ -1,6 +1,7 @@
 import { AudioCard } from './audio-card';
 import { AudioViewer } from './audio-viewer';
 import { Card } from './card';
+import { CheckUpdates } from './check-updates';
 import { Close } from './close';
 import { Col } from './col';
 import { ConfigProvider } from './config-provider';
@@ -62,6 +63,7 @@ declare module 'vue' {
     CoAudioCard: typeof AudioCard;
     CoAudioViewer: typeof AudioViewer;
     CoCard: typeof Card;
+    CoCheckUpdates: typeof CheckUpdates;
     CoClose: typeof Close;
     CoCol: typeof Col;
     CoConfigProvider: typeof ConfigProvider;
@@ -130,6 +132,7 @@ export const registerGlobalComponents = {
       AudioCard,
       AudioViewer,
       Card,
+      CheckUpdates,
       Close,
       Col,
       ConfigProvider,

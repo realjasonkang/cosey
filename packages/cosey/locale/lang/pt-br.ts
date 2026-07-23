@@ -98,6 +98,12 @@ export default {
       xmlLabel: 'Tabela XML',
       txtLabel: 'Texto Unicode',
     },
+    checkUpdates: {
+      newVersionAvailable: 'Nova versão disponível',
+      updateNow: 'Atualizar agora?',
+      refreshNow: 'Atualizar agora',
+      refreshLater: 'Atualizar mais tarde',
+    },
     auth: {
       changePassword: 'Alterar senha',
       enterCurrentPassword: 'Informe a senha atual',

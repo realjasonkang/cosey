@@ -196,6 +196,7 @@ export default defineConfig({
         {
           text: 'Feedback 反馈组件',
           items: [
+            { text: 'CheckUpdates 版本更新检测', link: '/components/check-updates' },
             { text: 'Copy 复制', link: '/components/copy' },
             { text: 'DndSort 拖拽排序', link: '/components/dnd-sort' },
             {

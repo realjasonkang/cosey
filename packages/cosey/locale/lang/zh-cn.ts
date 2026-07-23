@@ -98,6 +98,12 @@ export default {
       xmlLabel: 'XML 表格',
       txtLabel: 'Unicode 文本',
     },
+    checkUpdates: {
+      newVersionAvailable: '新版本可用',
+      updateNow: '是否更新？',
+      refreshNow: '立即刷新页面',
+      refreshLater: '稍后手动刷新',
+    },
     auth: {
       changePassword: '修改密码',
       enterCurrentPassword: '请输入原密码',
