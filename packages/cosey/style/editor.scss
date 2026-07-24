@@ -93,12 +93,12 @@
     padding-left: 16px;
   }
 
-  code {
+  code:not(pre > code) {
     font-size: 85%;
     padding-block: 2px;
     padding-inline: 4px;
     border-radius: css-var(border-radius-small);
-    background-color: #f0f0f0;
+    background-color: css-var(fill-color-light);
   }
 
   kbd {
@@ -115,7 +115,28 @@
 
   pre {
     position: relative;
+    padding: css-var(padding);
     overflow: hidden;
+    font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: css-var(border-radius-base);
+    color: #000;
+    background-color: css-var(fill-color-extra-light);
+
+    .dark & {
+      color: #fff;
+    }
+
+    code {
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      white-space: inherit;
+      background: none;
+      padding: 0;
+      border-radius: 0;
+    }
 
     select {
       position: absolute;
@@ -127,97 +148,12 @@
       color: css-var(text-color-primary);
       border-radius: css-var(border-radius-base);
       font-size: css-var(font-size-extra-small);
+      font-family: css-var(font-family);
     }
 
     > div {
       padding: 1rem;
       overflow: auto;
-    }
-  }
-}
-
-// ===== Button styles =====
-@include b(editor-button) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 28px;
-  height: 28px;
-  flex: none;
-  font-size: 20px;
-  white-space: nowrap;
-  border-radius: css-var(border-radius-small);
-  border: css-var(border-width) css-var(border-style) transparent;
-  cursor: pointer;
-
-  &:hover {
-    background-color: css-var(fill-color);
-  }
-
-  &:active {
-    background-color: css-var(color-primary-light-9);
-  }
-
-  @include is(active) {
-    background-color: css-var(color-primary-light-9);
-  }
-
-  &:focus-visible {
-    outline: 2px solid css-var(color-primary-light-5);
-    outline-offset: 1px;
-  }
-
-  @include e(group) {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px;
-  }
-
-  @include e(select) {
-    width: 130px;
-    justify-content: space-between;
-    padding-inline: css-var(padding-xs);
-    font-size: css-var(font-size-base);
-    background-color: css-var(fill-color-light);
-  }
-
-  @include e(chevron) {
-    width: 16px;
-  }
-
-  @include e(text) {
-    @include truncate;
-  }
-
-  @include e(arrow) {
-    flex: none;
-  }
-
-  @include e(split) {
-    display: flex;
-    border-radius: css-var(border-radius-small);
-    border: css-var(border-width) css-var(border-style) transparent;
-
-    @include is(active) {
-      border-color: css-var(border-color-lighter);
-    }
-
-    &:hover {
-      border-color: css-var(border-color-lighter);
-    }
-
-    .co-editor__button-button {
-      border: none;
-      border-radius: calc(css-var(border-radius-small) - 1px);
-
-      &:not(:first-child) {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-      &:not(:last-child) {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
     }
   }
 }
@@ -257,11 +193,13 @@
 
   @include e(wrapper) {
     overflow: auto;
+    min-height: 120px;
   }
 
   @include is(error) {
-    &,
-    .co-editor__toolbar {
+    border-color: css-var(color-error);
+
+    @include e(toolbar) {
       border-color: css-var(color-error);
     }
   }
@@ -277,7 +215,7 @@
   }
 
   @include is(disabled) {
-    .co-editor__content {
+    @include e(content) {
       background-color: css-var(disabled-bg-color);
       color: css-var(text-color-disabled);
       cursor: not-allowed;

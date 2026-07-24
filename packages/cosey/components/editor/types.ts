@@ -280,6 +280,11 @@ export type CustomText = {
   size?: string;
   color?: string;
   background?: string;
+  // Shiki token decorations
+  token?: boolean;
+  tokenColor?: string;
+  tokenBgColor?: string;
+  tokenFontStyle?: number;
 };
 
 export type EmptyText = {

@@ -1,7 +1,6 @@
 <template>
   <ClientOnly>
     <ConfigProvider
-      :locale="coseyZhCn"
       :theme="{
         token: {
           colorPrimary: '#1677ff',
@@ -10,15 +9,18 @@
           colorError: '#ff4d4f',
         },
       }"
+      #default="{ locale }"
     >
-      <CustomLayout />
+      <ElConfigProvider :locale="locale">
+        <CustomLayout />
+      </ElConfigProvider>
     </ConfigProvider>
   </ClientOnly>
 </template>
 
 <script lang="ts" setup>
 import { ConfigProvider } from 'cosey/components';
-import coseyZhCn from 'cosey/locale/lang/zh-cn';
+// import coseyZhCn from 'cosey/locale/lang/zh-cn';
 
 import CustomLayout from './custom-layout.vue';
 </script>
