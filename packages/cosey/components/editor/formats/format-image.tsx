@@ -1,12 +1,11 @@
 import { computed, defineComponent, reactive, ref } from 'vue';
 import { ElButton } from 'element-plus';
 import { useEditor } from 'slate-vue3';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import Button from '../button';
 import { chooseFiles } from '../../../utils';
-import FormDialog from '../../form-dialog/form-dialog';
-import Form from '../../form/form';
-import FormItem from '../../form/form-item.vue';
+import { FormDialog } from '../../form-dialog';
+import { Form, FormItem } from '../../form';
 import { useLocale } from '../../../hooks';
 import { type ImageElement } from '../types';
 import { getPointingOptions, isPointingAt } from '../utils';

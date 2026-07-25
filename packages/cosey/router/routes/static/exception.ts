@@ -1,7 +1,7 @@
 import { defineRoutes } from '../../utils';
-import MergedLayoutException from '../../../layout/merged/layout-exception';
-import MergedLayoutForbidden from '../../../layout/merged/layout-forbidden';
-import MergedLayoutInternalServerError from '../../../layout/merged/layout-internal-server-error';
+import LayoutException from '../../../layout/layout-exception/layout-exception.vue';
+import LayoutForbidden from '../../../layout/layout-forbidden/layout-forbidden.vue';
+import LayoutInternalServerError from '../../../layout/layout-internal-server-error/layout-internal-server-error.vue';
 import { NotFoundRoute } from '../../not-found';
 
 /**
@@ -11,7 +11,7 @@ export default defineRoutes([
   {
     path: '/exception',
     name: 'Exception',
-    component: MergedLayoutException,
+    component: LayoutException,
     meta: {
       hideInMenu: true,
     },
@@ -24,7 +24,7 @@ export default defineRoutes([
       {
         path: 'forbidden',
         name: 'ExceptionForbidden',
-        component: MergedLayoutForbidden,
+        component: LayoutForbidden,
         meta: {
           title: 'Forbidden',
         },
@@ -32,7 +32,7 @@ export default defineRoutes([
       {
         path: 'internal-server-error',
         name: 'ExceptionInternalServerError',
-        component: MergedLayoutInternalServerError,
+        component: LayoutInternalServerError,
         meta: {
           title: 'Internal Server Error',
         },

@@ -1,7 +1,7 @@
 import { defineComponent, ref } from 'vue';
 import { useLockscreen } from 'element-plus';
 import { pagCardProps, pagCardEmits } from './pag-card.api';
-import PagViewer from '../pag-viewer/pag-viewer';
+import { PagViewer } from '../pag-viewer';
 import { createBem } from '../../utils';
 
 export default defineComponent({

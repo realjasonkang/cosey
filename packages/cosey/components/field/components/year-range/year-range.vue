@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElDatePicker } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldYearRangeProps, type FieldYearRangeSlots } from './year-range';
+import { type FieldYearRangeProps, type FieldYearRangeSlots } from './year-range.api';
 import dayjs from 'dayjs';
 import { addNullablePlaceholder, YEAR_FORMAT } from '../../../../utils';
 import { useLocale } from '../../../../hooks';

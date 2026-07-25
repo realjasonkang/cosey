@@ -1,6 +1,6 @@
 import { type SlotsType, type ExtractPropTypes } from 'vue';
 import { imageProps, imageEmits } from 'element-plus';
-import { mediaCardBaseProps } from '../media-card/media-card.api';
+import { mediaCardBaseProps } from '../media-card';
 
 export const imageCardProps = {
   ...imageProps,

@@ -1,21 +1,23 @@
 <template>
   <div :class="bem.b()" :style="mainStyle">
-    <MergedLayoutIframe />
+    <component :is="IframeComp" />
     <router-view v-slot="{ Component, route }">
-      <MergedLayoutSwitchEffect>
+      <component :is="SwitchEffectComp">
         <keep-alive :include="layoutStore.keepAliveInclude" :exclude="layoutStore.keepAliveExclude">
           <component v-if="!layoutStore.refreshing" :is="Component" :key="route.path" />
         </keep-alive>
-      </MergedLayoutSwitchEffect>
+      </component>
     </router-view>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import MergedLayoutIframe from '../merged/layout-iframe';
-import MergedLayoutSwitchEffect from '../merged/layout-switch-effect';
+import LayoutIframe from '../layout-iframe/layout-iframe.vue';
+import LayoutSwitchEffect from '../layout-switch-effect/layout-switch-effect.vue';
 import { useLayoutStore } from '../../store';
+import { useGlobalConfig } from '../../config';
+import { useOptionalComponent } from '../../hooks';
 import { createBem } from '../../utils';
 
 defineOptions({
@@ -25,6 +27,10 @@ defineOptions({
 const bem = createBem('layout-main');
 
 const layoutStore = useLayoutStore();
+
+const { components } = useGlobalConfig();
+const IframeComp = useOptionalComponent(() => components?.iframe, LayoutIframe);
+const SwitchEffectComp = useOptionalComponent(() => components?.switchEffect, LayoutSwitchEffect);
 
 const mainStyle = computed(() => {
   return {

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElTimePicker } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldTimeProps, type FieldTimeSlots } from './time';
+import { type FieldTimeProps, type FieldTimeSlots } from './time.api';
 import dayjs from 'dayjs';
 import { addNullablePlaceholder, TIME_FORMAT } from '../../../../utils';
 import { useLocale } from '../../../../hooks';

@@ -9,7 +9,7 @@ import {
   type FieldSelectSlots,
   flatGroup,
   fieldSelectOmitKeys,
-} from './select';
+} from './select.api';
 import { getLabelByValue, addNullablePlaceholder, isFunction } from '../../../../utils';
 import { omit } from 'lodash-es';
 import { useLocale, useProps } from '../../../../hooks';

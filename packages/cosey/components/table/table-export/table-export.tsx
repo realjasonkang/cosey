@@ -15,7 +15,7 @@ import List from './list';
 import { type TableColumnProps } from '../table-column/table-column.api';
 import { exportRenderer } from '../table-column/renderer';
 import { ElCheckbox, ElMessage } from 'element-plus';
-import FormDialog from '../../form-dialog/form-dialog';
+import { FormDialog } from '../../form-dialog';
 import { Form, FormItem } from '../../form';
 import { Panel } from '../../panel';
 

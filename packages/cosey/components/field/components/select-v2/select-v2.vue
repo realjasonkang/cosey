@@ -6,7 +6,7 @@ import {
   flatGroup,
   type FieldSelectV2Props,
   type FieldSelectV2Slots,
-} from './select-v2';
+} from './select-v2.api';
 import { addNullablePlaceholder, getLabelByValue } from '../../../../utils';
 import { useLocale, useProps } from '../../../../hooks';
 import { omit } from 'lodash-es';

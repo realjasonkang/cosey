@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElIcon, ElInput, useNamespace } from 'element-plus';
 import { computed, defineComponent, h, mergeProps, ref, type SlotsType } from 'vue';
-import { type FieldPasswordProps, type FieldPasswordSlots } from './password';
+import { type FieldPasswordProps, type FieldPasswordSlots } from './password.api';
 import { addNullablePlaceholder } from '../../../../utils';
 import { Hide as IconHide, View as IconView } from '@element-plus/icons-vue';
 import { useLocale } from '../../../../hooks';

@@ -1,7 +1,7 @@
 import { dndSortItemProps, dndSortItemSlots } from './dnd-sort-item.api';
 import { defineComponent, reactive, toRef } from 'vue';
 import { useDndSortItem } from './useDndSortItem';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { createBem } from '../../utils';
 
 export default defineComponent({

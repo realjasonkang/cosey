@@ -1,17 +1,19 @@
 <template>
-  <MergedLayoutSwitchEffect>
+  <component :is="SwitchEffectComp">
     <div v-show="name === layoutStore.activeTab" :class="bem.b()">
       <div v-loading="loading" :class="bem.e('loading')">
         <iframe :src="src" :class="bem.e('iframe')" @load="onLoad" />
       </div>
     </div>
-  </MergedLayoutSwitchEffect>
+  </component>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import MergedLayoutSwitchEffect from '../merged/layout-switch-effect';
+import LayoutSwitchEffect from '../layout-switch-effect/layout-switch-effect.vue';
 import { useLayoutStore } from '../../store';
+import { useGlobalConfig } from '../../config';
+import { useOptionalComponent } from '../../hooks';
 import { createBem } from '../../utils';
 
 defineOptions({
@@ -26,6 +28,9 @@ defineProps<{
 const bem = createBem('layout-iframe');
 
 const layoutStore = useLayoutStore();
+
+const { components } = useGlobalConfig();
+const SwitchEffectComp = useOptionalComponent(() => components?.switchEffect, LayoutSwitchEffect);
 
 const loading = ref(true);
 

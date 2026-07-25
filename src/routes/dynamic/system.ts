@@ -1,9 +1,9 @@
-import { defineRoutes, MergedLayoutBase } from 'cosey';
+import { defineRoutes, LayoutBase } from 'cosey';
 
 export default defineRoutes({
   path: '/system',
   name: 'System',
-  component: MergedLayoutBase,
+  component: LayoutBase,
   meta: {
     title: 'system.system',
     icon: 'carbon:settings',

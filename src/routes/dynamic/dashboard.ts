@@ -1,4 +1,4 @@
-import { MergedLayoutBase, defineRoutes } from 'cosey';
+import { LayoutBase, defineRoutes } from 'cosey';
 
 /**
  * 仪表板路由
@@ -6,7 +6,7 @@ import { MergedLayoutBase, defineRoutes } from 'cosey';
 export default defineRoutes({
   path: '/dashboard',
   name: 'Dashboard',
-  component: MergedLayoutBase,
+  component: LayoutBase,
   meta: {
     title: 'dashboard.dashboard',
     icon: 'carbon:dashboard',

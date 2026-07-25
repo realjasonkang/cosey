@@ -311,7 +311,7 @@
    * Code
    * -------------------------------------------------------------------------- */
 
-  code:not(.demo code) {
+  code:not(.demo code):not(pre code) {
     font-size: var(--vp-code-font-size);
     color: var(--vp-code-color);
     border-radius: 4px;

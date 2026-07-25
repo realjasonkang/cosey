@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElDatePicker } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldMonthProps, type FieldMonthSlots } from './month';
+import { type FieldMonthProps, type FieldMonthSlots } from './month.api';
 import dayjs from 'dayjs';
 import { addNullablePlaceholder, MONTH_FORMAT } from '../../../../utils';
 import { useLocale } from '../../../../hooks';

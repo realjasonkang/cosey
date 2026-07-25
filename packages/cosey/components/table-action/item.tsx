@@ -6,7 +6,7 @@ import {
   defaultTableActionItemProps,
   tableActionItemProps,
 } from './item.api';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { getCssVar } from '../../utils';
 import { useLocale } from '../../hooks';
 import { useConfig } from '../config-provider';

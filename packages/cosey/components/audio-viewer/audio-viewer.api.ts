@@ -1,9 +1,5 @@
 import { ExtractPropTypes, SlotsType } from 'vue';
-import {
-  mediaViewerBaseEmits,
-  mediaViewerBaseProps,
-  MediaViewerSlots,
-} from '../media-viewer/media-viewer.api';
+import { mediaViewerBaseEmits, mediaViewerBaseProps, MediaViewerSlots } from '../media-viewer';
 
 export const audioViewerProps = {
   ...mediaViewerBaseProps,

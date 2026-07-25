@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElSegmented } from 'element-plus';
 import { computed, defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldSegmentedProps, type FieldSegmentedSlots } from './segmented';
+import { type FieldSegmentedProps, type FieldSegmentedSlots } from './segmented.api';
 import { getLabelByValue, addNullablePlaceholder } from '../../../../utils';
 
 export default defineComponent(

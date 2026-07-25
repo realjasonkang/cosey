@@ -3,7 +3,7 @@ import { ElButton, ElDivider, useLocale } from 'element-plus';
 import { useEditor, useElement } from 'slate-vue3';
 import { DOMEditor } from 'slate-vue3/dom';
 import { createBem } from '../../../utils';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import WidgetPopover from './widget-popover';
 
 export default defineComponent({

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElInput } from 'element-plus';
 import { defineComponent, h, type SlotsType } from 'vue';
-import { type FieldTextareaProps, type FieldTextareaSlots } from './textarea';
+import { type FieldTextareaProps, type FieldTextareaSlots } from './textarea.api';
 import { addNullablePlaceholder } from '../../../../utils';
 import { useLocale } from '../../../../hooks';
 

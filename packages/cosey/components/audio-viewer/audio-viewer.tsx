@@ -1,6 +1,6 @@
 import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
 import { audioViewerEmits, audioViewerProps, audioViewerSlots } from './audio-viewer.api';
-import { MediaViewerDialog } from '../media-viewer/media-viewer-dialog';
+import { MediaViewerDialog } from '../media-viewer';
 import { omit } from 'lodash-es';
 
 export default defineComponent({

@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { createBem } from '../../utils';
 import { contextMenuContentProps } from './content.api';
 

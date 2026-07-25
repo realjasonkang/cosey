@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElTransfer } from 'element-plus';
 import { computed, defineComponent, h, type SlotsType } from 'vue';
-import { type FieldTransferProps, type FieldTransferSlots } from './transfer';
+import { type FieldTransferProps, type FieldTransferSlots } from './transfer.api';
 import { getLabelByValue, addNullablePlaceholder } from '../../../../utils';
 
 export default defineComponent(

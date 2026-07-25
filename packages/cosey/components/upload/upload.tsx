@@ -28,7 +28,7 @@ import {
 } from '../../utils';
 import UploadItem from './upload-item';
 import { TransitionGroup } from '../transition-group';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 
 import { useLocale } from '../../hooks';
 import { injectUploadConfig } from '../../config/upload';

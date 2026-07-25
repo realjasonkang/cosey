@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElRadio, ElRadioButton, ElRadioGroup } from 'element-plus';
 import { computed, defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldRadioGroupProps, type FieldRadioGroupSlots } from './radio-group';
+import { type FieldRadioGroupProps, type FieldRadioGroupSlots } from './radio-group.api';
 import { getLabelByValue, addNullablePlaceholder } from '../../../../utils';
 import { useProps } from '../../../../hooks';
 

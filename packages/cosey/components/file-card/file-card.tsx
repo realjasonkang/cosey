@@ -1,4 +1,4 @@
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { fileCardProps, fileCardSlots } from './file-card.api';
 import { createBem } from '../../utils';
 import { defineComponent } from 'vue';

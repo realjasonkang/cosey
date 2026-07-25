@@ -3,7 +3,7 @@ import { ElScrollbar } from 'element-plus';
 import { highlightCode, highlightProps, highlightSlots } from './highlight.api';
 import { onHighlighterReady } from '../../utils/shiki';
 import { useColorScheme } from '../../hooks';
-import Copy from '../copy/copy';
+import { Copy } from '../copy';
 import { createBem } from '../../utils';
 
 export default defineComponent({

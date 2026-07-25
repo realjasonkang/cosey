@@ -1,5 +1,5 @@
 import { type ExtractPropTypes, type SlotsType, type PropType } from 'vue';
-import { transitionProps } from '../transition/transition.api';
+import { transitionProps } from '../transition';
 import { omit } from 'lodash-es';
 
 export const transitionGroupProps = {

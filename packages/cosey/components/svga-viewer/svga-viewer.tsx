@@ -2,7 +2,7 @@ import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
 import { omit } from 'lodash-es';
 import { Parser, Player } from 'svga';
 import { svgaViewerEmits, svgaViewerProps, svgaViewerSlots } from './svga-viewer.api';
-import { MediaViewerDialog } from '../media-viewer/media-viewer-dialog';
+import { MediaViewerDialog } from '../media-viewer';
 import { ElIcon } from 'element-plus';
 import { Loading } from '@element-plus/icons-vue';
 import { getCssVar } from '../../utils';

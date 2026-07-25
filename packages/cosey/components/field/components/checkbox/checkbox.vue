@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElCheckbox } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldCheckboxProps, type FieldCheckboxSlots } from './checkbox';
+import { type FieldCheckboxProps, type FieldCheckboxSlots } from './checkbox.api';
 import { addNullablePlaceholder } from '../../../../utils';
 
 export default defineComponent(

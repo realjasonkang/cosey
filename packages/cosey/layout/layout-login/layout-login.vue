@@ -93,7 +93,7 @@ if (withCaptcha.value) {
 const captchaLoading = ref(false);
 
 function getCaptcha() {
-  if (captchaLoading.value) return;
+  if (captchaLoading.value || !withCaptcha.value) return;
   captchaLoading.value = true;
   apiConfig.captcha!({})
     .then((res) => {

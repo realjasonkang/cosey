@@ -1,5 +1,5 @@
 import { SlotsType, type ExtractPublicPropTypes, type PropType } from 'vue';
-import { type FormSlots, type FormExpose, formProps, formEmits } from '../form/form.api';
+import { type FormSlots, type FormExpose, formProps, formEmits } from '../form';
 import { type ColPublicProps } from '../col';
 import { isBoolean } from '../../utils';
 

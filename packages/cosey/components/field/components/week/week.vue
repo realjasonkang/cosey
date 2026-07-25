@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElDatePicker } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldWeekProps, type FieldWeekSlots } from './week';
+import { type FieldWeekProps, type FieldWeekSlots } from './week.api';
 import dayjs from 'dayjs';
 import weekOfYear from 'dayjs/plugin/weekOfYear.js';
 import { addNullablePlaceholder } from '../../../../utils';

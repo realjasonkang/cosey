@@ -6,7 +6,7 @@ import { ElTableColumn, ElTooltip } from 'element-plus';
 import classNames from 'classnames';
 
 import { useLocale } from '../../../hooks';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import { getCssVar } from '../../../utils';
 
 const TableColumn = defineComponent({

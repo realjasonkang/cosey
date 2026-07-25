@@ -1,5 +1,5 @@
 import { computed, MaybeRef, mergeProps, unref } from 'vue';
-import { type TableExpose, type TableProps, tableExposeKeys } from './table';
+import { type TableExpose, type TableProps, tableExposeKeys } from './table.api';
 import { createMergedExpose } from '../../utils';
 
 export type UseTableProps = TableProps & { [prop: PropertyKey]: any };

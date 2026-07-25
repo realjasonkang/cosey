@@ -1,9 +1,9 @@
-import { defineRoutes, MergedLayoutBase } from 'cosey';
+import { defineRoutes, LayoutBase } from 'cosey';
 
 export default defineRoutes({
   path: '/blog',
   name: 'Blog',
-  component: MergedLayoutBase,
+  component: LayoutBase,
   meta: {
     title: 'post.blog',
     icon: 'carbon:blog',

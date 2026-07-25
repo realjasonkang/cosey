@@ -1,8 +1,8 @@
 import { defineComponent, ref } from 'vue';
 import { useLockscreen } from 'element-plus';
 import { audioCardProps, audioCardEmits } from './audio-card.api';
-import Icon from '../icon/icon';
-import AudioViewer from '../audio-viewer/audio-viewer';
+import { Icon } from '../icon';
+import { AudioViewer } from '../audio-viewer';
 import { createBem } from '../../utils';
 
 export default defineComponent({

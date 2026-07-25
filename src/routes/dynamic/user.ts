@@ -1,8 +1,8 @@
-import { defineRoutes, MergedLayoutBase } from 'cosey';
+import { defineRoutes, LayoutBase } from 'cosey';
 
 export default defineRoutes({
   path: '/',
-  component: MergedLayoutBase,
+  component: LayoutBase,
   meta: {
     flatChildrenInMenu: true,
   },

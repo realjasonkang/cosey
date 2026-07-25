@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldUploadProps, type FieldUploadSlots } from './upload';
+import { type FieldUploadProps, type FieldUploadSlots } from './upload.api';
 import { Upload } from '../../../upload';
 
 export default defineComponent(

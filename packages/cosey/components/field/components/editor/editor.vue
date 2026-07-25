@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, h, type SlotsType } from 'vue';
-import { type FieldEditorProps, type FieldEditorSlots } from './editor';
+import { type FieldEditorProps, type FieldEditorSlots } from './editor.api';
 import { addNullablePlaceholder } from '../../../../utils';
 import { Editor } from '../../../editor';
 

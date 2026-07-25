@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElRate } from 'element-plus';
 import { computed, defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldRateProps, type FieldRateSlots } from './rate';
+import { type FieldRateProps, type FieldRateSlots } from './rate.api';
 
 export default defineComponent(
   (props: FieldRateProps, { slots }) => {

@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldNumberRangeProps, type FieldNumberRangeSlots } from './number-range';
+import { type FieldNumberRangeProps, type FieldNumberRangeSlots } from './number-range.api';
 import { addNullablePlaceholder } from '../../../../utils';
-import InputNumberRange from '../../../input-number-range/input-number-range';
+import { InputNumberRange } from '../../../input-number-range';
 import { useLocale } from '../../../../hooks';
 
 export default defineComponent(

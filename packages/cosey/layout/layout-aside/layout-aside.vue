@@ -8,7 +8,8 @@
       :class="bem.e('header')"
       :style="{ height: `${layoutStore.topbarHeight - 1}px` }"
     >
-      <MergedLayoutBrand
+      <component
+        :is="BrandComp"
         :hide-logo="
           !layoutStore.isMobile &&
           (layoutStore.menuType === 'biserial' || layoutStore.menuType === 'horizontal-biserial')
@@ -17,7 +18,7 @@
       />
     </div>
     <ScrollView :class="bem.e('body')">
-      <MergedLayoutMenu />
+      <component :is="MenuComp" />
     </ScrollView>
     <div v-if="!layoutStore.isMobile" :class="bem.e('footer')">
       <el-button text bg size="small" @click="layoutStore.collapse = !layoutStore.collapse">
@@ -30,9 +31,11 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { ElButton } from 'element-plus';
-import MergedLayoutBrand from '../merged/layout-brand';
-import MergedLayoutMenu from '../merged/layout-menu';
+import LayoutBrand from '../layout-brand/layout-brand.vue';
+import LayoutMenu from '../layout-menu/layout-menu.vue';
 import { useLayoutStore } from '../../store';
+import { useGlobalConfig } from '../../config';
+import { useOptionalComponent } from '../../hooks';
 import { ScrollView, Icon } from '../../components';
 import { createBem } from '../../utils';
 
@@ -43,6 +46,10 @@ defineOptions({
 const bem = createBem('layout-aside');
 
 const layoutStore = useLayoutStore();
+
+const { components } = useGlobalConfig();
+const BrandComp = useOptionalComponent(() => components?.brand, LayoutBrand);
+const MenuComp = useOptionalComponent(() => components?.menu, LayoutMenu);
 
 const asideStyle = computed(() => {
   return {

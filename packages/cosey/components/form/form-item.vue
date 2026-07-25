@@ -58,10 +58,10 @@ import {
 } from './form-item.api';
 import { type FormContext, formContextSymbol } from './form.api';
 import { type FieldType, Field } from '../field';
-import { type FormQueryContext, formQueryContextSymbol } from '../form-query/form-query.api';
+import { type FormQueryContext, formQueryContextSymbol } from '../form-query';
 import { OptionalWrapper } from '../optional-wrapper';
 import { Col } from '../col';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { useFormItemWidth } from './useFormItemWidth';
 import {
   omitUndefined,

@@ -1,7 +1,7 @@
 import { defineComponent, ref } from 'vue';
 import { useLockscreen } from 'element-plus';
 import { svgaCardProps, svgaCardEmits } from './svga-card.api';
-import SvgaViewer from '../svga-viewer/svga-viewer';
+import { SvgaViewer } from '../svga-viewer';
 import { createBem } from '../../utils';
 
 export default defineComponent({

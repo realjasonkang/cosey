@@ -4,7 +4,7 @@ import { useEditor } from 'slate-vue3';
 import katex from 'katex';
 import Button from '../button';
 import { Panel } from '../../panel';
-import FormDialog from '../../form-dialog/form-dialog';
+import { FormDialog } from '../../form-dialog';
 import { Form } from '../../form';
 import Row from '../../row';
 import Col from '../../col';

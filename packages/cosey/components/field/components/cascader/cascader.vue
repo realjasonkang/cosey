@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElCascader } from 'element-plus';
 import { computed, defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldCascaderProps, type FieldCascaderSlots } from './cascader';
+import { type FieldCascaderProps, type FieldCascaderSlots } from './cascader.api';
 import { getTreeLabelByValue, addNullablePlaceholder } from '../../../../utils';
 import { useLocale } from '../../../../hooks';
 

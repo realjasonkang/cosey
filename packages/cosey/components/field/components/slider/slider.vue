@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElSlider } from 'element-plus';
 import { defineComponent, h, type SlotsType } from 'vue';
-import { type FieldSliderProps, type FieldSliderSlots } from './slider';
+import { type FieldSliderProps, type FieldSliderSlots } from './slider.api';
 import { addNullablePlaceholder } from '../../../../utils';
 
 export default defineComponent(

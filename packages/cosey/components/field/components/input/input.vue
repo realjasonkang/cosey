@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElInput } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldInputProps, type FieldInputSlots } from './input';
+import { type FieldInputProps, type FieldInputSlots } from './input.api';
 import { addNullablePlaceholder } from '../../../../utils';
 import { useLocale } from '../../../../hooks';
 

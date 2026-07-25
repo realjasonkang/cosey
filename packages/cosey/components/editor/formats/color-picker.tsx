@@ -1,7 +1,7 @@
 import { computed, defineComponent, ref } from 'vue';
 import Picker from './picker';
 import { colorNames, colorPalettes } from './color-picker.api';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import { ElInput } from 'element-plus';
 import { TinyColor } from '@ctrl/tinycolor';
 import { useHistoryColor } from '../hooks/useHistoryColor';

@@ -2,7 +2,7 @@ import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
 import { omit } from 'lodash-es';
 import { PAGView, PAGFile, types, View } from '@gunny/libpag-lite';
 import { pagViewerEmits, pagViewerProps, pagViewerSlots } from './pag-viewer.api';
-import { MediaViewerDialog } from '../media-viewer/media-viewer-dialog';
+import { MediaViewerDialog } from '../media-viewer';
 import { ElIcon } from 'element-plus';
 import { Loading } from '@element-plus/icons-vue';
 import { getCssVar } from '../../utils';

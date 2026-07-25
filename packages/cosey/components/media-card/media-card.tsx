@@ -1,12 +1,12 @@
 import { computed, defineComponent, mergeProps, ref } from 'vue';
 import { mediaCardProps, mediaCardSlots } from './media-card.api';
 import { getFileType, getBasename } from '../../utils';
-import ImageCard from '../image-card/image-card';
-import VideoCard from '../video-card/video-card';
-import AudioCard from '../audio-card/audio-card';
-import FileCard from '../file-card/file-card';
-import SvgaCard from '../svga-card/svga-card';
-import PagCard from '../pag-card/pag-card';
+import { ImageCard } from '../image-card';
+import { VideoCard } from '../video-card';
+import { AudioCard } from '../audio-card';
+import { FileCard } from '../file-card';
+import { SvgaCard } from '../svga-card';
+import { PagCard } from '../pag-card';
 
 export default defineComponent({
   name: 'CoMediaCard',

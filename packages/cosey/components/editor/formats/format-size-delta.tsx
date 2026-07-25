@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import { useEditor } from 'slate-vue3';
 import Button from '../button';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import { isString } from '../../../utils';
 
 export default defineComponent({

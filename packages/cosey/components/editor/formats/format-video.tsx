@@ -1,10 +1,9 @@
 import { computed, defineComponent, reactive, ref } from 'vue';
 import { useEditor } from 'slate-vue3';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import Button from '../button';
-import FormDialog from '../../form-dialog/form-dialog';
-import Form from '../../form/form';
-import FormItem from '../../form/form-item.vue';
+import { FormDialog } from '../../form-dialog';
+import { Form, FormItem } from '../../form';
 import { useLocale } from '../../../hooks';
 import { VideoElement } from '../types';
 import { getPointingOptions, isPointingAt } from '../utils';

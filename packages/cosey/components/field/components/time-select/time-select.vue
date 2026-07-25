@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElTimeSelect } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldTimeSelectProps, type FieldTimeSelectSlots } from './time-select';
+import { type FieldTimeSelectProps, type FieldTimeSelectSlots } from './time-select.api';
 import { addNullablePlaceholder } from '../../../../utils';
 import { useLocale } from '../../../../hooks';
 

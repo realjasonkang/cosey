@@ -125,7 +125,6 @@ const [tableProps, { reload, getSelectionRows }] = useTable(
           fieldProps: { options: mock.genders },
         },
         { prop: 'birthday', label: t('user.birthday'), fieldType: 'daterange' },
-        { prop: 'weeks', label: t('user.birthday'), fieldType: 'weekrange' },
         {
           prop: 'silent',
           label: t('user.mute'),

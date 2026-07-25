@@ -1,6 +1,6 @@
 import { computed, defineComponent, PropType } from 'vue';
 import { useEditor } from 'slate-vue3';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import Button from '../button';
 import { type ListType } from '../types';
 

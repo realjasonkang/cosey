@@ -45,7 +45,6 @@ function launch(app: App, options: CoseyOptions = {}) {
 }
 
 export * from './layout/layout';
-export * from './layout/merged';
 
 export {
   // components

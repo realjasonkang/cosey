@@ -2,7 +2,7 @@ import { defineComponent, inject, onMounted, useTemplateRef } from 'vue';
 import { createBem } from '../../utils';
 import { pickerContextKey } from './formats/picker.api';
 import Button, { type EditorButtonExpose } from './button';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 
 export default defineComponent({
   name: 'CoEditorButtonSplit',

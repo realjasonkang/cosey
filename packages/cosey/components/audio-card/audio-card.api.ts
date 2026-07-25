@@ -1,6 +1,6 @@
 import { type ExtractPropTypes } from 'vue';
-import { mediaCardBaseProps } from '../media-card/media-card.api';
-import { audioViewerProps } from '../audio-viewer/audio-viewer.api';
+import { mediaCardBaseProps } from '../media-card';
+import { audioViewerProps } from '../audio-viewer';
 
 export const audioCardProps = {
   ...mediaCardBaseProps,

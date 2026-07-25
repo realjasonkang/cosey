@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { CheckUpdates, ConfigProvider } from 'cosey/components';
 import { ElConfigProvider } from 'element-plus';
-import { onMounted } from 'vue';
 
 // 移除 index.html 的加载动画
 onMounted(() => {

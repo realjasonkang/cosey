@@ -28,9 +28,6 @@ export default defineConfig(({ command }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    // optimizeDeps: {
-    //   include: ['cosey'],
-    // },
     server: {
       proxy: {
         '/api': {

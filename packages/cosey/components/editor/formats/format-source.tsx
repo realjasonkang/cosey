@@ -1,7 +1,7 @@
 import { defineComponent, ref } from 'vue';
 import { ElButton, ElDialog, ElInput } from 'element-plus';
 import { useEditor } from 'slate-vue3';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import Button from '../button';
 import { useLocale } from '../../../hooks';
 

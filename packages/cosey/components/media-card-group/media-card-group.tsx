@@ -1,6 +1,5 @@
 import { mediaCardGroupProps, mediaCardGroupSlots } from './media-card-group.api';
-import { type MediaCardBaseProps } from '../media-card/media-card.api';
-import MediaCard from '../media-card/media-card';
+import { type MediaCardBaseProps, MediaCard } from '../media-card';
 import { computed, defineComponent } from 'vue';
 import { createBem, isString } from '../../utils';
 

@@ -1,5 +1,5 @@
 import { SlotsType, type ExtractPropTypes } from 'vue';
-import { mediaCardBaseProps } from '../media-card/media-card.api';
+import { mediaCardBaseProps } from '../media-card';
 
 export const fileCardProps = {
   ...mediaCardBaseProps,

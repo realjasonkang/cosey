@@ -4,7 +4,7 @@ import { get, merge, omit } from 'lodash-es';
 import { ElOption, ElPagination, ElSelect, PaginationProps } from 'element-plus';
 import { remoteSelectEmits, remoteSelectProps, remoteSelectSlots } from './remote-select.api';
 import { useConfig } from '../config-provider';
-import { defaultTableConfig } from '../table/table';
+import { defaultTableConfig } from '../table';
 import {
   bulkBindEvents,
   createLoading,
@@ -15,7 +15,7 @@ import {
   createBem,
 } from '../../utils';
 import { useFetch, useProps } from '../../hooks';
-import TableQuery from '../table/table-query/table-query';
+import { TableQuery } from '../table-query';
 import { type TableQueryExpose } from '..';
 
 export default defineComponent({

@@ -1,8 +1,8 @@
 import { defineRoutes } from '../../utils';
 
-import MergedLayoutAuth from '../../../layout/merged/layout-auth';
-import MergedLayoutChangePassword from '../../../layout/merged/layout-change-password';
-import MergedLayoutLogin from '../../../layout/merged/layout-login';
+import LayoutAuth from '../../../layout/layout-auth/layout-auth.vue';
+import LayoutChangePassword from '../../../layout/layout-change-password/layout-change-password.vue';
+import LayoutLogin from '../../../layout/layout-login/layout-login.vue';
 
 /**
  * 身份验证相关路由
@@ -10,7 +10,7 @@ import MergedLayoutLogin from '../../../layout/merged/layout-login';
 export default defineRoutes({
   path: '/auth',
   name: 'Auth',
-  component: MergedLayoutAuth,
+  component: LayoutAuth,
   meta: {
     hideInMenu: true,
   },
@@ -18,7 +18,7 @@ export default defineRoutes({
     {
       path: 'login',
       name: 'Login',
-      component: MergedLayoutLogin,
+      component: LayoutLogin,
       meta: {
         title: '登录',
         authentication: false,
@@ -27,7 +27,7 @@ export default defineRoutes({
     {
       path: 'change-password',
       name: 'ChangePassword',
-      component: MergedLayoutChangePassword,
+      component: LayoutChangePassword,
       meta: {
         title: '修改密码',
       },

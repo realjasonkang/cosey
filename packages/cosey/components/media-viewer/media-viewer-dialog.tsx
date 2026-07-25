@@ -1,13 +1,13 @@
 import { defineComponent, ref, Teleport } from 'vue';
-import Mask from '../mask/mask';
-import Close from '../close/close';
+import { Mask } from '../mask';
+import { Close } from '../close';
 import { useZIndex } from 'element-plus';
 import { mediaViewerDialogEmits, mediaViewerDialogProps } from './media-viewer-dialog.api';
-import Transition from '../transition/transition';
+import { Transition } from '../transition';
 import { ElFocusTrap } from 'element-plus/es/components/focus-trap/index.mjs';
 import { createBem } from '../../utils';
 
-export const MediaViewerDialog = defineComponent({
+export default defineComponent({
   name: 'CoMediaViewerDialog',
   props: mediaViewerDialogProps,
   emits: mediaViewerDialogEmits,

@@ -228,13 +228,13 @@ import {
   defaultTableConfig,
   tableEmitEvents,
   tableEmitOnEvents,
-} from './table';
+} from './table.api';
 import { type TableColumnProps } from './table-column/table-column.api';
 import TableColumn from './table-column/table-column';
 import TableColumnEditor from './table-column-editor/table-column-editor';
-import TableQuery from './table-query/table-query';
+import { type TableQueryExpose, TableQuery } from '../table-query';
 import TableExport from './table-export/table-export';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { useFetch, useFullPage, useResizeObserver } from '../../hooks';
 import {
   addPxUnit,
@@ -256,7 +256,6 @@ import { hColgroup } from 'element-plus/es/components/table/src/h-helper.mjs';
 import TableFooter from './table-footer';
 import { defaultSummaryMethod } from './table-footer/utils';
 import TableStats from './table-stats/table-stats';
-import { type TableQueryExpose } from './table-query/table-query.api';
 
 defineOptions({
   name: 'CoTable',

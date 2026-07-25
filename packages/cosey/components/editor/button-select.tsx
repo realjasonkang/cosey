@@ -1,6 +1,6 @@
 import { defineComponent, inject, onMounted, useTemplateRef } from 'vue';
 import { createBem } from '../../utils';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { pickerContextKey } from './formats/picker.api';
 
 export default defineComponent({

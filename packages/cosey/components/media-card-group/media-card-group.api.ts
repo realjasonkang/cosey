@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType, SlotsType } from 'vue';
-import type { MediaCardBasePublicProps } from '../media-card/media-card.api';
+import type { MediaCardBasePublicProps } from '../media-card';
 
 export const mediaCardGroupProps = {
   srcset: {

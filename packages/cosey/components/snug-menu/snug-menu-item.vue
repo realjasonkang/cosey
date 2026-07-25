@@ -23,7 +23,7 @@ import {
   type SnugMenuItemSlots,
 } from './snug-menu-item';
 import { type SnugMenuContext, snugMenuContextSymbol } from './snug-menu';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { createBem } from '../../utils';
 import { useI18n } from 'vue-i18n';
 

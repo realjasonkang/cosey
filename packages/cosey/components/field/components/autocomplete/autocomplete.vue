@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { ElAutocomplete } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldAutocompleteProps, type FieldAutocompleteSlots } from './autocomplete';
+import { type FieldAutocompleteProps, type FieldAutocompleteSlots } from './autocomplete.api';
 import { addNullablePlaceholder } from '../../../../utils';
 import { useLocale } from '../../../../hooks';
 

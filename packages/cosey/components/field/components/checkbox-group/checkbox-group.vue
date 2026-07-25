@@ -5,7 +5,7 @@ import {
   fieldCheckboxGroupOmitKeys,
   type FieldCheckboxGroupProps,
   type FieldCheckboxGroupSlots,
-} from './checkbox-group';
+} from './checkbox-group.api';
 
 import { getLabelByValue, addNullablePlaceholder, isNumber, isFunction } from '../../../../utils';
 import Panel from './panel.vue';

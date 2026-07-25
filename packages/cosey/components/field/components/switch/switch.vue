@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElSwitch } from 'element-plus';
 import { computed, defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldSwitchProps, type FieldSwitchSlots } from './switch';
+import { type FieldSwitchProps, type FieldSwitchSlots } from './switch.api';
 
 export default defineComponent(
   (props: FieldSwitchProps, { slots }) => {

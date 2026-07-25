@@ -6,7 +6,7 @@ export function mergedLayout(name: keyof LayoutComponents, defaultComponent: Com
   return defineComponent({
     setup(props, { slots }) {
       const { components } = useGlobalConfig();
-      const component = useOptionalComponent(components?.[name], defaultComponent);
+      const component = useOptionalComponent(() => components?.[name], defaultComponent);
 
       return () => h(component.value, props, slots);
     },

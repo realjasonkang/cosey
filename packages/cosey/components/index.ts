@@ -44,7 +44,7 @@ export * from './stack-dialog';
 export * from './svg-icon';
 export * from './table';
 export * from './table-action';
-export * from './table/table-query';
+export * from './table-query';
 export * from './toggle';
 export * from './transition';
 export * from './transition-group';

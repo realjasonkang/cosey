@@ -1,8 +1,8 @@
 import { defineComponent, ref } from 'vue';
 import { type VideoCardExpose, videoCardProps, videoCardEmits } from './video-card.api';
 import { useLockscreen } from 'element-plus';
-import VideoViewer from '../video-viewer/video-viewer';
-import Icon from '../icon/icon';
+import VideoViewer from '../video-viewer';
+import { Icon } from '../icon';
 import { createBem } from '../../utils';
 
 export default defineComponent({

@@ -8,19 +8,21 @@
       :style="{ height: `${layoutStore.topbarHeight - 1}px` }"
       :class="bem.e('header')"
     >
-      <MergedLayoutBrand hide-name />
+      <component :is="BrandComp" hide-name />
     </div>
     <el-scrollbar :class="bem.e('body')">
-      <MergedLayoutSnugMenu />
+      <component :is="SnugMenuComp" />
     </el-scrollbar>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import MergedLayoutBrand from '../merged/layout-brand';
-import MergedLayoutSnugMenu from '../merged/layout-snug-menu';
+import LayoutBrand from '../layout-brand/layout-brand.vue';
+import LayoutSnugMenu from '../layout-snug-menu/layout-snug-menu.vue';
 import { useLayoutStore } from '../../store';
+import { useGlobalConfig } from '../../config';
+import { useOptionalComponent } from '../../hooks';
 import { createBem } from '../../utils';
 
 defineOptions({
@@ -30,6 +32,10 @@ defineOptions({
 const bem = createBem('layout-snug-aside');
 
 const layoutStore = useLayoutStore();
+
+const { components } = useGlobalConfig();
+const BrandComp = useOptionalComponent(() => components?.brand, LayoutBrand);
+const SnugMenuComp = useOptionalComponent(() => components?.snugMenu, LayoutSnugMenu);
 
 const snugAsideStyle = computed(() => {
   return {

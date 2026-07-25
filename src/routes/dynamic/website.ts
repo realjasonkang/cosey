@@ -1,8 +1,8 @@
-import { defineRoutes, MergedLayoutBase, MergedLayoutEmpty } from 'cosey';
+import { defineRoutes, LayoutBase, LayoutEmpty } from 'cosey';
 
 export default defineRoutes({
   path: '/website',
-  component: MergedLayoutBase,
+  component: LayoutBase,
   meta: {
     title: 'website.externalPages',
     icon: 'carbon:application-web',
@@ -18,7 +18,7 @@ export default defineRoutes({
       children: [
         {
           path: 'https://cn.vuejs.org/',
-          component: MergedLayoutEmpty,
+          component: LayoutEmpty,
           meta: {
             title: 'Vue',
             icon: 'svg:vue',
@@ -26,7 +26,7 @@ export default defineRoutes({
         },
         {
           path: 'https://cn.vitejs.dev/',
-          component: MergedLayoutEmpty,
+          component: LayoutEmpty,
           meta: {
             title: 'Vite',
             icon: 'svg:vite',
@@ -43,7 +43,7 @@ export default defineRoutes({
       children: [
         {
           path: 'element',
-          component: MergedLayoutEmpty,
+          component: LayoutEmpty,
           meta: {
             title: 'element',
             icon: 'svg:element',
@@ -52,7 +52,7 @@ export default defineRoutes({
         },
         {
           path: 'pinia',
-          component: MergedLayoutEmpty,
+          component: LayoutEmpty,
           meta: {
             title: 'pinia',
             icon: 'svg:pinia',

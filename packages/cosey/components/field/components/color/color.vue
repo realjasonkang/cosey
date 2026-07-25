@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElColorPicker } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldColorProps, type FieldColorSlots } from './color';
+import { type FieldColorProps, type FieldColorSlots } from './color.api';
 import { addNullablePlaceholder } from '../../../../utils';
 
 export default defineComponent(

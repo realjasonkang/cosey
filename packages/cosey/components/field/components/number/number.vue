@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElInputNumber } from 'element-plus';
 import { computed, defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldNumberProps, type FieldNumberSlots } from './number';
+import { type FieldNumberProps, type FieldNumberSlots } from './number.api';
 import { addNullablePlaceholder, isString } from '../../../../utils';
 import { useLocale } from '../../../../hooks';
 

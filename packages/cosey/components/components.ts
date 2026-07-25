@@ -48,7 +48,7 @@ import { PagViewer } from './pag-viewer';
 import { PagCard } from './pag-card';
 import { Table } from './table';
 import { TableAction } from './table-action';
-import { TableQuery } from './table/table-query';
+import { TableQuery } from './table-query';
 import { Toggle } from './toggle';
 import { Transition } from './transition';
 import { TransitionGroup } from './transition-group';

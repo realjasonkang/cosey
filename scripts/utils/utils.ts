@@ -68,6 +68,7 @@ export async function resolvePackageJson(pkgJsonFile: string, packagesDir: strin
   const distPkg = {
     ...sourcePkg,
     main: sourcePkg.main ? sourcePkg.main.replace(/\.tsx?$/, '.js') : undefined,
+    module: sourcePkg.module ? sourcePkg.module.replace(/\.tsx?$/, '.js') : undefined,
     dependencies: resolveWorkspaceDeps(sourcePkg.dependencies),
     devDependencies: resolveWorkspaceDeps(sourcePkg.devDependencies),
     peerDependencies: resolveWorkspaceDeps(sourcePkg.peerDependencies),

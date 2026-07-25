@@ -3,7 +3,7 @@ import { ElButton, ElProgress } from 'element-plus';
 import { type UploadFileStatus, uploadItemProps, uploadItemEmits } from './upload.api';
 import { isString, createBem } from '../../utils';
 import { MediaCard } from '../media-card';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { useLocale } from '../../hooks';
 
 export default defineComponent({

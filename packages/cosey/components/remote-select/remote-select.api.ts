@@ -1,7 +1,7 @@
 import { type PaginationProps, selectEmits, selectProps } from 'element-plus';
 import { type PropType, ExtractPropTypes, SlotsType } from 'vue';
-import { type TableConfig } from '../table/table';
-import { type TableQueryProps } from '../table/table-query/table-query.api';
+import { type TableConfig } from '../table';
+import { type TableQueryProps } from '../table-query';
 import { type Props } from '../../hooks';
 
 export const remoteSelectProps = {

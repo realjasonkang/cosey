@@ -22,7 +22,7 @@ import { createMock } from '@cosey/mock';
 import { createWebHashHistory } from 'vue-router';
 
 import '@/styles/index.scss';
-import '@/styles/tailwindcss.css';
+import '@/styles/tailwind.css';
 
 addIconifyIcon('carbon', carbonIcons);
 

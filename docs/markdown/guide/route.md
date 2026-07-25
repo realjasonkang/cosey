@@ -28,14 +28,14 @@
 
 ### 一级菜单路由定义
 
-下面定义了一个一级菜单路由，路由访问地址为 `/users`，处于内置的 `MergedLayoutBase` 布局结构中，设置了 `flatChildrenInMenu` 使其在菜单中进行打平。
+下面定义了一个一级菜单路由，路由访问地址为 `/users`，处于内置的 `LayoutBase` 布局结构中，设置了 `flatChildrenInMenu` 使其在菜单中进行打平。
 
 ```ts
-import { defineRoutes, MergedLayoutBase } from 'cosey';
+import { defineRoutes, LayoutBase } from 'cosey';
 
 export default defineRoutes({
   path: '/',
-  component: MergedLayoutBase,
+  component: LayoutBase,
   meta: {
     flatChildrenInMenu: true,
   },
@@ -55,17 +55,17 @@ export default defineRoutes({
 
 ### 二级菜单路由
 
-下面定义了一个二级菜单路由，路由访问地址为 `/blog/posts`，同样处于内置的 `MergedLayoutBase` 布局结构中。
+下面定义了一个二级菜单路由，路由访问地址为 `/blog/posts`，同样处于内置的 `LayoutBase` 布局结构中。
 
 如果没有定义 `redirect`, 当访问 `/blog` 时，会自动重定向到第一个子路由，即 `/blog/posts`。
 
 ```ts
-import { defineRoutes, MergedLayoutBase } from 'cosey';
+import { defineRoutes, LayoutBase } from 'cosey';
 
 export default defineRoutes({
   path: '/blog',
   name: 'Blog',
-  component: MergedLayoutBase,
+  component: LayoutBase,
   meta: {
     title: '博客管理',
     icon: 'carbon:blog',

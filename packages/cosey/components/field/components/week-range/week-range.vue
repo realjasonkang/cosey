@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, h, mergeProps, type SlotsType } from 'vue';
-import { type FieldWeekRangeProps, type FieldWeekRangeSlots } from './week-range';
+import { type FieldWeekRangeProps, type FieldWeekRangeSlots } from './week-range.api';
 import dayjs from 'dayjs';
 import { addNullablePlaceholder } from '../../../../utils';
 import { useLocale } from '../../../../hooks';

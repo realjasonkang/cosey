@@ -1,7 +1,7 @@
 import { computed, defineComponent, ref, watch } from 'vue';
 import { ElButton } from 'element-plus';
 import { toggleProps, toggleSlots, toggleEmits } from './toggle.api';
-import Icon from '../icon/icon';
+import { Icon } from '../icon';
 import { useLocale } from '../../hooks';
 
 export default defineComponent({

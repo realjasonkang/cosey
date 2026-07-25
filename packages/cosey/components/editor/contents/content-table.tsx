@@ -4,7 +4,7 @@ import { Range } from 'slate-vue3/core';
 import { DOMEditor } from 'slate-vue3/dom';
 import { createBem } from '../../../utils';
 import { getSortedRange } from '../utils';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import ButtonGroup from '../button-group';
 import Button from '../button';
 import WidgetPopover from './widget-popover';

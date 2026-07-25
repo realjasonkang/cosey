@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElTreeSelect } from 'element-plus';
 import { defineComponent, h, mergeProps, type SlotsType, computed } from 'vue';
-import { type FieldTreeSelectProps, type FieldTreeSelectSlots } from './tree-select';
+import { type FieldTreeSelectProps, type FieldTreeSelectSlots } from './tree-select.api';
 import { getTreeLabelByValue, addNullablePlaceholder } from '../../../../utils';
 import { useLocale } from '../../../../hooks';
 

@@ -1,7 +1,7 @@
 import { defineComponent, onMounted, reactive, ref, shallowRef, useTemplateRef } from 'vue';
 import Picker from './picker';
 import Button from '../button';
-import Icon from '../../icon/icon';
+import { Icon } from '../../icon';
 import { createBem } from '../../../utils';
 import { useEditor } from 'slate-vue3';
 
