@@ -1,4 +1,17 @@
-## 0.0.0 (2026-05-28)
+## 0.0.0 (2026-07-25)
+
+## <small>1.0.2 (2026-07-25)</small>
+
+- feat: 允许获取 useFetch 的promise对象 ([04cff18](https://github.com/sutras/cosey/commit/04cff18))
+- feat: 升级到v1 ([67bfd00](https://github.com/sutras/cosey/commit/67bfd00))
+- feat: 新增 font-icon 组件, 支持状态码数组 ([adf4e96](https://github.com/sutras/cosey/commit/adf4e96))
+- feat: 新增 pag 预览 ([57d885a](https://github.com/sutras/cosey/commit/57d885a))
+- feat: 新增check-updates组件 ([e40f4b7](https://github.com/sutras/cosey/commit/e40f4b7))
+- feat: 新增登录页验证码 ([22034e4](https://github.com/sutras/cosey/commit/22034e4))
+- refactor: 主题token切换到el ([3456e29](https://github.com/sutras/cosey/commit/3456e29))
+- refactor: 优化导出 ([420005f](https://github.com/sutras/cosey/commit/420005f))
+- refactor: 使用 shiki 代替 primjs ([d1cbf05](https://github.com/sutras/cosey/commit/d1cbf05))
+- build: changelog ([8212588](https://github.com/sutras/cosey/commit/8212588))
 
 ## <small>0.11.9 (2026-05-28)</small>
 
