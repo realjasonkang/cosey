@@ -31,6 +31,12 @@ import { ElConfigProvider } from 'element-plus';
 @use 'cosey/style/index.css' as *;
 ```
 
+## 布局组件
+
+布局组件已经由 `MergedLayout*` 改为 `Layout*`，去掉了 `Merged` 前缀；
+
+例如常用的 `MergedLayoutBase` 需改为使用 `LayoutBase`。
+
 ## 主题 token
 
 弃用自定义主题 token，使用 `element-plus` 主题 token，如果有用到 `--co-` 前缀的变量，需从 `--el-` 中找到替代变量。
