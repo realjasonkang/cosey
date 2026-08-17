@@ -1,4 +1,10 @@
-## 0.0.0 (2026-07-25)
+## 0.0.0 (2026-08-17)
+
+## <small>1.0.4 (2026-08-17)</small>
+
+- fix: 修复layout 组件覆盖问题 ([5601294](https://github.com/sutras/cosey/commit/5601294))
+- fix: 修复media-card循环依赖问题 ([56c51b2](https://github.com/sutras/cosey/commit/56c51b2))
+- build: changelog ([42f0f4c](https://github.com/sutras/cosey/commit/42f0f4c))
 
 ## <small>1.0.2 (2026-07-25)</small>
 
