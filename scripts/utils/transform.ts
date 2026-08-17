@@ -89,7 +89,7 @@ export async function compileAllScript(options: {
     external: (source) => externals.some((item) => source.startsWith(item)),
     treeshake: {},
     plugins: [transformPlugin()],
-    logLevel: 'silent',
+    logLevel: 'warn',
   });
 
   await bundle.write({

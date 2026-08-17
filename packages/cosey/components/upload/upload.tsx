@@ -27,7 +27,6 @@ import {
   createBem,
 } from '../../utils';
 import UploadItem from './upload-item';
-import { TransitionGroup } from '../transition-group';
 import { Icon } from '../icon';
 
 import { useLocale } from '../../hooks';
@@ -260,21 +259,19 @@ export default defineComponent({
     return () => {
       return (
         <div class={bem.b()}>
-          <TransitionGroup effect="fade">
-            {fileList.value.map((file) => {
-              return (
-                <UploadItem
-                  key={file.key}
-                  file={file}
-                  readonly={props.readonly}
-                  size={props.size}
-                  onRemove={() => onRemove(file)}
-                  onRe-upload={() => onReUpload(file)}
-                  onCancel={() => onCancel(file)}
-                />
-              );
-            })}
-          </TransitionGroup>
+          {fileList.value.map((file) => {
+            return (
+              <UploadItem
+                key={file.key}
+                file={file}
+                readonly={props.readonly}
+                size={props.size}
+                onRemove={() => onRemove(file)}
+                onRe-upload={() => onReUpload(file)}
+                onCancel={() => onCancel(file)}
+              />
+            );
+          })}
 
           {showSelect.value && (
             <div class={[bem.e('select'), bem.is(props.size)]} onClick={onSelect}>

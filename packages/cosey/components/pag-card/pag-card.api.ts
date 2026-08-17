@@ -1,5 +1,5 @@
 import { type ExtractPropTypes } from 'vue';
-import { mediaCardBaseProps } from '../media-card';
+import { mediaCardBaseProps } from '../media-card/media-card.api';
 import { pagViewerProps } from '../pag-viewer';
 
 export const pagCardProps = {

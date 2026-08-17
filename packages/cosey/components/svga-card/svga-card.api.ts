@@ -1,5 +1,5 @@
 import { type ExtractPropTypes } from 'vue';
-import { mediaCardBaseProps } from '../media-card';
+import { mediaCardBaseProps } from '../media-card/media-card.api';
 import { svgaViewerProps } from '../svga-viewer';
 
 export const svgaCardProps = {
