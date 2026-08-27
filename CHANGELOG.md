@@ -1,4 +1,9 @@
-## 0.0.0 (2026-08-17)
+## 0.0.0 (2026-08-27)
+
+## <small>1.0.5 (2026-08-27)</small>
+
+- build: changelog ([9f1bb06](https://github.com/sutras/cosey/commit/9f1bb06))
+- build: 修复构建后 vue 组件类型确实问题 ([af91380](https://github.com/sutras/cosey/commit/af91380))
 
 ## <small>1.0.4 (2026-08-17)</small>
 
