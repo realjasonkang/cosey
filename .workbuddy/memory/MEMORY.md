@@ -103,6 +103,38 @@
 - 文件名走 `getDispositionFilename(cd)`：先 `filename*=`（RFC 5987）再 `filename="..."`，按 `;` 截断，
   `decodeURIComponent` 包 try/catch；容忍 null，解析不到返回 `''`。
 
+## form 校验响应体系（改 form 相关组件前必读）
+
+「隐藏起来的字段出错看不见」是 form 这一族组件的共同问题（页签未激活 / 分组收起 / 查询区折叠），
+统一靠 `FormContext`（`components/form/form.api.ts`，由 `useFormTemplate` provide）解决。
+
+- `onValidateChange(handler)` 回调 `(invalidFields, reason)`，**通过时也通知**（空对象）。
+  `reason: 'validate' | 'validate-field' | 'field' | 'reset'`，**只有 `validate` 会切容器 + 滚动**。
+- `invalidFields` 是**从 `el-form.fields` 的 `validateState` 推导的全量快照**，不用 el-form 回调给的那份（只含本次校验的字段）。
+- 字段标识用 **`field.propString`**；数组 prop 是 `join('.')`（`awards.1.award`），**不是逗号**。
+- `co-form-item` watch `validateState` → `reportFieldChange()`（microtask 去重），否则徽标不实时。
+- 滚动定位由 `useFormTemplate` 统一调度（nextTick + rAF，找第一个**可见的**出错字段，按文档顺序），
+  只 `scrollIntoView`，**不加高亮/闪烁**（`is-invalid-flash`、form-list 出错行底色都已删，别再恢复）。
+  多个容器同时响应时只能滚一次。
+- `co-form-tabs` 的能力就三条：**页签错误徽标**（`showBadge`）+ 校验失败切页签（`switchToInvalid`）+
+  弹窗打开复位（`resetOnOpen`）。**顶部错误汇总、分步模式（`step`/`@finish`/步进按钮）、滚动闪烁都被否决删除了**
+  —— 前者「太业务、跟框架简洁性不一致」，后者与弹窗按钮重叠；分步将来由独立的 `co-form-steps` 承担，不耦合 tabs。
+- 消费者共用 `components/form/useFormInvalid.ts`：`useFormContext()` / `locateInvalidContainer()` /
+  `useInvalidResponse(respond, reasons?, formContext?)`。判断字段归属一律用 **DOM contains**，不改 `co-form-item`。
+  现仅 tabs / group / query 消费。
+- ⚠️ **`inject` 不查自身**：`co-form-query` 自己 provide 表单上下文，内部必须用 `useFormTemplate`
+  返回的 `formContext`，不能再 `inject`（最外层用时拿到 null，订阅静默失效）。
+- ⚠️ 页签/容器的顺序按 **DOM 顺序**（`compareDocumentPosition`）算，注册顺序在 `v-if`/`v-for` 后不可靠。
+- ⚠️ 页签是**动态**的（`v-if` 增删）：`FormTabPanel` 卸载时除了从登记表摘掉自己，还要
+  `delete errorCounts[key]`、并在激活页签已消失时回落到第一个仍存在的页签（`ensureActivePanel`）。
+  不回落的话 el-tabs 会把**所有** pane 设成 `display: none` → 整个表单体空白，只能靠再提交一次自救。
+  ⚠️ 这个回落**只能在移除时做**：注册时调会冲掉外部 `v-model` 指定的初始页签（页签是逐个注册的）。
+  摘掉页签不清理 `model` 上的旧值（照样提交），要「隐藏即清空」得业务自己 watch。
+- 双向绑定统一用 vue 内置的 **`useModel`**（`hooks/useTwoWayBinding` 仅留作已发布包的兼容导出，标了 `@deprecated`）。
+  `useModel` 在**父级没绑 `v-model`**（或只单向传 `:model-value`）时会自动退回组件内部状态 ——
+  所以「校验失败切页签」「query 自动展开」「弹窗 cancel/confirm 关闭」这些**内部改值**不要求外绑 v-model；
+  父级真绑了则受控、等回写。⚠️ 它依赖 `getCurrentInstance()` → `useBubbleTemplate` **必须在 setup 里同步调用**。
+
 ## hooks/useUpsert
 
 - `useUpsert`（内层，持 model + Fetch，`defineExpose`）+ `useOuterUpsert`（外层，`add/edit/setData` + `success` 刷新）。
